@@ -1,0 +1,16 @@
+{
+  "name": "studio3-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Webbplats, ansökningssystem och admin för STUDIO 3 – Debatten börjar här.",
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env --disable-warning=ExperimentalWarning server.js",
+    "dev": "node --env-file-if-exists=.env --disable-warning=ExperimentalWarning --watch server.js",
+    "seed:demo": "node --disable-warning=ExperimentalWarning tools/seed-demo.js",
+    "test": "node --disable-warning=ExperimentalWarning --test tests/*.test.js",
+    "hero:thumbs": "python3 tools/hero/montage_from_thumbnails.py",
+    "hero:footage": "node tools/hero/hero_from_footage.mjs"
+  }
+}

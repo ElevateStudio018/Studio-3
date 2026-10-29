@@ -1,0 +1,40 @@
+.sp { padding-bottom: 100px; }
+.sp__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 22px; }
+.sp__card { border-radius: 22px; overflow: hidden; border: 1px solid var(--border); background: var(--surface); display: flex; flex-direction: column; }
+.sp__card.is-active { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* mini-sajt som ritas med paketets egna variabler */
+.mini { background: var(--bg); color: var(--text); font-family: var(--font-body); position: relative; overflow: hidden; }
+.mini__hero { position: relative; aspect-ratio: 16/10; display: grid; place-items: center; text-align: center; color: #fff; overflow: hidden; background: #000; }
+.mini__hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .55; filter: saturate(.85); }
+.mini__hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.65)), var(--hero-tint); }
+.mini__hero > div { position: relative; z-index: 1; display: grid; gap: 10px; justify-items: center; padding: 16px; }
+.mini__logo { width: 64px; color: var(--accent); }
+.mini[data-tone="light"] .mini__logo { color: #fff; }
+.mini__h { font-family: var(--font-display); font-weight: var(--display-weight); font-stretch: var(--display-stretch); text-transform: var(--display-case); letter-spacing: var(--display-tracking); font-style: var(--display-style); font-size: 1.9rem; line-height: .95; }
+.mini__h span { color: var(--accent); display: block; }
+.mini[data-tone="light"] .mini__h span { color: #fff; text-decoration: underline; text-decoration-color: var(--accent); }
+.mini__btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-weight: 700; font-size: .8rem; }
+.mini[data-theme="lopsedel"] .mini__btn, .mini[data-theme="breaking"] .mini__btn, .mini[data-theme="brutalist"] .mini__btn { border-radius: var(--radius); }
+.mini__body { padding: 16px; display: grid; gap: 10px; }
+.mini__card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; display: grid; gap: 6px; box-shadow: var(--shadow); }
+.mini[data-fx~="thick"] .mini__card { border-width: 3px; }
+.mini[data-fx~="glass"] .mini__card { backdrop-filter: blur(10px); }
+.mini__card b { font-family: var(--font-display); font-weight: var(--display-weight); font-stretch: var(--display-stretch); text-transform: var(--display-case); font-size: 1rem; line-height: 1.05; }
+.mini__card small { color: var(--muted); font-size: .78rem; }
+.mini__chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.mini__chips span { font-size: .7rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); }
+.mini__chips span:first-child { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.mini[data-fx~="scanlines"]::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,.2) 0 1px, transparent 1px 3px); }
+.mini[data-fx~="glow"] .mini__h span { text-shadow: 0 0 18px var(--accent); }
+.mini[data-fx~="sunset"] .mini__hero::after { background: linear-gradient(180deg, rgba(26,11,46,.5), rgba(255,122,24,.2), rgba(26,11,46,.85)); }
+.mini[data-fx~="split"] .mini__hero::after { background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 55%, transparent), transparent 45%, transparent 55%, color-mix(in srgb, var(--accent-2) 55%, transparent)), rgba(0,0,0,.35); }
+
+.sp__meta { padding: 18px 20px 20px; display: grid; gap: 10px; flex: 1; }
+.sp__meta h2 { font-size: 1.3rem; line-height: 1.1; display: flex; gap: 10px; align-items: baseline; }
+.sp__meta h2 small { font-family: var(--font-body); font-size: .8rem; color: var(--muted); font-weight: 700; letter-spacing: .1em; text-transform: none; font-stretch: 100%; }
+.sp__meta p { margin: 0; color: var(--muted); font-size: .92rem; }
+.sp__swatches { display: flex; gap: 6px; }
+.sp__swatches i { width: 26px; height: 26px; border-radius: 8px; border: 1px solid rgba(128,128,128,.35); }
+.sp__fonts { font-size: .82rem; color: var(--muted); }
+.sp__actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; padding-top: 8px; }

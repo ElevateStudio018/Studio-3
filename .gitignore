@@ -1,0 +1,9 @@
+node_modules/
+data/*
+!data/.gitkeep
+tools/hero/.cache/
+tools/hero/.work/
+footage/
+.env
+*.log
+.DS_Store

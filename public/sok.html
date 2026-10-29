@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!--HEAD-->
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/css/site.css?v=ASSET">
+  <link rel="stylesheet" href="/assets/css/apply.css?v=ASSET">
+  <script type="module" src="/assets/js/apply.js?v=ASSET"></script>
+</head>
+<body class="page-apply">
+  <!--LOGO-->
+  <a class="skip" href="#ansokan">Hoppa till formuläret</a>
+  <header class="header is-solid">
+    <div class="header__inner">
+      <a class="brand" href="/" aria-label="STUDIO 3 – till startsidan">
+        <svg viewBox="0 0 1025 452" aria-hidden="true"><use href="#s3logo"/></svg>
+        <span class="brand__word">Studio 3</span>
+      </a>
+      <a class="btn btn--ghost btn--sm" href="/#debatter" style="margin-left:auto">← Alla debatter</a>
+    </div>
+  </header>
+
+  <main class="apply wrap" id="ansokan">
+    <aside class="apply__info" id="info"></aside>
+
+    <section class="apply__main">
+      <ol class="progress" id="progress" aria-label="Steg"></ol>
+
+      <form id="applyForm" class="form" novalidate>
+        <div class="kind" id="kindToggle" hidden role="radiogroup" aria-label="Jag vill">
+          <label><input type="radio" name="kind" value="deltagare" checked><span>Delta i debatten</span></label>
+          <label><input type="radio" name="kind" value="publik"><span>Sitta i publiken</span></label>
+        </div>
+
+        <!-- Steg 1 -->
+        <fieldset class="step-panel" data-step="1">
+          <legend><span class="step-no">Steg 1</span>Om dig</legend>
+          <div class="form-row">
+            <div class="field"><label for="name">För- och efternamn</label><input id="name" name="name" type="text" autocomplete="name" required></div>
+            <div class="field"><label for="email">E-post</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="phone">Mobilnummer</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></div>
+            <div class="field"><label for="birth_year">Födelseår</label><input id="birth_year" name="birth_year" type="number" inputmode="numeric" min="1920" max="2010" placeholder="t.ex. 1998" required></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="municipality">Bostadsort / kommun</label><input id="municipality" name="municipality" type="text" autocomplete="address-level2"></div>
+            <div class="field"><label for="county">Län</label><select id="county" name="county"><option value="">Välj län</option></select></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="occupation">Sysselsättning <span class="hint">(yrke, studier…)</span></label><input id="occupation" name="occupation" type="text" autocomplete="organization-title"></div>
+            <div class="field"><label for="gender">Kön <span class="hint">(valfritt)</span></label>
+              <select id="gender" name="gender"><option value="">Vill inte uppge</option><option>Kvinna</option><option>Man</option><option>Icke-binär</option><option>Annat</option></select>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Steg 2 -->
+        <fieldset class="step-panel" data-step="2" hidden>
+          <legend><span class="step-no">Steg 2</span>Politik &amp; åsikter</legend>
+          <p class="muted" style="margin:0">Vi frågar för att kunna sätta ihop en balanserad grupp – inte för att sålla bort någon. Alla partier och alla som inte röstar är välkomna.</p>
+          <div class="field" data-field="party">
+            <span class="label">Vilket parti står du närmast?</span>
+            <div class="parties" id="parties"></div>
+          </div>
+          <div class="form-row">
+            <label class="toggle"><input type="checkbox" name="party_member"><span>Jag är medlem i ett parti eller ungdomsförbund</span></label>
+            <div class="field"><label for="office">Har du ett politiskt uppdrag?</label>
+              <select id="office" name="office"><option value="">Nej</option><option value="kommun">Ja, i kommunen</option><option value="region">Ja, i regionen</option><option value="riksdag">Ja, i riksdagen</option><option value="eu">Ja, i EU-parlamentet</option><option value="parti">Ja, inom partiet / förbundet</option><option value="tidigare">Tidigare uppdrag</option></select>
+            </div>
+          </div>
+          <div class="field" id="officeDetailField" hidden><label for="office_detail">Beskriv uppdraget</label><input id="office_detail" name="office_detail" type="text" placeholder="t.ex. ersättare i kommunfullmäktige"></div>
+          <div class="field"><label for="organisations">Engagerad i någon organisation? <span class="hint">(fack, intresseorganisation, aktivism – valfritt)</span></label><input id="organisations" name="organisations" type="text"></div>
+
+          <div class="field" data-field="compass">
+            <span class="label">Var hamnar du politiskt? <span class="hint">Dra pricken – eller hoppa över.</span></span>
+            <div class="compass-wrap">
+              <div class="compass" id="compass" tabindex="0" role="slider" aria-label="Politisk kompass. Piltangenter flyttar pricken." aria-valuetext="Inte angivet">
+                <span class="compass__ax compass__ax--top">Liberal / GAL</span>
+                <span class="compass__ax compass__ax--bottom">Konservativ / TAN</span>
+                <span class="compass__ax compass__ax--left">Vänster</span>
+                <span class="compass__ax compass__ax--right">Höger</span>
+                <span class="compass__dot" id="compassDot" hidden></span>
+              </div>
+              <div class="compass-side">
+                <p class="compass-read" id="compassRead">Klicka eller dra i rutan.</p>
+                <button type="button" class="btn btn--ghost btn--sm" id="compassClear">Hoppa över</button>
+              </div>
+            </div>
+            <input type="hidden" name="econ" id="econ"><input type="hidden" name="social" id="social">
+          </div>
+
+          <div class="field" data-field="stance" id="stanceField" hidden>
+            <span class="label">Vad tycker du om påståendet?</span>
+            <p class="statement" id="stanceStatement"></p>
+            <div class="scale" role="radiogroup" aria-label="Din ståndpunkt">
+              <label><input type="radio" name="stance" value="-2"><span>Helt emot</span></label>
+              <label><input type="radio" name="stance" value="-1"><span>Delvis emot</span></label>
+              <label><input type="radio" name="stance" value="0"><span>Vet inte</span></label>
+              <label><input type="radio" name="stance" value="1"><span>Delvis för</span></label>
+              <label><input type="radio" name="stance" value="2"><span>Helt för</span></label>
+            </div>
+          </div>
+
+          <div class="field" data-field="need_label" id="needsField" hidden>
+            <span class="label">Vilken grupp söker du till?</span>
+            <div class="needs" id="needs"></div>
+          </div>
+        </fieldset>
+
+        <!-- Steg 3 -->
+        <fieldset class="step-panel" data-step="3" hidden>
+          <legend><span class="step-no">Steg 3</span>Din röst</legend>
+          <div class="field">
+            <label for="motivation">Varför ska just du vara med?</label>
+            <textarea id="motivation" name="motivation" maxlength="3000" placeholder="Berätta vem du är, vad du tycker och varför det här ämnet betyder något för dig." required></textarea>
+            <div class="counter" id="motCounter">0 / minst 30 tecken</div>
+          </div>
+          <div class="field"><label for="argument">Ditt starkaste argument – i en mening</label><input id="argument" name="argument" type="text" maxlength="300"></div>
+          <div class="field"><label for="change_mind">Vad skulle kunna få dig att ändra dig? <span class="hint">(valfritt)</span></label><input id="change_mind" name="change_mind" type="text" maxlength="300"></div>
+          <div id="customQuestions" class="form"></div>
+          <div class="form-row">
+            <label class="toggle"><input type="checkbox" name="media_experience" id="media_experience"><span>Jag har varit med i media, poddar eller debatter förut</span></label>
+            <div class="field" id="mediaDetailField" hidden><label for="media_detail">Var då?</label><input id="media_detail" name="media_detail" type="text"></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="ig">Instagram <span class="hint">(valfritt)</span></label><input id="ig" name="socials.instagram" type="text" placeholder="@användarnamn"></div>
+            <div class="field"><label for="tt">TikTok <span class="hint">(valfritt)</span></label><input id="tt" name="socials.tiktok" type="text" placeholder="@användarnamn"></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="followers">Antal följare totalt</label><select id="followers" name="followers"><option value="">Vet inte / spelar ingen roll</option><option>Under 1 000</option><option>1 000–10 000</option><option>10 000–100 000</option><option>Över 100 000</option></select></div>
+            <div class="field"><label for="video_link">Länk till en kort video av dig <span class="hint">(ökar chansen!)</span></label><input id="video_link" name="video_link" type="url" placeholder="https://"></div>
+          </div>
+          <div class="field">
+            <span class="label">Bild på dig <span class="hint">(valfritt men rekommenderas)</span></span>
+            <div class="photo" id="photoBox">
+              <img id="photoPreview" alt="Förhandsvisning av din bild" hidden>
+              <label class="photo__pick" id="photoPick"><input type="file" id="photoInput" accept="image/*" class="sr-only"><span>📸 Välj en bild</span><small class="muted">JPG eller PNG – vi förminskar den automatiskt</small></label>
+              <button type="button" class="btn btn--ghost btn--sm" id="photoRemove" hidden>Ta bort bild</button>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Steg 4 -->
+        <fieldset class="step-panel" data-step="4" hidden>
+          <legend><span class="step-no">Steg 4</span>Klart att skicka</legend>
+          <div class="field" data-field="availability" id="availabilityField">
+            <span class="label" id="availabilityLabel">Kan du delta vid inspelningen?</span>
+            <div class="scale scale--3" role="radiogroup" aria-labelledby="availabilityLabel">
+              <label><input type="radio" name="availability" value="ja"><span>Ja</span></label>
+              <label><input type="radio" name="availability" value="kanske"><span>Kanske</span></label>
+              <label><input type="radio" name="availability" value="nej"><span>Nej, men hör av er nästa gång</span></label>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="toggle"><input type="checkbox" name="can_travel"><span>Jag kan resa till inspelningen på egen hand</span></label>
+            <div class="field"><label for="heard_from">Hur hittade du hit?</label><select id="heard_from" name="heard_from"><option value="">Välj</option><option>YouTube</option><option>TikTok</option><option>Instagram</option><option>En vän tipsade</option><option>Nyhetsbrevet</option><option>Media / press</option><option>Annat</option></select></div>
+          </div>
+          <div class="summary" id="summary"></div>
+          <div class="consents">
+            <label class="check" data-field="consent_age"><input type="checkbox" name="consent_age"><span>Jag har fyllt 18 år.</span></label>
+            <label class="check" data-field="consent_political" id="consentPolitical"><input type="checkbox" name="consent_political"><span>Jag samtycker till att STUDIO 3 sparar uppgifter om mina politiska åsikter och sympatier för att kunna sätta ihop debatter. Uppgifterna delas inte med någon och raderas automatiskt. <a class="link" href="/integritet" target="_blank">Läs mer</a></span></label>
+            <label class="check" data-field="consent_media"><input type="checkbox" name="consent_media"><span>Jag förstår att debatten filmas och publiceras på YouTube och sociala medier om jag blir uttagen.</span></label>
+            <label class="check"><input type="checkbox" name="newsletter" checked><span>Skicka mig nyhetsbrevet när nya debatter öppnar (valfritt).</span></label>
+          </div>
+        </fieldset>
+
+        <div class="hp" aria-hidden="true"><label>Lämna tomt <input name="hp" tabindex="-1" autocomplete="off"></label></div>
+        <p class="form-status" id="status" role="status"></p>
+        <div class="apply__nav">
+          <button type="button" class="btn btn--ghost" id="prevBtn" hidden>← Tillbaka</button>
+          <span class="draft" id="draftNote"></span>
+          <button type="button" class="btn" id="nextBtn">Nästa <span class="arrow">→</span></button>
+          <button type="submit" class="btn" id="submitBtn" hidden>Skicka ansökan <span class="arrow">→</span></button>
+        </div>
+      </form>
+
+      <div class="done" id="done" hidden></div>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

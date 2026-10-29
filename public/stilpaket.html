@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--HEAD-->
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/site.css?v=ASSET">
+  <link rel="stylesheet" href="/assets/css/stilpaket.css?v=ASSET">
+  <script type="module" src="/assets/js/stilpaket.js?v=ASSET"></script>
+</head>
+<body>
+  <!--LOGO-->
+  <header class="header is-solid">
+    <div class="header__inner">
+      <a class="brand" href="/" aria-label="STUDIO 3 – till startsidan"><svg viewBox="0 0 1025 452" aria-hidden="true"><use href="#s3logo"/></svg><span class="brand__word">Studio 3</span></a>
+      <a class="btn btn--ghost btn--sm" href="/" style="margin-left:auto">← Till sajten</a>
+    </div>
+  </header>
+  <main class="wrap sp">
+    <div class="section__head" style="padding-top:calc(var(--header-h) + 50px)">
+      <span class="eyebrow">Designförslag</span>
+      <h1 class="display" style="font-size:clamp(2.4rem,6vw,5rem)">20 stilpaket</h1>
+      <p class="lead">Varje paket är ett komplett utseende för hela sajten – färger, typsnitt, former och effekter. Klicka på <strong>Förhandsgranska</strong> för att se hela sajten i paketet, och aktivera ett paket i admin under <em>Innehåll → Stilpaket</em> (eller direkt här om du är inloggad).</p>
+      <div class="chips" id="current"></div>
+    </div>
+    <div class="sp__grid" id="grid"></div>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "STUDIO 3",
+  "short_name": "STUDIO 3",
+  "description": "Olika åsikter. Samma rum. Debatten börjar här.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0d0e",
+  "theme_color": "#0d0d0e",
+  "icons": [
+    { "src": "/assets/img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/assets/img/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

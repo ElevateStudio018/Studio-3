@@ -1,0 +1,2446 @@
+{
+ "scrapedAt": "2026-10-29",
+ "channel": {
+  "name": "STUDIO 3",
+  "handle": "@studio3-se",
+  "id": "UCq0WPjQ9K4beFTYSQFx_rSQ",
+  "url": "https://www.youtube.com/@studio3-se",
+  "subscribers": 103000,
+  "views": 19676417,
+  "videos": 725,
+  "shorts": 653,
+  "longform": 71,
+  "joined": "2023-01-05",
+  "country": "Sverige",
+  "brandColor": "#F1944F",
+  "keywords": [
+   "studio3",
+   "studio 3",
+   "studio tre"
+  ],
+  "socials": {
+   "youtube": "https://www.youtube.com/@studio3-se",
+   "tiktok": "https://www.tiktok.com/@studio3_tiktok",
+   "instagramEmil": "https://www.instagram.com/emil__widen/",
+   "instagramSimon": "https://www.instagram.com/simon.claesson/"
+  },
+  "bannerQuote": "Grymt bra!! SVT stick och brinn, ni suger i jämförelse"
+ },
+ "team": [
+  {
+   "name": "Simon Claesson",
+   "role": "Grundare & programledare",
+   "bio": "Medgrundare av Studio 3. Leder debatterna i studion och på scen – senast inför 300 personer på Stortorget i Örebro.",
+   "instagram": "https://www.instagram.com/simon.claesson/"
+  },
+  {
+   "name": "Emil Widén",
+   "role": "Grundare & programledare",
+   "bio": "Medgrundare av Studio 3. Ansvarar för att rätt människor hamnar mitt emot varandra – och att samtalet blir på riktigt.",
+   "instagram": "https://www.instagram.com/emil__widen/"
+  },
+  {
+   "name": "Oliver Kastell",
+   "role": "Bakom spakarna",
+   "bio": "En del av gänget bakom Studio 3:s produktion och innehåll i sociala medier.",
+   "instagram": null
+  }
+ ],
+ "press": [
+  {
+   "outlet": "Sveriges Radio",
+   "title": "Duon bakom debattsuccén: ”Gap och skrik säljer inte”",
+   "url": "https://www.sverigesradio.se/avsnitt/duon-bakom-debattsuccen-gap-och-skrik-saljer-inte"
+  },
+  {
+   "outlet": "DN / Pressen",
+   "title": "Youtubekanalen Studio 3 lockar de tyngsta politikerna",
+   "url": "https://www.pressen.se/1345506911.html"
+  },
+  {
+   "outlet": "Blankspot",
+   "title": "När alla gör politik till innehåll",
+   "url": "https://blankspot.se/nar-alla-gor-politik-till-innehall/"
+  },
+  {
+   "outlet": "Nyheter24 / Bloggbevakning",
+   "title": "Jan Emanuel i Studio 3",
+   "url": "https://bloggbevakning.nyheter24.se/2026/01/09/jan-emanuel-i-studio-3/"
+  }
+ ],
+ "quotes": [
+  {
+   "text": "Om man sätter upp rätt personer mot varandra så kommer det att få mycket visningar.",
+   "by": "Emil Widén",
+   "source": "DN"
+  },
+  {
+   "text": "Gap och skrik säljer inte.",
+   "by": "Simon Claesson & Emil Widén",
+   "source": "Sveriges Radio"
+  }
+ ],
+ "events": [
+  {
+   "title": "Livedebatt på Stortorget, Örebro",
+   "desc": "Markus Allard (Örebropartiet) mot John Johansson (S) inför cirka 300 personer, modererad av Simon och Emil.",
+   "year": 2026
+  }
+ ],
+ "playlists": [
+  {
+   "id": "PL5dk8eoTSDBp4aA3aQST50pbUg2QDo1CL",
+   "title": "STUDIO SOFFAN"
+  },
+  {
+   "id": "PL5dk8eoTSDBoY0w_36xtFA9pLU5edEWGM",
+   "title": "DUELLEN"
+  },
+  {
+   "id": "PL5dk8eoTSDBomTjH2c0GxoZ6hK9DrtuR1",
+   "title": "1 VS 20"
+  },
+  {
+   "id": "PL5dk8eoTSDBod-HVjrGyfQo9U4TBuDhsh",
+   "title": "PARTILEDARE VS 20 VÄLJARE"
+  },
+  {
+   "id": "PLfQ5H7Xuu3rs",
+   "title": "PANELEN"
+  },
+  {
+   "id": "PL5dk8eoTSDBpng4aYZ29OIkxnmYZ4yL3I",
+   "title": "BAKOM KULISSERNA"
+  },
+  {
+   "id": "PL5dk8eoTSDBodYDU1ayJKnmQYDF4Y8fjL",
+   "title": "STUDIO BANDITER"
+  },
+  {
+   "id": "PLVtPYAF29qXQ",
+   "title": "SVARAR PÅ KOMMENTARER"
+  }
+ ],
+ "formats": [
+  {
+   "key": "1vs20",
+   "name": "1 mot 20",
+   "logo": "20-vs-1.svg",
+   "tagline": "En person. Tjugo motståndare. Ingen gömmer sig.",
+   "desc": "En känd profil sätter sig mitt i ringen och möter tjugo personer med motsatt åsikt. Det är vårt mest sedda format – med flera avsnitt över 700 000 visningar.",
+   "playlist": "PL5dk8eoTSDBomTjH2c0GxoZ6hK9DrtuR1",
+   "count": 11,
+   "views": 4013000,
+   "top": "2D3DJt9OJxo"
+  },
+  {
+   "key": "soffan",
+   "name": "Studio Soffan",
+   "logo": "studio-soffan.svg",
+   "tagline": "Sex röster. Ett ämne. En soffa.",
+   "desc": "Ett aktuellt ämne, sex personer från olika läger och en soffa. Här får samtalet ta tid – och det blir ofta hett ändå.",
+   "playlist": "PL5dk8eoTSDBp4aA3aQST50pbUg2QDo1CL",
+   "count": 22,
+   "views": 2559000,
+   "top": "VXzihX-9ocM"
+  },
+  {
+   "key": "duellen",
+   "name": "Duellen",
+   "logo": "duellen.svg",
+   "tagline": "Två personer. Ett bord. Inga mellanhänder.",
+   "desc": "Två debattörer möts öga mot öga vid samma bord – ministrar, partisekreterare, ungdomsförbund och opinionsbildare.",
+   "playlist": "PL5dk8eoTSDBoY0w_36xtFA9pLU5edEWGM",
+   "count": 21,
+   "views": 1525000,
+   "top": "oFYNhWQN3qs"
+  },
+  {
+   "key": "partiledare",
+   "name": "Partiledare vs 20 väljare",
+   "logo": "20-vs-1.svg",
+   "tagline": "Makten möter väljarna.",
+   "desc": "Partiledare möter tjugo väljare som får ställa precis de frågor de vill. Statsminister Ulf Kristersson har suttit i stolen.",
+   "playlist": "PL5dk8eoTSDBod-HVjrGyfQo9U4TBuDhsh",
+   "count": 3,
+   "views": 584000,
+   "top": "EggtcghwlAA"
+  },
+  {
+   "key": "panelen",
+   "name": "Panelen",
+   "logo": "panelen.svg",
+   "tagline": "Parti mot parti. Två mot två.",
+   "desc": "Två lag från två partier eller läger möts i en lagdebatt – två mot två.",
+   "playlist": "PLfQ5H7Xuu3rs",
+   "count": 4,
+   "views": 280000,
+   "top": "4ipLbWJppIQ"
+  },
+  {
+   "key": "valvakan",
+   "name": "Valvakan 2026",
+   "logo": "valvakan.svg",
+   "tagline": "Valnatten – live.",
+   "desc": "Vår valvaka sändes live under valet 2026 med debatter, samtal och analys hela kvällen.",
+   "playlist": null,
+   "count": 7,
+   "views": 318000,
+   "top": "_9ebORMezk0"
+  },
+  {
+   "key": "banditer",
+   "name": "Studio Banditer",
+   "logo": null,
+   "tagline": "När vi lämnar studion.",
+   "desc": "Underhållning, utmaningar och en dag i någon annans skor.",
+   "playlist": "PL5dk8eoTSDBodYDU1ayJKnmQYDF4Y8fjL",
+   "count": 2,
+   "views": 166000,
+   "top": "rvZsQ8Lw71Q"
+  }
+ ],
+ "videos": [
+  {
+   "id": "oydxTW6PeEo",
+   "title": "SVARAR PÅ KOMMENTARER | ISABELLA LÖWENGRIP",
+   "display": "Svarar på kommentarer – Isabella Löwengrip",
+   "quote": null,
+   "topic": null,
+   "format": "kommentarer",
+   "views": 11000,
+   "duration": 475,
+   "published": "2026-10-20T14:41:06+00:00",
+   "position": 0,
+   "live": false,
+   "people": [
+    "Isabella Löwengrip"
+   ]
+  },
+  {
+   "id": "kzR9B3IzHkE",
+   "title": "BARNAFÖDANDET | STUDIO SOFFAN",
+   "display": "Barnafödandet",
+   "quote": null,
+   "topic": "Barnafödandet",
+   "format": "soffan",
+   "views": 44000,
+   "duration": 4421,
+   "published": "2026-10-15T15:35:35+00:00",
+   "position": 1,
+   "live": false,
+   "people": [
+    "Jessica Stegrud",
+    "Louise Hammargren",
+    "Elfva Barrio",
+    "Alice Landerholm",
+    "Enna Gerin",
+    "Emil Nordfjell"
+   ]
+  },
+  {
+   "id": "m3Sm3jBB3W0",
+   "title": "KILLKOMPISAR | STUDIO SOFFAN",
+   "display": "Killkompisar",
+   "quote": null,
+   "topic": "Killkompisar",
+   "format": "soffan",
+   "views": 135000,
+   "duration": 3346,
+   "published": "2026-10-08T14:00:35+00:00",
+   "position": 2,
+   "live": false,
+   "people": [
+    "Urban Nyman",
+    "Benjamin Löhndorf",
+    "Isabella Löwengrip",
+    "Nick Alinia",
+    "Gustav Carlbert"
+   ]
+  },
+  {
+   "id": "Bhp2Rqihu28",
+   "title": "Valresultatet | STUDIO SOFFAN",
+   "display": "Valresultatet",
+   "quote": null,
+   "topic": "Valresultatet",
+   "format": "soffan",
+   "views": 44000,
+   "duration": 3313,
+   "published": "2026-10-01T14:11:24+00:00",
+   "position": 3,
+   "live": false,
+   "people": [
+    "Emil Nordfjell",
+    "Bathina Philipson",
+    "Noah Rafat",
+    "Réka Tolnai",
+    "Gustav Carlbert",
+    "Amilia Stapelfeldt"
+   ]
+  },
+  {
+   "id": "B1IwGXoqovs",
+   "title": "VALVAKAN 2026 | DEBATT 5",
+   "display": "Valvakan 2026 – Debatt 5",
+   "quote": null,
+   "topic": null,
+   "format": "valvakan",
+   "views": 14000,
+   "duration": 2884,
+   "published": "2026-09-20T10:34:02+00:00",
+   "position": 4,
+   "live": false,
+   "people": [
+    "Axel Öhman",
+    "Luay Mohageb",
+    "Réka Tolnai",
+    "Arin Karapet"
+   ]
+  },
+  {
+   "id": "L5LPhi7f_8o",
+   "title": "VALVAKAN 2026 | SAMTAL MED MARKUS ALLARD",
+   "display": "Valvakan 2026 – Samtal med Markus Allard",
+   "quote": null,
+   "topic": null,
+   "format": "valvakan",
+   "views": 52000,
+   "duration": 1160,
+   "published": "2026-09-19T13:20:26+00:00",
+   "position": 5,
+   "live": false,
+   "people": [
+    "Markus Allard"
+   ]
+  },
+  {
+   "id": "9eSL_RfjRqM",
+   "title": "VALVAKAN 2026 | DEBATT 4",
+   "display": "Valvakan 2026 – Debatt 4",
+   "quote": null,
+   "topic": null,
+   "format": "valvakan",
+   "views": 14000,
+   "duration": 2681,
+   "published": "2026-09-19T10:40:01+00:00",
+   "position": 6,
+   "live": false,
+   "people": [
+    "Axel Öhman",
+    "Elfva Barrio",
+    "Nike Örbrink",
+    "Tobias Andersson"
+   ]
+  },
+  {
+   "id": "h301OCxFH3g",
+   "title": "VALVAKAN 2026 | DEBATT 3",
+   "display": "Valvakan 2026 – Debatt 3",
+   "quote": null,
+   "topic": null,
+   "format": "valvakan",
+   "views": 30000,
+   "duration": 2859,
+   "published": "2026-09-18T11:40:36+00:00",
+   "position": 7,
+   "live": false,
+   "people": [
+    "Nick Alinia",
+    "Alexander Ernstberger",
+    "Emil Nordfjell",
+    "Rasmus Elfström"
+   ]
+  },
+  {
+   "id": "6BCHZhMzvhQ",
+   "title": "VALVAKAN 2026 | DEBATT 2",
+   "display": "Valvakan 2026 – Debatt 2",
+   "quote": null,
+   "topic": null,
+   "format": "valvakan",
+   "views": 13000,
+   "duration": 2718,
+   "published": "2026-09-16T13:29:09+00:00",
+   "position": 8,
+   "live": false,
+   "people": [
+    "Jessica Stegrud",
+    "Louise Hammargren",
+    "Daniel Suhonen",
+    "Annika Hirvonen"
+   ]
+  },
+  {
+   "id": "q8xjixbcJVY",
+   "title": "VALVAKAN 2026 | DEBATT 1",
+   "display": "Valvakan 2026 – Debatt 1",
+   "quote": null,
+   "topic": null,
+   "format": "valvakan",
+   "views": 18000,
+   "duration": 2500,
+   "published": "2026-09-15T12:51:43+00:00",
+   "position": 9,
+   "live": false,
+   "people": [
+    "Denice Westerberg",
+    "Douglas Thor",
+    "Anton Bylin"
+   ]
+  },
+  {
+   "id": "1pvFKYqPSDk",
+   "title": "\"Liberalerna sålde sin själ för att sitta med i regeringen\" | STUDIO SOFFAN",
+   "display": "Liberalerna sålde sin själ för att sitta med i regeringen",
+   "quote": "Liberalerna sålde sin själ för att sitta med i regeringen",
+   "topic": "Känslor inför valet",
+   "format": "soffan",
+   "views": 69000,
+   "duration": 5987,
+   "published": "2026-09-10T14:06:36+00:00",
+   "position": 10,
+   "live": false,
+   "people": [
+    "Daniel Suhonen",
+    "Hannes Hervieu",
+    "Romina Pourmokhtari",
+    "My Kårlycke",
+    "Jessica Stegrud",
+    "Oliver Rosengren"
+   ]
+  },
+  {
+   "id": "CdtF8EYBh68",
+   "title": "GUNNAR STRÖMMER (M) VS ULRIKA LILJEBERG (C) | DUELLEN",
+   "display": "Gunnar Strömmer (M) vs Ulrika Liljeberg (C)",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 37000,
+   "duration": 3453,
+   "published": "2026-09-09T14:00:30+00:00",
+   "position": 11,
+   "live": false,
+   "people": [
+    "Gunnar Strömmer",
+    "Ulrika Liljeberg"
+   ]
+  },
+  {
+   "id": "zFtd14n4lnM",
+   "title": "MIKAEL DAMBERG (S) VS OSCAR SJÖSTEDT (SD) | DUELLEN",
+   "display": "Mikael Damberg (S) vs Oscar Sjöstedt (SD)",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 75000,
+   "duration": 3654,
+   "published": "2026-09-08T14:00:04+00:00",
+   "position": 12,
+   "live": false,
+   "people": [
+    "Mikael Damberg",
+    "Oscar Sjöstedt"
+   ]
+  },
+  {
+   "id": "SoIG1bYNnOs",
+   "title": "MOSKA HASSAS VS 20 MODERATER",
+   "display": "Moska Hassas vs 20 moderater",
+   "quote": null,
+   "topic": null,
+   "format": "1vs20",
+   "views": 99000,
+   "duration": 3660,
+   "published": "2026-09-06T10:00:04+00:00",
+   "position": 13,
+   "live": false,
+   "people": [
+    "Moska Hassas"
+   ]
+  },
+  {
+   "id": "wWOaROItj-o",
+   "title": "\"Dom fattiga länderna ska hjälpa sig själva\" | STUDIO SOFFAN",
+   "display": "Dom fattiga länderna ska hjälpa sig själva",
+   "quote": "Dom fattiga länderna ska hjälpa sig själva",
+   "topic": "Bistånd",
+   "format": "soffan",
+   "views": 252000,
+   "duration": 5042,
+   "published": "2026-09-03T14:00:20+00:00",
+   "position": 14,
+   "live": false,
+   "people": [
+    "Simon Fuglsang",
+    "Markus Allard",
+    "Benjamin Dousa",
+    "Anna Lasses",
+    "Hanna Lindqvist",
+    "Arin Karapet"
+   ]
+  },
+  {
+   "id": "Nf6tJejbuJk",
+   "title": "JOHAN FORSSELL VS ANNIKA HIRVONEN | DUELLEN",
+   "display": "Johan Forssell vs Annika Hirvonen",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 54000,
+   "duration": 4624,
+   "published": null,
+   "position": 15,
+   "live": false,
+   "people": [
+    "Johan Forssell",
+    "Annika Hirvonen"
+   ]
+  },
+  {
+   "id": "yJ1Yi6KDCA0",
+   "title": "ARDALAN SHEKARABI VS ERIK SLOTTNER | DUELLEN",
+   "display": "Ardalan Shekarabi vs Erik Slottner",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 23000,
+   "duration": 4548,
+   "published": null,
+   "position": 16,
+   "live": false,
+   "people": [
+    "Ardalan Shekarabi",
+    "Erik Slottner"
+   ]
+  },
+  {
+   "id": "R90i6AIv3zw",
+   "title": "MARKUS ALLARD VS 20 VÄLJARE",
+   "display": "Markus Allard vs 20 väljare",
+   "quote": null,
+   "topic": null,
+   "format": "1vs20",
+   "views": 995000,
+   "duration": 4467,
+   "published": null,
+   "position": 17,
+   "live": false,
+   "people": [
+    "Markus Allard"
+   ]
+  },
+  {
+   "id": "VXzihX-9ocM",
+   "title": "\"Klimatkrisen är här nu, vad ska vi göra åt det?\" | Studio Soffan",
+   "display": "Klimatkrisen är här nu, vad ska vi göra åt det?",
+   "quote": "Klimatkrisen är här nu, vad ska vi göra åt det?",
+   "topic": "Klimatkrisen",
+   "format": "soffan",
+   "views": 370000,
+   "duration": 4858,
+   "published": null,
+   "position": 18,
+   "live": false,
+   "people": [
+    "Douglas Thor",
+    "Anton Bylin",
+    "Romina Pourmokhtari",
+    "Markus Allard",
+    "Rasmus Elfström",
+    "Roxy Farhat"
+   ]
+  },
+  {
+   "id": "LNpwB5_ScfI",
+   "title": "IDA GABRIELSSON (V) VS OLIVER ROSENGREN (M) | DUELLEN",
+   "display": "Ida Gabrielsson (V) vs Oliver Rosengren (M)",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 26000,
+   "duration": 4495,
+   "published": null,
+   "position": 19,
+   "live": false,
+   "people": [
+    "Ida Gabrielsson",
+    "Oliver Rosengren"
+   ]
+  },
+  {
+   "id": "lEzR_Oyjx_g",
+   "title": "SOCIALDEMOKRATERNA VS SVERIGEDEMOKRATERNA | PANELEN",
+   "display": "Socialdemokraterna vs Sverigedemokraterna",
+   "quote": null,
+   "topic": null,
+   "format": "panelen",
+   "views": 100000,
+   "duration": 4654,
+   "published": null,
+   "position": 20,
+   "live": false,
+   "people": [
+    "Lawen Redar",
+    "Elfva Barrio",
+    "Henrik Vinge",
+    "Denice Westerberg"
+   ]
+  },
+  {
+   "id": "_ykNB-TMR_s",
+   "title": "\"Det är klart man inte ska ha en mängdrabatt\" | Studio Soffan",
+   "display": "Det är klart man inte ska ha en mängdrabatt",
+   "quote": "Det är klart man inte ska ha en mängdrabatt",
+   "topic": "Brott & straff",
+   "format": "soffan",
+   "views": 329000,
+   "duration": 4396,
+   "published": null,
+   "position": 21,
+   "live": false,
+   "people": [
+    "Martin Melin",
+    "Amilia Stapelfeldt",
+    "Markus Allard",
+    "Anders Lindberg",
+    "Réka Tolnai",
+    "Luay Mohageb"
+   ]
+  },
+  {
+   "id": "fFhLkJzEVR4",
+   "title": "NICK ALINIA VS SIMON FUGLSANG | DUELLEN",
+   "display": "Nick Alinia vs Simon Fuglsang",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 98000,
+   "duration": 4541,
+   "published": null,
+   "position": 22,
+   "live": false,
+   "people": [
+    "Nick Alinia",
+    "Simon Fuglsang"
+   ]
+  },
+  {
+   "id": "yDF-JtVWPl4",
+   "title": "TOBIAS ANDERSSON VS 20 SOCIALDEMOKRATER",
+   "display": "Tobias Andersson vs 20 socialdemokrater",
+   "quote": null,
+   "topic": null,
+   "format": "1vs20",
+   "views": 230000,
+   "duration": 3325,
+   "published": null,
+   "position": 23,
+   "live": false,
+   "people": [
+    "Tobias Andersson"
+   ]
+  },
+  {
+   "id": "nieUt0p7DXA",
+   "title": "\"Ni har slaktat A-Kassan\" | Studio Soffan",
+   "display": "Ni har slaktat A-Kassan",
+   "quote": "Ni har slaktat A-Kassan",
+   "topic": "Karensavdrag & a-kassa",
+   "format": "soffan",
+   "views": 39000,
+   "duration": 3899,
+   "published": null,
+   "position": 24,
+   "live": false,
+   "people": [
+    "Tobias Årnell",
+    "Emil Nordfjell",
+    "Elfva Barrio",
+    "Louise Hammargren",
+    "Hanna Östeby",
+    "Oliver Rosengren"
+   ]
+  },
+  {
+   "id": "j_U6t12ZSdw",
+   "title": "NOOSHI DADGOSTAR (V) VS ELISABETH SVANTESSON (M) | DUELLEN",
+   "display": "Nooshi Dadgostar (V) vs Elisabeth Svantesson (M)",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 143000,
+   "duration": 3759,
+   "published": null,
+   "position": 25,
+   "live": false,
+   "people": [
+    "Nooshi Dadgostar",
+    "Elisabeth Svantesson"
+   ]
+  },
+  {
+   "id": "B1IAy3WvnXg",
+   "title": "\"Gapa svennejävel\" | STUDIO SOFFAN",
+   "display": "Gapa svennejävel",
+   "quote": "Gapa svennejävel",
+   "topic": null,
+   "format": "soffan",
+   "views": 231000,
+   "duration": 4248,
+   "published": null,
+   "position": 26,
+   "live": false,
+   "people": [
+    "Louise Hammargren",
+    "Arin Guven",
+    "Gustav Kasselstrand",
+    "Douglas Thor",
+    "Tobias Årnell",
+    "Axel Öhman"
+   ]
+  },
+  {
+   "id": "saKWOojDse8",
+   "title": "MAGNUS RESARE VS NIELS PAARUP-PETERSEN | DUELLEN",
+   "display": "Magnus Resare vs Niels Paarup-Petersen",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 10000,
+   "duration": 4577,
+   "published": null,
+   "position": 27,
+   "live": false,
+   "people": [
+    "Magnus Resare",
+    "Niels Paarup-Petersen"
+   ]
+  },
+  {
+   "id": "q17a96KtJXE",
+   "title": "KRISTDEMOKRATERNA VS CENTERPARTIET | PANELEN",
+   "display": "Kristdemokraterna vs Centerpartiet",
+   "quote": null,
+   "topic": null,
+   "format": "panelen",
+   "views": 18000,
+   "duration": 4520,
+   "published": null,
+   "position": 28,
+   "live": false,
+   "people": [
+    "Hans Eklind",
+    "Louise Hammargren",
+    "Rasmus Elfström",
+    "Emelie Rossheim"
+   ]
+  },
+  {
+   "id": "gGfcrFhlGvQ",
+   "title": "\"Stämmer det att MP lade ner fullt fungerande kärnkraft?\" | STUDIO SOFFAN",
+   "display": "Stämmer det att MP lade ner fullt fungerande kärnkraft?",
+   "quote": "Stämmer det att MP lade ner fullt fungerande kärnkraft?",
+   "topic": "Kärnkraft",
+   "format": "soffan",
+   "views": 44000,
+   "duration": 4463,
+   "published": null,
+   "position": 29,
+   "live": false,
+   "people": [
+    "Martin Westling",
+    "Oliwer Schultz",
+    "Rasmus Elfström",
+    "Tobias Andersson",
+    "Douglas Thor"
+   ]
+  },
+  {
+   "id": "LDArmB--V1w",
+   "title": "\"Kurdiska rävens springis ska inte torka min mormors röv\"  | STUDIO SOFFAN",
+   "display": "Kurdiska rävens springis ska inte torka min mormors röv",
+   "quote": "Kurdiska rävens springis ska inte torka min mormors röv",
+   "topic": "Vinster i välfärden",
+   "format": "soffan",
+   "views": 64000,
+   "duration": 4296,
+   "published": null,
+   "position": 30,
+   "live": false,
+   "people": [
+    "Moska Hassas",
+    "Magnus Bjerg Sturm",
+    "Martin Westling",
+    "Alexander Ernstberger",
+    "Nike Örbrink",
+    "Tobias Andersson"
+   ]
+  },
+  {
+   "id": "EgpHYabhyQ8",
+   "title": "MIKAIL YÜKSEL VS 20 SVERIGEDEMOKRATER",
+   "display": "Mikail Yüksel vs 20 sverigedemokrater",
+   "quote": null,
+   "topic": null,
+   "format": "1vs20",
+   "views": 93000,
+   "duration": 3334,
+   "published": null,
+   "position": 31,
+   "live": false,
+   "people": [
+    "Mikail Yüksel"
+   ]
+  },
+  {
+   "id": "XghR0B2Sn28",
+   "title": "SOCIALDEMOKRATERNA VS MODERATERNA | PANELEN",
+   "display": "Socialdemokraterna vs Moderaterna",
+   "quote": null,
+   "topic": null,
+   "format": "panelen",
+   "views": 47000,
+   "duration": 5920,
+   "published": null,
+   "position": 32,
+   "live": false,
+   "people": [
+    "Ardalan Shekarabi",
+    "Moska Hassas",
+    "Oliver Rosengren",
+    "Douglas Thor"
+   ]
+  },
+  {
+   "id": "5P2ek3uEvMs",
+   "title": "\"Det är inte upp till staten att bestämma om slöja\" | Studio Soffan",
+   "display": "Det är inte upp till staten att bestämma om slöja",
+   "quote": "Det är inte upp till staten att bestämma om slöja",
+   "topic": "Slöjförbud",
+   "format": "soffan",
+   "views": 71000,
+   "duration": 5164,
+   "published": null,
+   "position": 33,
+   "live": false,
+   "people": [
+    "Jessica Stegrud",
+    "Tobias Andersson",
+    "Felicia Axelsson Söderström",
+    "Rasmus Elfström"
+   ]
+  },
+  {
+   "id": "qWp6O2RULRI",
+   "title": "GUSTAV KASSELSTRAND VS 20 FRÅN VÄNSTER",
+   "display": "Gustav Kasselstrand vs 20 från vänster",
+   "quote": null,
+   "topic": null,
+   "format": "1vs20",
+   "views": 373000,
+   "duration": 3375,
+   "published": null,
+   "position": 34,
+   "live": false,
+   "people": [
+    "Gustav Kasselstrand"
+   ]
+  },
+  {
+   "id": "CzkB1mHkhJY",
+   "title": "”Det är väldigt svårt att bli rik i Sverige” | STUDIO SOFFAN",
+   "display": "Det är väldigt svårt att bli rik i Sverige",
+   "quote": "Det är väldigt svårt att bli rik i Sverige",
+   "topic": "Ekonomi & välfärd",
+   "format": "soffan",
+   "views": 70000,
+   "duration": 6103,
+   "published": null,
+   "position": 35,
+   "live": false,
+   "people": [
+    "Anton Bylin",
+    "Douglas Thor",
+    "Alexander Ernstberger",
+    "Jonathan Nordmark",
+    "Louise Hammargren",
+    "Elfva Barrio"
+   ]
+  },
+  {
+   "id": "05E8zvVWvzE",
+   "title": "MIKAIL YÜKSEL VS ARIN KARAPET | DUELLEN",
+   "display": "Mikail Yüksel vs Arin Karapet",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 69000,
+   "duration": 5098,
+   "published": null,
+   "position": 36,
+   "live": false,
+   "people": [
+    "Mikail Yüksel",
+    "Arin Karapet"
+   ]
+  },
+  {
+   "id": "4ipLbWJppIQ",
+   "title": "SVERIGEDEMOKRATERNA VS MILJÖPARTIET | PANELEN",
+   "display": "Sverigedemokraterna vs Miljöpartiet",
+   "quote": null,
+   "topic": null,
+   "format": "panelen",
+   "views": 115000,
+   "duration": 5125,
+   "published": null,
+   "position": 37,
+   "live": false,
+   "people": [
+    "Denice Westerberg",
+    "Tobias Andersson",
+    "Anton Bylin",
+    "Martin Marmgren"
+   ]
+  },
+  {
+   "id": "G_ELomoQJx4",
+   "title": "”Pride är inte särskilt inkluderande” | STUDIO SOFFAN",
+   "display": "Pride är inte särskilt inkluderande",
+   "quote": "Pride är inte särskilt inkluderande",
+   "topic": "Pride",
+   "format": "soffan",
+   "views": 127000,
+   "duration": 4673,
+   "published": null,
+   "position": 38,
+   "live": false,
+   "people": [
+    "Amilia Stapelfeldt",
+    "Liv Svedberg",
+    "Nick Alinia",
+    "Emil Nordfjell",
+    "Isak Charles Sjöberg",
+    "Elias Fjellander"
+   ]
+  },
+  {
+   "id": "EggtcghwlAA",
+   "title": "ULF KRISTERSSON VS 20 VÄLJARE",
+   "display": "Ulf Kristersson vs 20 väljare",
+   "quote": null,
+   "topic": null,
+   "format": "partiledare",
+   "views": 379000,
+   "duration": 4592,
+   "published": null,
+   "position": 39,
+   "live": false,
+   "people": [
+    "Ulf Kristersson"
+   ]
+  },
+  {
+   "id": "4CAnD_LcewA",
+   "title": "”SVT och Public Service har en vänsterlutning” | STUDIO SOFFAN",
+   "display": "SVT och Public Service har en vänsterlutning",
+   "quote": "SVT och Public Service har en vänsterlutning",
+   "topic": "Public service",
+   "format": "soffan",
+   "views": 70000,
+   "duration": 4524,
+   "published": null,
+   "position": 40,
+   "live": false,
+   "people": [
+    "Anders Lindberg",
+    "Emil Nordfjell",
+    "Axel Öhman",
+    "Alexander Ernstberger",
+    "Douglas Thor",
+    "Arin Karapet"
+   ]
+  },
+  {
+   "id": "t54kzCi0VFM",
+   "title": "MATTIAS KARLSSON VS DANIEL SUHONEN | DUELLEN",
+   "display": "Mattias Karlsson vs Daniel Suhonen",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 71000,
+   "duration": 5173,
+   "published": null,
+   "position": 41,
+   "live": false,
+   "people": [
+    "Mattias Karlsson",
+    "Daniel Suhonen"
+   ]
+  },
+  {
+   "id": "_lCO-cH6DtI",
+   "title": "”Ni tjänar på att försvara Lundsberg” | STUDIO SOFFAN",
+   "display": "Ni tjänar på att försvara Lundsberg",
+   "quote": "Ni tjänar på att försvara Lundsberg",
+   "topic": "Lundsberg",
+   "format": "soffan",
+   "views": 37000,
+   "duration": 4528,
+   "published": null,
+   "position": 42,
+   "live": false,
+   "people": [
+    "Axel Öhman",
+    "Bathina Philipson",
+    "Anton Bylin",
+    "Jonathan Nordmark",
+    "Lisa Håglund",
+    "Tindra H. Forsberg"
+   ]
+  },
+  {
+   "id": "kFxqT6vClZ8",
+   "title": "ANDERS LINDBERG VS 20 MOTSTÅNDARE",
+   "display": "Anders Lindberg vs 20 motståndare",
+   "quote": null,
+   "topic": null,
+   "format": "1vs20",
+   "views": 79000,
+   "duration": 4424,
+   "published": null,
+   "position": 43,
+   "live": false,
+   "people": [
+    "Anders Lindberg"
+   ]
+  },
+  {
+   "id": "-R31ScHr8IM",
+   "title": "”Skicka bara ut folk!” | STUDIO SOFFAN",
+   "display": "Skicka bara ut folk!",
+   "quote": "Skicka bara ut folk!",
+   "topic": "Migration",
+   "format": "soffan",
+   "views": 155000,
+   "duration": 3900,
+   "published": null,
+   "position": 44,
+   "live": false,
+   "people": [
+    "Nick Alinia",
+    "Amilia Stapelfeldt",
+    "Isak Charles Sjöberg",
+    "Emil Nordfjell"
+   ]
+  },
+  {
+   "id": "lDHvf8fvh5c",
+   "title": "\"Ett stort hot mot kvinnors trygghet är högerpolitiker\" | STUDIO SOFFAN",
+   "display": "Ett stort hot mot kvinnors trygghet är högerpolitiker",
+   "quote": "Ett stort hot mot kvinnors trygghet är högerpolitiker",
+   "topic": "Feminism",
+   "format": "soffan",
+   "views": 213000,
+   "duration": 4062,
+   "published": null,
+   "position": 45,
+   "live": false,
+   "people": [
+    "Nick Alinia",
+    "Axel Öhman",
+    "Denice Westerberg",
+    "Nike Örbrink",
+    "Ella Berndes",
+    "Emil Nordfjell"
+   ]
+  },
+  {
+   "id": "0pEETaommmE",
+   "title": "ALEXANDER ERNSTBERGER VS 20 KRITIKER",
+   "display": "Alexander Ernstberger vs 20 kritiker",
+   "quote": null,
+   "topic": null,
+   "format": "1vs20",
+   "views": 179000,
+   "duration": 3306,
+   "published": null,
+   "position": 46,
+   "live": false,
+   "people": [
+    "Alexander Ernstberger"
+   ]
+  },
+  {
+   "id": "W9EA90nlbLY",
+   "title": "FÖRETAGARNA VS KATALYS | DUELLEN",
+   "display": "Företagarna vs Katalys",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 11000,
+   "duration": 4649,
+   "published": null,
+   "position": 47,
+   "live": false,
+   "people": [
+    "Magnus Demervall",
+    "Max Jerneck"
+   ]
+  },
+  {
+   "id": "0mYpBwKukqs",
+   "title": "MOSKA HASSAS VS DOUGLAS THOR | DUELLEN",
+   "display": "Moska Hassas vs Douglas Thor",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 35000,
+   "duration": 4574,
+   "published": null,
+   "position": 48,
+   "live": false,
+   "people": [
+    "Moska Hassas",
+    "Douglas Thor"
+   ]
+  },
+  {
+   "id": "oFYNhWQN3qs",
+   "title": "MARKUS ALLARD VS MARTIN MELIN | DUELLEN",
+   "display": "Markus Allard vs Martin Melin",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 351000,
+   "duration": 4607,
+   "published": null,
+   "position": 49,
+   "live": false,
+   "people": [
+    "Markus Allard",
+    "Martin Melin"
+   ]
+  },
+  {
+   "id": "6BrG_y4aHp0",
+   "title": "\"Vad innebär det egentligen att vara svensk?\" | STUDIO SOFFAN",
+   "display": "Vad innebär det egentligen att vara svensk?",
+   "quote": "Vad innebär det egentligen att vara svensk?",
+   "topic": "Vad är svenskhet?",
+   "format": "soffan",
+   "views": 74000,
+   "duration": 4211,
+   "published": null,
+   "position": 50,
+   "live": false,
+   "people": [
+    "Gurgîn Bakircioglu",
+    "Réka Tolnai",
+    "Denice Westerberg",
+    "Axel Öhman",
+    "Mats Selander",
+    "Tobias Årnell"
+   ]
+  },
+  {
+   "id": "GewqhtFL_qg",
+   "title": "NICK ALINIA VS RÉKA TOLNAI | DUELLEN",
+   "display": "Nick Alinia vs Réka Tolnai",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 131000,
+   "duration": 4555,
+   "published": null,
+   "position": 51,
+   "live": false,
+   "people": [
+    "Nick Alinia",
+    "Réka Tolnai"
+   ]
+  },
+  {
+   "id": "8GEDOAEvJKs",
+   "title": "\"Skulle du hellre vilja leva i Iran än USA?\" | STUDIO SOFFAN",
+   "display": "Skulle du hellre vilja leva i Iran än USA?",
+   "quote": "Skulle du hellre vilja leva i Iran än USA?",
+   "topic": "Iran vs USA",
+   "format": "soffan",
+   "views": 35000,
+   "duration": 3553,
+   "published": null,
+   "position": 52,
+   "live": false,
+   "people": []
+  },
+  {
+   "id": "hXTgjkQAUsI",
+   "title": "DANIEL VENCU VS NIKE ÖRBRINK | DUELLEN",
+   "display": "Daniel Vencu vs Nike Örbrink",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 10000,
+   "duration": 4559,
+   "published": null,
+   "position": 53,
+   "live": false,
+   "people": [
+    "Daniel Vencu Velasquez Castro",
+    "Nike Örbrink"
+   ]
+  },
+  {
+   "id": "LLeuhs1Rh0c",
+   "title": "VALÅRET 2026 | STUDIO SOFFAN",
+   "display": "Valåret 2026",
+   "quote": null,
+   "topic": "Valåret 2026",
+   "format": "soffan",
+   "views": 34000,
+   "duration": 5098,
+   "published": null,
+   "position": 54,
+   "live": false,
+   "people": []
+  },
+  {
+   "id": "-IIbqvriYY8",
+   "title": "DANIEL HELLDÉN VS 20 VÄLJARE",
+   "display": "Daniel Helldén vs 20 väljare",
+   "quote": null,
+   "topic": null,
+   "format": "partiledare",
+   "views": 87000,
+   "duration": 4846,
+   "published": null,
+   "position": 55,
+   "live": false,
+   "people": [
+    "Daniel Helldén"
+   ]
+  },
+  {
+   "id": "gH6_DoNaqbo",
+   "title": "\"ABORT EFTER 2 ÅR?!\" | STUDIO SOFFAN",
+   "display": "Abort efter 2 år?!",
+   "quote": "ABORT EFTER 2 ÅR?!",
+   "topic": "Abort",
+   "format": "soffan",
+   "views": 52000,
+   "duration": 6170,
+   "published": null,
+   "position": 56,
+   "live": false,
+   "people": []
+  },
+  {
+   "id": "smeZbVNaf6M",
+   "title": "KALLE SUNDIN VS ERIK BENGTZBOE | DUELLEN",
+   "display": "Kalle Sundin vs Erik Bengtzboe",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 11000,
+   "duration": 4559,
+   "published": null,
+   "position": 57,
+   "live": false,
+   "people": [
+    "Kalle Sundin",
+    "Erik Bengtzboe"
+   ]
+  },
+  {
+   "id": "sXln42JrIqM",
+   "title": "LAWEN REDAR VS JESSICA STEGRUD | DUELLEN",
+   "display": "Lawen Redar vs Jessica Stegrud",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 62000,
+   "duration": 4902,
+   "published": null,
+   "position": 58,
+   "live": false,
+   "people": [
+    "Lawen Redar",
+    "Jessica Stegrud"
+   ]
+  },
+  {
+   "id": "KmmKCToDsoo",
+   "title": "BENJAMIN DOUSA VS LORENTZ TOVATT | DUELLEN",
+   "display": "Benjamin Dousa vs Lorentz Tovatt",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 26000,
+   "duration": 4840,
+   "published": null,
+   "position": 59,
+   "live": false,
+   "people": [
+    "Benjamin Dousa",
+    "Lorentz Tovatt"
+   ]
+  },
+  {
+   "id": "nSMNu4d9IS8",
+   "title": "DENICE WESTERBERG VS LUDWIG ULLER | DUELLEN",
+   "display": "Denice Westerberg vs Ludwig Uller",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 84000,
+   "duration": 4737,
+   "published": null,
+   "position": 60,
+   "live": false,
+   "people": [
+    "Denice Westerberg",
+    "Ludwig Uller"
+   ]
+  },
+  {
+   "id": "kcv6Bs9bWfw",
+   "title": "KRISTEN VS ATEIST | DUELLEN",
+   "display": "Kristen vs Ateist",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 44000,
+   "duration": 3801,
+   "published": null,
+   "position": 61,
+   "live": false,
+   "people": []
+  },
+  {
+   "id": "WsTxXWhVA3E",
+   "title": "ALEXANDER ERNSTBERGER VS DANIEL SUHONEN | DUELLEN",
+   "display": "Alexander Ernstberger vs Daniel Suhonen",
+   "quote": null,
+   "topic": null,
+   "format": "duellen",
+   "views": 154000,
+   "duration": 4834,
+   "published": null,
+   "position": 62,
+   "live": false,
+   "people": [
+    "Alexander Ernstberger",
+    "Daniel Suhonen"
+   ]
+  },
+  {
+   "id": "9NoQo_KYV1E",
+   "title": "SIMONA MOHAMSSON VS 20 VÄLJARE",
+   "display": "Simona Mohamsson vs 20 väljare",
+   "quote": null,
+   "topic": null,
+   "format": "partiledare",
+   "views": 118000,
+   "duration": 4647,
+   "published": null,
+   "position": 63,
+   "live": false,
+   "people": [
+    "Simona Mohamsson"
+   ]
+  },
+  {
+   "id": "GX_mlM87AzU",
+   "title": "1 VEGAN VS 20 KÖTTÄTARE",
+   "display": "1 vegan vs 20 köttätare",
+   "quote": null,
+   "topic": null,
+   "format": "1vs20",
+   "views": 89000,
+   "duration": 3158,
+   "published": null,
+   "position": 64,
+   "live": false,
+   "people": []
+  },
+  {
+   "id": "7yG501L9zGE",
+   "title": "GURGÎN BAKIRCIOGLU VS 20 FRÅN HÖGERN",
+   "display": "Gurgîn Bakircioglu vs 20 från högern",
+   "quote": null,
+   "topic": null,
+   "format": "1vs20",
+   "views": 127000,
+   "duration": 3593,
+   "published": null,
+   "position": 65,
+   "live": false,
+   "people": [
+    "Gurgîn Bakircioglu"
+   ]
+  },
+  {
+   "id": "rvZsQ8Lw71Q",
+   "title": "LEVER EN DAG SOM ALEXANDER ERNSTBERGER",
+   "display": "Lever en dag som Alexander Ernstberger",
+   "quote": null,
+   "topic": null,
+   "format": "banditer",
+   "views": 102000,
+   "duration": 2351,
+   "published": null,
+   "position": 66,
+   "live": false,
+   "people": [
+    "Alexander Ernstberger"
+   ]
+  },
+  {
+   "id": "oMMfTotn6jU",
+   "title": "VI BYTER LIV MED 3 KÄNDISAR",
+   "display": "Vi byter liv med 3 kändisar",
+   "quote": null,
+   "topic": null,
+   "format": "banditer",
+   "views": 64000,
+   "duration": 2924,
+   "published": null,
+   "position": 67,
+   "live": false,
+   "people": []
+  },
+  {
+   "id": "dh-BWEvy2wE",
+   "title": "NICK ALINIA VS 20 FRÅN VÄNSTERN",
+   "display": "Nick Alinia vs 20 från vänstern",
+   "quote": null,
+   "topic": null,
+   "format": "1vs20",
+   "views": 749000,
+   "duration": 4593,
+   "published": null,
+   "position": 68,
+   "live": false,
+   "people": [
+    "Nick Alinia"
+   ]
+  },
+  {
+   "id": "2D3DJt9OJxo",
+   "title": "JAN EMANUEL VS 20 MILJÖPARTISTER",
+   "display": "Jan Emanuel vs 20 miljöpartister",
+   "quote": null,
+   "topic": null,
+   "format": "1vs20",
+   "views": 1000000,
+   "duration": 2611,
+   "published": null,
+   "position": 69,
+   "live": false,
+   "people": [
+    "Jan Emanuel"
+   ]
+  },
+  {
+   "id": "_9ebORMezk0",
+   "title": "VALVAKA 2026 | STUDIO 3",
+   "display": "Valvaka 2026 – hela livesändningen",
+   "quote": null,
+   "topic": null,
+   "format": "valvakan",
+   "views": 177000,
+   "duration": 30555,
+   "published": null,
+   "position": 70,
+   "live": true,
+   "people": []
+  }
+ ],
+ "people": [
+  {
+   "name": "Douglas Thor",
+   "slug": "douglas-thor",
+   "party": null,
+   "role": null,
+   "videos": [
+    "q8xjixbcJVY",
+    "VXzihX-9ocM",
+    "B1IAy3WvnXg",
+    "gGfcrFhlGvQ",
+    "XghR0B2Sn28",
+    "CzkB1mHkhJY",
+    "4CAnD_LcewA",
+    "0mYpBwKukqs"
+   ],
+   "views": 885000
+  },
+  {
+   "name": "Emil Nordfjell",
+   "slug": "emil-nordfjell",
+   "party": null,
+   "role": null,
+   "videos": [
+    "kzR9B3IzHkE",
+    "Bhp2Rqihu28",
+    "h301OCxFH3g",
+    "nieUt0p7DXA",
+    "G_ELomoQJx4",
+    "4CAnD_LcewA",
+    "-R31ScHr8IM",
+    "lDHvf8fvh5c"
+   ],
+   "views": 722000
+  },
+  {
+   "name": "Nick Alinia",
+   "slug": "nick-alinia",
+   "party": null,
+   "role": null,
+   "videos": [
+    "m3Sm3jBB3W0",
+    "h301OCxFH3g",
+    "fFhLkJzEVR4",
+    "G_ELomoQJx4",
+    "-R31ScHr8IM",
+    "lDHvf8fvh5c",
+    "GewqhtFL_qg",
+    "dh-BWEvy2wE"
+   ],
+   "views": 1638000
+  },
+  {
+   "name": "Alexander Ernstberger",
+   "slug": "alexander-ernstberger",
+   "party": null,
+   "role": null,
+   "videos": [
+    "h301OCxFH3g",
+    "LDArmB--V1w",
+    "CzkB1mHkhJY",
+    "4CAnD_LcewA",
+    "0pEETaommmE",
+    "WsTxXWhVA3E",
+    "rvZsQ8Lw71Q"
+   ],
+   "views": 669000
+  },
+  {
+   "name": "Axel Öhman",
+   "slug": "axel-ohman",
+   "party": null,
+   "role": null,
+   "videos": [
+    "B1IwGXoqovs",
+    "9eSL_RfjRqM",
+    "B1IAy3WvnXg",
+    "4CAnD_LcewA",
+    "_lCO-cH6DtI",
+    "lDHvf8fvh5c",
+    "6BrG_y4aHp0"
+   ],
+   "views": 653000
+  },
+  {
+   "name": "Denice Westerberg",
+   "slug": "denice-westerberg",
+   "party": null,
+   "role": null,
+   "videos": [
+    "q8xjixbcJVY",
+    "lEzR_Oyjx_g",
+    "4ipLbWJppIQ",
+    "lDHvf8fvh5c",
+    "6BrG_y4aHp0",
+    "nSMNu4d9IS8"
+   ],
+   "views": 604000
+  },
+  {
+   "name": "Louise Hammargren",
+   "slug": "louise-hammargren",
+   "party": null,
+   "role": null,
+   "videos": [
+    "kzR9B3IzHkE",
+    "6BCHZhMzvhQ",
+    "nieUt0p7DXA",
+    "B1IAy3WvnXg",
+    "q17a96KtJXE",
+    "CzkB1mHkhJY"
+   ],
+   "views": 415000
+  },
+  {
+   "name": "Markus Allard",
+   "slug": "markus-allard",
+   "party": null,
+   "role": null,
+   "videos": [
+    "L5LPhi7f_8o",
+    "wWOaROItj-o",
+    "R90i6AIv3zw",
+    "VXzihX-9ocM",
+    "_ykNB-TMR_s",
+    "oFYNhWQN3qs"
+   ],
+   "views": 2349000
+  },
+  {
+   "name": "Tobias Andersson",
+   "slug": "tobias-andersson",
+   "party": null,
+   "role": null,
+   "videos": [
+    "9eSL_RfjRqM",
+    "yDF-JtVWPl4",
+    "gGfcrFhlGvQ",
+    "LDArmB--V1w",
+    "5P2ek3uEvMs",
+    "4ipLbWJppIQ"
+   ],
+   "views": 538000
+  },
+  {
+   "name": "Anton Bylin",
+   "slug": "anton-bylin",
+   "party": null,
+   "role": null,
+   "videos": [
+    "q8xjixbcJVY",
+    "VXzihX-9ocM",
+    "CzkB1mHkhJY",
+    "4ipLbWJppIQ",
+    "_lCO-cH6DtI"
+   ],
+   "views": 610000
+  },
+  {
+   "name": "Elfva Barrio",
+   "slug": "elfva-barrio",
+   "party": null,
+   "role": null,
+   "videos": [
+    "kzR9B3IzHkE",
+    "9eSL_RfjRqM",
+    "lEzR_Oyjx_g",
+    "nieUt0p7DXA",
+    "CzkB1mHkhJY"
+   ],
+   "views": 267000
+  },
+  {
+   "name": "Jessica Stegrud",
+   "slug": "jessica-stegrud",
+   "party": null,
+   "role": null,
+   "videos": [
+    "kzR9B3IzHkE",
+    "6BCHZhMzvhQ",
+    "1pvFKYqPSDk",
+    "5P2ek3uEvMs",
+    "sXln42JrIqM"
+   ],
+   "views": 259000
+  },
+  {
+   "name": "Rasmus Elfström",
+   "slug": "rasmus-elfstrom",
+   "party": null,
+   "role": null,
+   "videos": [
+    "h301OCxFH3g",
+    "VXzihX-9ocM",
+    "q17a96KtJXE",
+    "gGfcrFhlGvQ",
+    "5P2ek3uEvMs"
+   ],
+   "views": 533000
+  },
+  {
+   "name": "Réka Tolnai",
+   "slug": "reka-tolnai",
+   "party": null,
+   "role": null,
+   "videos": [
+    "Bhp2Rqihu28",
+    "B1IwGXoqovs",
+    "_ykNB-TMR_s",
+    "6BrG_y4aHp0",
+    "GewqhtFL_qg"
+   ],
+   "views": 592000
+  },
+  {
+   "name": "Amilia Stapelfeldt",
+   "slug": "amilia-stapelfeldt",
+   "party": null,
+   "role": null,
+   "videos": [
+    "Bhp2Rqihu28",
+    "_ykNB-TMR_s",
+    "G_ELomoQJx4",
+    "-R31ScHr8IM"
+   ],
+   "views": 655000
+  },
+  {
+   "name": "Arin Karapet",
+   "slug": "arin-karapet",
+   "party": null,
+   "role": null,
+   "videos": [
+    "B1IwGXoqovs",
+    "wWOaROItj-o",
+    "05E8zvVWvzE",
+    "4CAnD_LcewA"
+   ],
+   "views": 405000
+  },
+  {
+   "name": "Daniel Suhonen",
+   "slug": "daniel-suhonen",
+   "party": null,
+   "role": null,
+   "videos": [
+    "6BCHZhMzvhQ",
+    "1pvFKYqPSDk",
+    "t54kzCi0VFM",
+    "WsTxXWhVA3E"
+   ],
+   "views": 307000
+  },
+  {
+   "name": "Moska Hassas",
+   "slug": "moska-hassas",
+   "party": null,
+   "role": null,
+   "videos": [
+    "SoIG1bYNnOs",
+    "LDArmB--V1w",
+    "XghR0B2Sn28",
+    "0mYpBwKukqs"
+   ],
+   "views": 245000
+  },
+  {
+   "name": "Nike Örbrink",
+   "slug": "nike-orbrink",
+   "party": null,
+   "role": null,
+   "videos": [
+    "9eSL_RfjRqM",
+    "LDArmB--V1w",
+    "lDHvf8fvh5c",
+    "hXTgjkQAUsI"
+   ],
+   "views": 301000
+  },
+  {
+   "name": "Oliver Rosengren",
+   "slug": "oliver-rosengren",
+   "party": "M",
+   "role": null,
+   "videos": [
+    "1pvFKYqPSDk",
+    "LNpwB5_ScfI",
+    "nieUt0p7DXA",
+    "XghR0B2Sn28"
+   ],
+   "views": 181000
+  },
+  {
+   "name": "Anders Lindberg",
+   "slug": "anders-lindberg",
+   "party": null,
+   "role": null,
+   "videos": [
+    "_ykNB-TMR_s",
+    "4CAnD_LcewA",
+    "kFxqT6vClZ8"
+   ],
+   "views": 478000
+  },
+  {
+   "name": "Tobias Årnell",
+   "slug": "tobias-arnell",
+   "party": null,
+   "role": null,
+   "videos": [
+    "nieUt0p7DXA",
+    "B1IAy3WvnXg",
+    "6BrG_y4aHp0"
+   ],
+   "views": 344000
+  },
+  {
+   "name": "Annika Hirvonen",
+   "slug": "annika-hirvonen",
+   "party": null,
+   "role": null,
+   "videos": [
+    "6BCHZhMzvhQ",
+    "Nf6tJejbuJk"
+   ],
+   "views": 67000
+  },
+  {
+   "name": "Ardalan Shekarabi",
+   "slug": "ardalan-shekarabi",
+   "party": null,
+   "role": null,
+   "videos": [
+    "yJ1Yi6KDCA0",
+    "XghR0B2Sn28"
+   ],
+   "views": 70000
+  },
+  {
+   "name": "Bathina Philipson",
+   "slug": "bathina-philipson",
+   "party": null,
+   "role": null,
+   "videos": [
+    "Bhp2Rqihu28",
+    "_lCO-cH6DtI"
+   ],
+   "views": 81000
+  },
+  {
+   "name": "Benjamin Dousa",
+   "slug": "benjamin-dousa",
+   "party": null,
+   "role": null,
+   "videos": [
+    "wWOaROItj-o",
+    "KmmKCToDsoo"
+   ],
+   "views": 278000
+  },
+  {
+   "name": "Gurgîn Bakircioglu",
+   "slug": "gurgin-bakircioglu",
+   "party": null,
+   "role": null,
+   "videos": [
+    "6BrG_y4aHp0",
+    "7yG501L9zGE"
+   ],
+   "views": 201000
+  },
+  {
+   "name": "Gustav Carlbert",
+   "slug": "gustav-carlbert",
+   "party": null,
+   "role": null,
+   "videos": [
+    "m3Sm3jBB3W0",
+    "Bhp2Rqihu28"
+   ],
+   "views": 179000
+  },
+  {
+   "name": "Gustav Kasselstrand",
+   "slug": "gustav-kasselstrand",
+   "party": null,
+   "role": null,
+   "videos": [
+    "B1IAy3WvnXg",
+    "qWp6O2RULRI"
+   ],
+   "views": 604000
+  },
+  {
+   "name": "Isabella Löwengrip",
+   "slug": "isabella-lowengrip",
+   "party": null,
+   "role": null,
+   "videos": [
+    "oydxTW6PeEo",
+    "m3Sm3jBB3W0"
+   ],
+   "views": 146000
+  },
+  {
+   "name": "Isak Charles Sjöberg",
+   "slug": "isak-charles-sjoberg",
+   "party": null,
+   "role": null,
+   "videos": [
+    "G_ELomoQJx4",
+    "-R31ScHr8IM"
+   ],
+   "views": 282000
+  },
+  {
+   "name": "Jonathan Nordmark",
+   "slug": "jonathan-nordmark",
+   "party": null,
+   "role": null,
+   "videos": [
+    "CzkB1mHkhJY",
+    "_lCO-cH6DtI"
+   ],
+   "views": 107000
+  },
+  {
+   "name": "Lawen Redar",
+   "slug": "lawen-redar",
+   "party": null,
+   "role": null,
+   "videos": [
+    "lEzR_Oyjx_g",
+    "sXln42JrIqM"
+   ],
+   "views": 162000
+  },
+  {
+   "name": "Luay Mohageb",
+   "slug": "luay-mohageb",
+   "party": null,
+   "role": null,
+   "videos": [
+    "B1IwGXoqovs",
+    "_ykNB-TMR_s"
+   ],
+   "views": 343000
+  },
+  {
+   "name": "Martin Melin",
+   "slug": "martin-melin",
+   "party": null,
+   "role": null,
+   "videos": [
+    "_ykNB-TMR_s",
+    "oFYNhWQN3qs"
+   ],
+   "views": 680000
+  },
+  {
+   "name": "Martin Westling",
+   "slug": "martin-westling",
+   "party": null,
+   "role": null,
+   "videos": [
+    "gGfcrFhlGvQ",
+    "LDArmB--V1w"
+   ],
+   "views": 108000
+  },
+  {
+   "name": "Mikail Yüksel",
+   "slug": "mikail-yuksel",
+   "party": null,
+   "role": null,
+   "videos": [
+    "EgpHYabhyQ8",
+    "05E8zvVWvzE"
+   ],
+   "views": 162000
+  },
+  {
+   "name": "Romina Pourmokhtari",
+   "slug": "romina-pourmokhtari",
+   "party": null,
+   "role": null,
+   "videos": [
+    "1pvFKYqPSDk",
+    "VXzihX-9ocM"
+   ],
+   "views": 439000
+  },
+  {
+   "name": "Simon Fuglsang",
+   "slug": "simon-fuglsang",
+   "party": null,
+   "role": null,
+   "videos": [
+    "wWOaROItj-o",
+    "fFhLkJzEVR4"
+   ],
+   "views": 350000
+  },
+  {
+   "name": "Alice Landerholm",
+   "slug": "alice-landerholm",
+   "party": null,
+   "role": null,
+   "videos": [
+    "kzR9B3IzHkE"
+   ],
+   "views": 44000
+  },
+  {
+   "name": "Anna Lasses",
+   "slug": "anna-lasses",
+   "party": null,
+   "role": null,
+   "videos": [
+    "wWOaROItj-o"
+   ],
+   "views": 252000
+  },
+  {
+   "name": "Arin Guven",
+   "slug": "arin-guven",
+   "party": null,
+   "role": null,
+   "videos": [
+    "B1IAy3WvnXg"
+   ],
+   "views": 231000
+  },
+  {
+   "name": "Benjamin Löhndorf",
+   "slug": "benjamin-lohndorf",
+   "party": null,
+   "role": null,
+   "videos": [
+    "m3Sm3jBB3W0"
+   ],
+   "views": 135000
+  },
+  {
+   "name": "Daniel Helldén",
+   "slug": "daniel-hellden",
+   "party": "MP",
+   "role": "Språkrör (MP)",
+   "videos": [
+    "-IIbqvriYY8"
+   ],
+   "views": 87000
+  },
+  {
+   "name": "Daniel Vencu Velasquez Castro",
+   "slug": "daniel-vencu-velasquez-castro",
+   "party": null,
+   "role": null,
+   "videos": [
+    "hXTgjkQAUsI"
+   ],
+   "views": 10000
+  },
+  {
+   "name": "Elias Fjellander",
+   "slug": "elias-fjellander",
+   "party": null,
+   "role": null,
+   "videos": [
+    "G_ELomoQJx4"
+   ],
+   "views": 127000
+  },
+  {
+   "name": "Elisabeth Svantesson",
+   "slug": "elisabeth-svantesson",
+   "party": "M",
+   "role": null,
+   "videos": [
+    "j_U6t12ZSdw"
+   ],
+   "views": 143000
+  },
+  {
+   "name": "Ella Berndes",
+   "slug": "ella-berndes",
+   "party": null,
+   "role": null,
+   "videos": [
+    "lDHvf8fvh5c"
+   ],
+   "views": 213000
+  },
+  {
+   "name": "Emelie Rossheim",
+   "slug": "emelie-rossheim",
+   "party": null,
+   "role": null,
+   "videos": [
+    "q17a96KtJXE"
+   ],
+   "views": 18000
+  },
+  {
+   "name": "Enna Gerin",
+   "slug": "enna-gerin",
+   "party": null,
+   "role": null,
+   "videos": [
+    "kzR9B3IzHkE"
+   ],
+   "views": 44000
+  },
+  {
+   "name": "Erik Bengtzboe",
+   "slug": "erik-bengtzboe",
+   "party": null,
+   "role": null,
+   "videos": [
+    "smeZbVNaf6M"
+   ],
+   "views": 11000
+  },
+  {
+   "name": "Erik Slottner",
+   "slug": "erik-slottner",
+   "party": null,
+   "role": null,
+   "videos": [
+    "yJ1Yi6KDCA0"
+   ],
+   "views": 23000
+  },
+  {
+   "name": "Felicia Axelsson Söderström",
+   "slug": "felicia-axelsson-soderstrom",
+   "party": null,
+   "role": null,
+   "videos": [
+    "5P2ek3uEvMs"
+   ],
+   "views": 71000
+  },
+  {
+   "name": "Gunnar Strömmer",
+   "slug": "gunnar-strommer",
+   "party": "M",
+   "role": null,
+   "videos": [
+    "CdtF8EYBh68"
+   ],
+   "views": 37000
+  },
+  {
+   "name": "Hanna Lindqvist",
+   "slug": "hanna-lindqvist",
+   "party": null,
+   "role": null,
+   "videos": [
+    "wWOaROItj-o"
+   ],
+   "views": 252000
+  },
+  {
+   "name": "Hanna Östeby",
+   "slug": "hanna-osteby",
+   "party": null,
+   "role": null,
+   "videos": [
+    "nieUt0p7DXA"
+   ],
+   "views": 39000
+  },
+  {
+   "name": "Hannes Hervieu",
+   "slug": "hannes-hervieu",
+   "party": null,
+   "role": null,
+   "videos": [
+    "1pvFKYqPSDk"
+   ],
+   "views": 69000
+  },
+  {
+   "name": "Hans Eklind",
+   "slug": "hans-eklind",
+   "party": null,
+   "role": null,
+   "videos": [
+    "q17a96KtJXE"
+   ],
+   "views": 18000
+  },
+  {
+   "name": "Henrik Vinge",
+   "slug": "henrik-vinge",
+   "party": null,
+   "role": null,
+   "videos": [
+    "lEzR_Oyjx_g"
+   ],
+   "views": 100000
+  },
+  {
+   "name": "Ida Gabrielsson",
+   "slug": "ida-gabrielsson",
+   "party": "V",
+   "role": null,
+   "videos": [
+    "LNpwB5_ScfI"
+   ],
+   "views": 26000
+  },
+  {
+   "name": "Jan Emanuel",
+   "slug": "jan-emanuel",
+   "party": null,
+   "role": null,
+   "videos": [
+    "2D3DJt9OJxo"
+   ],
+   "views": 1000000
+  },
+  {
+   "name": "Johan Forssell",
+   "slug": "johan-forssell",
+   "party": null,
+   "role": null,
+   "videos": [
+    "Nf6tJejbuJk"
+   ],
+   "views": 54000
+  },
+  {
+   "name": "Kalle Sundin",
+   "slug": "kalle-sundin",
+   "party": null,
+   "role": null,
+   "videos": [
+    "smeZbVNaf6M"
+   ],
+   "views": 11000
+  },
+  {
+   "name": "Lisa Håglund",
+   "slug": "lisa-haglund",
+   "party": null,
+   "role": null,
+   "videos": [
+    "_lCO-cH6DtI"
+   ],
+   "views": 37000
+  },
+  {
+   "name": "Liv Svedberg",
+   "slug": "liv-svedberg",
+   "party": null,
+   "role": null,
+   "videos": [
+    "G_ELomoQJx4"
+   ],
+   "views": 127000
+  },
+  {
+   "name": "Lorentz Tovatt",
+   "slug": "lorentz-tovatt",
+   "party": null,
+   "role": null,
+   "videos": [
+    "KmmKCToDsoo"
+   ],
+   "views": 26000
+  },
+  {
+   "name": "Ludwig Uller",
+   "slug": "ludwig-uller",
+   "party": null,
+   "role": null,
+   "videos": [
+    "nSMNu4d9IS8"
+   ],
+   "views": 84000
+  },
+  {
+   "name": "Magnus Bjerg Sturm",
+   "slug": "magnus-bjerg-sturm",
+   "party": null,
+   "role": null,
+   "videos": [
+    "LDArmB--V1w"
+   ],
+   "views": 64000
+  },
+  {
+   "name": "Magnus Demervall",
+   "slug": "magnus-demervall",
+   "party": null,
+   "role": null,
+   "videos": [
+    "W9EA90nlbLY"
+   ],
+   "views": 11000
+  },
+  {
+   "name": "Magnus Resare",
+   "slug": "magnus-resare",
+   "party": null,
+   "role": null,
+   "videos": [
+    "saKWOojDse8"
+   ],
+   "views": 10000
+  },
+  {
+   "name": "Martin Marmgren",
+   "slug": "martin-marmgren",
+   "party": null,
+   "role": null,
+   "videos": [
+    "4ipLbWJppIQ"
+   ],
+   "views": 115000
+  },
+  {
+   "name": "Mats Selander",
+   "slug": "mats-selander",
+   "party": null,
+   "role": null,
+   "videos": [
+    "6BrG_y4aHp0"
+   ],
+   "views": 74000
+  },
+  {
+   "name": "Mattias Karlsson",
+   "slug": "mattias-karlsson",
+   "party": null,
+   "role": null,
+   "videos": [
+    "t54kzCi0VFM"
+   ],
+   "views": 71000
+  },
+  {
+   "name": "Max Jerneck",
+   "slug": "max-jerneck",
+   "party": null,
+   "role": null,
+   "videos": [
+    "W9EA90nlbLY"
+   ],
+   "views": 11000
+  },
+  {
+   "name": "Mikael Damberg",
+   "slug": "mikael-damberg",
+   "party": "S",
+   "role": null,
+   "videos": [
+    "zFtd14n4lnM"
+   ],
+   "views": 75000
+  },
+  {
+   "name": "My Kårlycke",
+   "slug": "my-karlycke",
+   "party": null,
+   "role": null,
+   "videos": [
+    "1pvFKYqPSDk"
+   ],
+   "views": 69000
+  },
+  {
+   "name": "Niels Paarup-Petersen",
+   "slug": "niels-paarup-petersen",
+   "party": null,
+   "role": null,
+   "videos": [
+    "saKWOojDse8"
+   ],
+   "views": 10000
+  },
+  {
+   "name": "Noah Rafat",
+   "slug": "noah-rafat",
+   "party": null,
+   "role": null,
+   "videos": [
+    "Bhp2Rqihu28"
+   ],
+   "views": 44000
+  },
+  {
+   "name": "Nooshi Dadgostar",
+   "slug": "nooshi-dadgostar",
+   "party": "V",
+   "role": null,
+   "videos": [
+    "j_U6t12ZSdw"
+   ],
+   "views": 143000
+  },
+  {
+   "name": "Oliwer Schultz",
+   "slug": "oliwer-schultz",
+   "party": null,
+   "role": null,
+   "videos": [
+    "gGfcrFhlGvQ"
+   ],
+   "views": 44000
+  },
+  {
+   "name": "Oscar Sjöstedt",
+   "slug": "oscar-sjostedt",
+   "party": "SD",
+   "role": null,
+   "videos": [
+    "zFtd14n4lnM"
+   ],
+   "views": 75000
+  },
+  {
+   "name": "Roxy Farhat",
+   "slug": "roxy-farhat",
+   "party": null,
+   "role": null,
+   "videos": [
+    "VXzihX-9ocM"
+   ],
+   "views": 370000
+  },
+  {
+   "name": "Simona Mohamsson",
+   "slug": "simona-mohamsson",
+   "party": "L",
+   "role": "Partiledare (L)",
+   "videos": [
+    "9NoQo_KYV1E"
+   ],
+   "views": 118000
+  },
+  {
+   "name": "Tindra H. Forsberg",
+   "slug": "tindra-h-forsberg",
+   "party": null,
+   "role": null,
+   "videos": [
+    "_lCO-cH6DtI"
+   ],
+   "views": 37000
+  },
+  {
+   "name": "Ulf Kristersson",
+   "slug": "ulf-kristersson",
+   "party": "M",
+   "role": "Partiledare (M)",
+   "videos": [
+    "EggtcghwlAA"
+   ],
+   "views": 379000
+  },
+  {
+   "name": "Ulrika Liljeberg",
+   "slug": "ulrika-liljeberg",
+   "party": "C",
+   "role": null,
+   "videos": [
+    "CdtF8EYBh68"
+   ],
+   "views": 37000
+  },
+  {
+   "name": "Urban Nyman",
+   "slug": "urban-nyman",
+   "party": null,
+   "role": null,
+   "videos": [
+    "m3Sm3jBB3W0"
+   ],
+   "views": 135000
+  }
+ ]
+}
