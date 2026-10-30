@@ -57,6 +57,24 @@ Tester: `npm test` (18 integrationstester som startar servern mot en tom databas
 | **Samarbeten** | Säljsida för sponsring, livedebatter, föreläsningar och egna debattserier, med kanalens siffror och ett förfrågningsformulär. |
 | **Nyhetsbrev** | Prenumeration med val (nya debatter att söka till / nya avsnitt / livedebatter & publikplatser) och län. Dubbel bekräftelse. |
 
+## Sidor
+
+Utöver startsidan finns riktiga undersidor, alla serverrenderade (bra för Google och delning):
+
+| Sida | Innehåll |
+|---|---|
+| `/debatter` | Alla öppna debatter, kommande och publicerade, talangbanken och hur det går till. |
+| `/format` + `/format/<format>` | Översikt och jämförelsetabell, plus en sida per format med regler, mest sedda avsnittet, alla avsnitt, medverkande och öppna debatter i formatet. |
+| `/avsnitt` + `/avsnitt/<video-id>` | Hela arkivet med sök, formatfilter och sortering. Varje avsnitt har en egen sida med spelare, de hetaste ögonblicken (YouTubes *Mest uppspelade*), medverkande, liknande avsnitt och strukturerad data för Google. |
+| `/profiler` + `/profiler/<namn>` | Alla 87 profiler med sök, partifilter och sortering. Varje person har en sida med sina avsnitt, visningar och vilka hen har debatterat mot. |
+| `/om-oss` | Historia, tidslinje, värderingar, team och citat. |
+| `/faq` | Så går det till och vanliga frågor. |
+| `/samarbeten` | Erbjudanden, siffror, exemplet Stortorget i Örebro, processen och förfrågningsformulär. |
+| `/press` | Faktablad, pressklipp, nedladdningsbara loggor och färger, pressförfrågan. |
+| `/nyhetsbrev`, `/kontakt` | Prenumeration och kontaktvägar. |
+
+Totalt drygt 180 sidor. Alla finns i `sitemap.xml`.
+
 ## Ansökan (`/sok/<debatt>` och talangbanken `/sok`)
 
 Fyra steg med förloppsindikator, validering per steg och **autosparat utkast** i webbläsaren:

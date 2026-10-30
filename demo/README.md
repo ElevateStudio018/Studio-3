@@ -4,4 +4,4 @@ Genererad med `npm run build:demo`. Öppna `index.html` via en statisk värd, t.
 raw.githack.com. Formulären sparas inte och adminpanelen visar **fiktiv** demodata –
 kör den riktiga servern (`npm start`) för allt på riktigt.
 
-Sidor: index.html · sok.html · sok-partiledare-vs-20-valjare.html · sok-studio-soffan-mobilforbud.html · sok-1-mot-20-karnkraft.html · stilpaket.html · integritet.html · admin.html
+183 sidor, t.ex. index.html, debatter.html, format.html, avsnitt.html, profiler.html, om-oss.html, samarbeten.html, press.html, sok.html, stilpaket.html och admin.html.

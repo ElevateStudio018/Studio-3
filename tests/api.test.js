@@ -71,6 +71,26 @@ test('ansökningssidor: öppen debatt, talangbank och 404', async () => {
   assert.equal((await fetch(`${BASE}/sok/finns-inte`)).status, 404);
 });
 
+test('undersidor renderas på servern', async () => {
+  const pages = ['/debatter', '/format', '/format/1vs20', '/avsnitt', '/avsnitt/2D3DJt9OJxo', '/profiler', '/profiler/nick-alinia', '/om-oss', '/faq', '/samarbeten', '/press', '/nyhetsbrev', '/kontakt'];
+  for (const p of pages) {
+    const r = await fetch(BASE + p);
+    assert.equal(r.status, 200, p);
+    const html = await r.text();
+    assert.match(html, /<main id="innehall">/, p);
+    assert.match(html, /aria-label="Huvudmeny"/, p);
+  }
+  const ep = await (await fetch(`${BASE}/avsnitt/2D3DJt9OJxo`)).text();
+  assert.match(ep, /Jan Emanuel vs 20 miljöpartister/);
+  assert.match(ep, /"@type":"VideoObject"/);
+  assert.match(ep, /data-seek="548"/, 'mest uppspelade-tiden ska visas');
+  const person = await (await fetch(`${BASE}/profiler/nick-alinia`)).text();
+  assert.match(person, /Har debatterat mot/);
+  for (const p of ['/format/finns-inte', '/avsnitt/finnsinte123', '/profiler/ingen-alls']) assert.equal((await fetch(BASE + p)).status, 404, p);
+  const sitemap = await (await fetch(`${BASE}/sitemap.xml`)).text();
+  assert.ok((sitemap.match(/<loc>/g) || []).length > 150, 'sitemap ska innehålla alla undersidor');
+});
+
 test('ansökan valideras fält för fält', async () => {
   const r = await post('/api/public/applications', { debate: 'partiledare-vs-20-valjare', name: 'A', email: 'fel', t: 60000 });
   assert.equal(r.status, 422);

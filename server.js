@@ -11,6 +11,7 @@ import { registerPublic, bootstrap, debateOut, isOpen } from './server/routes/pu
 import { registerAdmin, retentionSweep, announceVideos } from './server/routes/admin.js';
 import { getTheme, themeCss, fontsHref, isLight, THEMES } from './public/assets/js/themes.js';
 import { escapeHtml } from './server/mailer.js';
+import { renderSubpage, subpageRoutes } from './server/pages.js';
 
 seed();
 
@@ -43,7 +44,7 @@ const LOGO_SYMBOL = (() => {
 })();
 const safeJson = (data) => JSON.stringify(data).replace(/</g, '\\u003c');
 
-function renderPage(req, res, file, { meta = {}, data, status = 200 } = {}) {
+function renderPage(req, res, file, { meta = {}, data, status = 200, body } = {}) {
   const site = getSetting('site', {});
   const url = new URL(req.url, config.siteUrl);
   const preview = url.searchParams.get('stil');
@@ -66,10 +67,12 @@ function renderPage(req, res, file, { meta = {}, data, status = 200 } = {}) {
     data ? `<script type="application/json" id="bootstrap">${safeJson(data)}</script>` : '',
     meta.jsonLd ? `<script type="application/ld+json">${safeJson(meta.jsonLd)}</script>` : '',
   ].join('\n  ');
+  // Ersätt med funktioner så att $-tecken i innehållet aldrig tolkas som mönster
   const html = template(file)
-    .replace('<html lang="sv">', `<html lang="sv" data-theme="${theme.id}" data-tone="${isLight(theme) ? 'light' : 'dark'}" data-fx="${theme.fx.join(' ')}">`)
-    .replace('<!--HEAD-->', head)
-    .replace('<!--LOGO-->', LOGO_SYMBOL)
+    .replace('<html lang="sv">', () => `<html lang="sv" data-theme="${theme.id}" data-tone="${isLight(theme) ? 'light' : 'dark'}" data-fx="${theme.fx.join(' ')}">`)
+    .replace('<!--HEAD-->', () => head)
+    .replace('<!--LOGO-->', () => LOGO_SYMBOL)
+    .replace('<!--BODY-->', () => body || '')
     .replace(/\?v=ASSET/g, `?v=${ASSET_VERSION}`);
   send(res, status, html, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
 }
@@ -107,12 +110,14 @@ function handlePage(req, res, pathname) {
   if (pathname === '/stilpaket') return renderPage(req, res, 'stilpaket.html', { meta: { title: '20 stilpaket för STUDIO 3' } });
   if (pathname === '/integritet') return renderPage(req, res, 'integritet.html', { meta: { title: 'Integritetspolicy | STUDIO 3' } });
   if (pathname === '/admin' || pathname === '/admin/') return renderPage(req, res, 'admin/index.html', { meta: { title: 'Admin | STUDIO 3' } });
+  const sub = renderSubpage(pathname.replace(/\/$/, '') || '/');
+  if (sub) return renderPage(req, res, 'page.html', { body: sub.body, meta: { title: sub.title, description: sub.description, image: sub.image, jsonLd: sub.jsonLd } });
   return false;
 }
 
 function sitemap() {
-  const urls = ['/', '/sok', '/integritet', ...all("SELECT slug FROM debates WHERE status = 'open'").map((d) => `/sok/${d.slug}`)];
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${config.siteUrl}${u}</loc></url>`).join('\n')}\n</urlset>\n`;
+  const urls = ['/', '/sok', '/integritet', ...subpageRoutes(), ...all("SELECT slug FROM debates WHERE status = 'open'").map((d) => `/sok/${d.slug}`)];
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${config.siteUrl}${u.split('/').map(encodeURIComponent).join('/')}</loc></url>`).join('\n')}\n</urlset>\n`;
 }
 
 const server = http.createServer(async (req, res) => {

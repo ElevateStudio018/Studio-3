@@ -45,7 +45,7 @@ const navLinks = $$('#nav a');
 const sectionIo = new IntersectionObserver((entries) => {
   for (const e of entries) if (e.isIntersecting) navLinks.forEach((a) => a.setAttribute('aria-current', a.hash === `#${e.target.id}`));
 }, { rootMargin: '-45% 0px -50% 0px' });
-navLinks.forEach((a) => { const s = document.querySelector(a.hash); if (s) sectionIo.observe(s); });
+navLinks.forEach((a) => { const s = a.hash && document.querySelector(a.hash); if (s) sectionIo.observe(s); });
 
 /* ---------- hero: slogan → hetsig montage → "Debatten börjar här" ---------- */
 const hero = $('#hero');
@@ -92,6 +92,8 @@ const END_CLIP = Math.min(7, clips.length);  // slutkortet visas efter så här 
 let driver = null;
 video.poster = site.heroPoster || '/assets/video/hero-poster.jpg';
 
+let mp4 = null;
+const getMp4 = () => (mp4 ??= mp4Driver());
 // MP4 (fallback eller vald i admin): tidslinjen styrs av videons tid
 function mp4Driver() {
   hero.dataset.mode = 'mp4';
@@ -128,7 +130,7 @@ function mp4Driver() {
 }
 
 // Riktiga avsnitt: de mest uppspelade ögonblicken, spelade via YouTube
-async function youtubeDriver() {
+async function youtubeDriver(retry = false) {
   hero.dataset.mode = 'youtube';
   $('.hero__media').style.background = `#000 url("${video.poster}") center / cover`; // syns tills första klippet laddat
   const { youtubeHero } = await import('./hero-youtube.js');
@@ -159,8 +161,13 @@ async function youtubeDriver() {
       }
     },
     onFail() {
-      driver = mp4Driver();
+      // YouTube kunde inte autospela (t.ex. i vissa appars webbläsare) – visa MP4 och erbjud att starta klippen med ett tryck
+      driver = getMp4();
+      hero.dataset.mode = 'mp4';
+      driver.play();
       $('#soundBtn').hidden = true;
+      $('#realBtn').hidden = false;
+      if (retry) toast('YouTube kunde inte spelas i den här webbläsaren.');
     },
   });
   $('#soundBtn').hidden = false;
@@ -178,8 +185,8 @@ if (reduceMotion || navigator.connection?.saveData) {
   $('#pauseBtn').hidden = true;
 } else {
   showIntro();
-  if (useYoutube) youtubeDriver().then((d) => (driver ??= d)).catch(() => (driver = mp4Driver()));
-  else driver = mp4Driver();
+  if (useYoutube) youtubeDriver().then((d) => (driver ??= d)).catch(() => (driver = getMp4()));
+  else driver = getMp4();
   // Spara batteri: pausa när hero inte syns
   new IntersectionObserver(([e]) => {
     if (hero.dataset.userPaused || !driver) return;
@@ -209,6 +216,12 @@ $('#pauseBtn').addEventListener('click', (e) => {
     e.currentTarget.textContent = '▶';
     e.currentTarget.setAttribute('aria-label', 'Spela bakgrundsvideon');
   }
+});
+$('#realBtn').addEventListener('click', async (e) => {
+  e.currentTarget.hidden = true;
+  mp4?.pause();
+  showIntro();
+  driver = await youtubeDriver(true);
 });
 $('#soundBtn').addEventListener('click', (e) => {
   const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
@@ -310,7 +323,6 @@ $('#faq').innerHTML = (site.faq || []).map((f) => `<details class="reveal"><summ
 
 /* ---------- format ---------- */
 $('#formats').innerHTML = D.formats.filter((f) => f.count > 0).map((f) => {
-  const playlist = f.playlist ? `https://www.youtube.com/playlist?list=${f.playlist}` : null;
   return `<article class="card format reveal">
     <div class="format__bg">${f.top ? `<img src="${thumb(f.top, 'hqdefault')}" alt="" loading="lazy">` : ''}</div>
     ${f.logo ? `<img class="format__logo ${f.logo === 'studio-soffan.svg' ? 'round' : ''}" src="/assets/img/logos/${f.logo}" alt="${esc(f.name)}">` : `<div class="format__name">${esc(f.name)}</div>`}
@@ -321,7 +333,7 @@ $('#formats').innerHTML = D.formats.filter((f) => f.count > 0).map((f) => {
       <span>${f.count} avsnitt · ${compact(f.views)} visningar</span>
       ${f.top ? `<a class="link" href="${ytUrl(f.top)}" target="_blank" rel="noopener" data-video="${f.top}">Mest sedda ▶</a>` : ''}
     </div>
-    ${playlist ? `<a class="link" href="${playlist}" target="_blank" rel="noopener">Hela spellistan på YouTube ↗</a>` : ''}
+    <a class="link" href="/format/${f.key}">Allt om ${esc(f.name)} →</a>
   </article>`;
 }).join('');
 
@@ -352,7 +364,7 @@ function videoCard(v) {
         ${v.duration ? `<span class="vcard__dur">${duration(v.duration)}</span>` : ''}
       </div>
     </button>
-    <h3 class="vcard__title">${v.quote ? `”${esc(v.display)}”` : esc(v.display)}</h3>
+    <h3 class="vcard__title"><a href="/avsnitt/${encodeURIComponent(v.id)}" style="text-decoration:none">${v.quote ? `”${esc(v.display)}”` : esc(v.display)}</a></h3>
     ${people ? `<p class="vcard__people">${esc(people)}</p>` : ''}
     <div class="vcard__meta">${v.views ? `<span>${views(v.views)}</span>` : ''}${v.published ? `<span>${dateSv(v.published, { day: 'numeric', month: 'short', year: 'numeric' })}</span>` : ''}<a href="${ytUrl(v.id)}" target="_blank" rel="noopener">YouTube ↗</a></div>
   </article>`;
@@ -412,35 +424,21 @@ document.addEventListener('click', (e) => {
 
 /* ---------- profiler ---------- */
 const PARTY_HUE = { S: '#e8112d', M: '#52bdec', SD: '#dddd00', V: '#da291c', C: '#009933', KD: '#000077', L: '#006ab3', MP: '#83cf39' };
-const pstate = { q: '', all: false };
+const pstate = { q: '' };
 $('#peopleLead').textContent = `${D.people.length} politiker, debattörer och opinionsbildare har debatterat hos oss. Klicka på en person för att se deras avsnitt.`;
 function renderPeople() {
   const q = pstate.q.toLowerCase();
   const list = D.people.filter((p) => !q || p.name.toLowerCase().includes(q));
-  const shown = pstate.all || q ? list : list.slice(0, 24);
+  const shown = q ? list : list.slice(0, 15);
   $('#people').innerHTML = shown.map((p) => `
-    <button class="person" type="button" data-person="${esc(p.name)}">
+    <a class="person" href="/profiler/${encodeURIComponent(p.slug)}">
       <span class="avatar" ${p.party && PARTY_HUE[p.party] ? `style="background:${PARTY_HUE[p.party]};color:${['M', 'SD', 'MP'].includes(p.party) ? '#111' : '#fff'}"` : ''}>${esc(initials(p.name))}</span>
       <span><span class="person__name">${esc(p.name)}</span>${p.party ? `<span class="party party--${p.party}">${p.party}</span>` : ''}
-        <span class="person__meta" style="display:block">${p.role ? `${esc(p.role)} · ` : ''}${p.videos.length} ${p.videos.length === 1 ? 'avsnitt' : 'avsnitt'} · ${compact(p.views)} visningar</span></span>
-    </button>`).join('') || '<div class="empty" style="grid-column:1/-1">Ingen träff.</div>';
-  $('#morePeople').hidden = pstate.all || !!q || list.length <= 24;
+        <span class="person__meta" style="display:block">${p.role ? `${esc(p.role)} · ` : ''}${p.videos.length} avsnitt · ${compact(p.views)} visningar</span></span>
+    </a>`).join('') || '<div class="empty" style="grid-column:1/-1">Ingen träff.</div>';
 }
 renderPeople();
 $('#peopleSearch').addEventListener('input', (e) => ((pstate.q = e.target.value), renderPeople()));
-$('#morePeople').addEventListener('click', () => ((pstate.all = true), renderPeople()));
-$('#people').addEventListener('click', (e) => {
-  const b = e.target.closest('[data-person]');
-  if (!b) return;
-  const p = D.people.find((x) => x.name === b.dataset.person);
-  const vids = p.videos.map((id) => videoById[id]).filter(Boolean);
-  const m = modal(`<div class="modal__body" style="padding-top:28px">
-    <span class="badge-format">${p.party ? `${esc(p.party)} · ` : ''}${vids.length} avsnitt</span>
-    <h3>${esc(p.name)}</h3>
-    <div class="mlist">${vids.map((v) => `<a href="${ytUrl(v.id)}" data-video="${v.id}"><img src="${thumb(v.id)}" alt="" loading="lazy"><span><strong>${esc(v.display)}</strong><br><span class="muted">${esc(formatName(v.format))}${v.views ? ` · ${views(v.views)}` : ''}</span></span></a>`).join('')}</div>
-  </div>`, { label: p.name });
-  m.el.addEventListener('click', (ev) => { if (ev.target.closest('[data-video]')) m.close(); });
-});
 
 /* ---------- om oss ---------- */
 $('#aboutLead').textContent = site.about?.lead || '';

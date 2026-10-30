@@ -22,12 +22,12 @@
         <span class="brand__word">Studio 3</span>
       </a>
       <nav class="nav" id="nav" aria-label="Huvudmeny">
-        <a href="#debatter">Debatter</a>
-        <a href="#format">Format</a>
-        <a href="#avsnitt">Avsnitt</a>
-        <a href="#profiler">Profiler</a>
-        <a href="#om">Om oss</a>
-        <a href="#samarbeten">Samarbeten</a>
+        <a href="/debatter">Debatter</a>
+        <a href="/format">Format</a>
+        <a href="/avsnitt">Avsnitt</a>
+        <a href="/profiler">Profiler</a>
+        <a href="/om-oss">Om oss</a>
+        <a href="/samarbeten">Samarbeten</a>
       </nav>
       <a class="btn header__cta" href="/sok">Sök till en debatt <span class="arrow">→</span></a>
       <button class="menu-btn" id="menuBtn" aria-label="Öppna meny" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
@@ -71,6 +71,7 @@
     <div class="hero__controls">
       <button class="hero__ctrl" id="skipBtn" type="button">Hoppa över intro ⏭</button>
       <button class="hero__ctrl" id="replayBtn" type="button" hidden>↺ Spela igen</button>
+      <button class="hero__ctrl" id="realBtn" type="button" hidden>▶ Spela riktiga klipp</button>
       <button class="hero__ctrl" id="soundBtn" type="button" aria-pressed="false" hidden>🔇 Ljud</button>
       <button class="hero__ctrl" id="pauseBtn" type="button" aria-label="Pausa bakgrundsvideon">❚❚</button>
     </div>
@@ -94,7 +95,7 @@
             <h2>Vill du sitta<br>i stolen?</h2>
             <p class="lead">Vi söker hela tiden väljare, debattörer och publik med åsikter som spretar åt alla håll. Välj en debatt och sök på fem minuter.</p>
           </div>
-          <a class="btn btn--ghost" href="/sok">Anmäl dig till talangbanken</a>
+          <div class="row-btns"><a class="btn btn--ghost" href="/sok">Talangbanken</a><a class="btn" href="/debatter">Alla debatter →</a></div>
         </div>
         <div class="debates" id="debates"></div>
       </div>
@@ -108,6 +109,7 @@
         </div>
         <div class="steps" id="steps"></div>
         <div class="faq" id="faq"></div>
+        <p style="margin-top:24px"><a class="link" href="/faq">Läs mer om hur det går till →</a></p>
       </div>
     </section>
 
@@ -119,6 +121,7 @@
           <p class="lead">Från en partiledare mot tjugo väljare till sex personer i en soffa. Varje format har sin egen puls.</p>
         </div>
         <div class="formats" id="formats"></div>
+        <div class="more"><a class="btn btn--ghost" href="/format">Jämför alla format →</a></div>
       </div>
     </section>
 
@@ -144,7 +147,7 @@
         </div>
         <div class="filters" id="formatFilters" role="group" aria-label="Filtrera på format" style="margin-bottom:28px"></div>
         <div class="videos" id="videos" aria-live="polite"></div>
-        <div class="more"><button class="btn btn--ghost" id="moreBtn" type="button">Visa fler avsnitt</button></div>
+        <div class="more"><button class="btn btn--ghost" id="moreBtn" type="button">Visa fler avsnitt</button><a class="btn" href="/avsnitt" style="margin-left:10px">Hela arkivet →</a></div>
       </div>
     </section>
 
@@ -163,7 +166,7 @@
           </label>
         </div>
         <div class="people" id="people"></div>
-        <div class="more"><button class="btn btn--ghost" id="morePeople" type="button">Visa alla</button></div>
+        <div class="more"><a class="btn btn--ghost" href="/profiler">Alla profiler →</a></div>
       </div>
     </section>
 
@@ -182,6 +185,7 @@
         </div>
         <div class="team" id="team"></div>
         <figure class="quote" id="quote"></figure>
+        <div class="more"><a class="btn btn--ghost" href="/om-oss">Mer om oss →</a></div>
       </div>
     </section>
 
@@ -278,7 +282,7 @@
         </div>
         <div>
           <h4>Utforska</h4>
-          <ul><li><a href="#debatter">Öppna debatter</a></li><li><a href="#format">Format</a></li><li><a href="#avsnitt">Avsnitt</a></li><li><a href="#om">Om oss</a></li></ul>
+          <ul><li><a href="/debatter">Öppna debatter</a></li><li><a href="/format">Format</a></li><li><a href="/avsnitt">Avsnitt</a></li><li><a href="/profiler">Profiler</a></li><li><a href="/om-oss">Om oss</a></li></ul>
         </div>
         <div>
           <h4>Följ oss</h4>
@@ -286,7 +290,7 @@
         </div>
         <div>
           <h4>Mer</h4>
-          <ul><li><a href="/sok">Talangbanken</a></li><li><a href="#samarbeten">Samarbeten</a></li><li><a href="/integritet">Integritet &amp; GDPR</a></li><li><a href="/stilpaket">Stilpaket</a></li><li><a href="/admin">Admin</a></li></ul>
+          <ul><li><a href="/sok">Talangbanken</a></li><li><a href="/faq">Så går det till</a></li><li><a href="/samarbeten">Samarbeten</a></li><li><a href="/press">Press</a></li><li><a href="/kontakt">Kontakt</a></li><li><a href="/nyhetsbrev">Nyhetsbrev</a></li><li><a href="/integritet">Integritet &amp; GDPR</a></li><li><a href="/stilpaket">Stilpaket</a></li><li><a href="/admin">Admin</a></li></ul>
         </div>
       </div>
       <div class="footer__bottom">

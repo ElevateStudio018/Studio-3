@@ -12,15 +12,10 @@
     var hash = m[3] || '';
     var stil = params.get('stil');
     if (stil && search.indexOf('stil=') < 0 && !/^\/admin/.test(p)) search += (search ? '&' : '?') + 'stil=' + stil;
-    var out;
-    if (p === '/' || p === '') out = 'index.html';
-    else if (p === '/sok') out = 'sok.html';
-    else if (/^\/sok\/[^/]+$/.test(p)) out = 'sok-' + p.slice(5) + '.html';
-    else if (p === '/stilpaket') out = 'stilpaket.html';
-    else if (p === '/integritet') out = 'integritet.html';
-    else if (p === '/admin' || p === '/admin/') return 'admin.html' + hash;
-    else if (/\.[a-z0-9]+$/i.test(p)) return '../public' + p;
-    else out = 'index.html';
+    if (/^\/admin\/?$/.test(p)) return 'admin.html' + hash;
+    if (/\.[a-z0-9]+$/i.test(p)) return '../public' + p;
+    var clean = p.replace(/^\/+|\/+$/g, '');
+    var out = (clean ? clean.replace(/\//g, '-') : 'index') + '.html';
     return out + search + hash;
   }
 

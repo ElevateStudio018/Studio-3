@@ -58,14 +58,13 @@ try {
   fs.mkdirSync(path.join(OUT, 'js'), { recursive: true });
   fs.mkdirSync(path.join(OUT, 'data'), { recursive: true });
 
+  // /avsnitt/abc → avsnitt-abc.html, /om-oss → om-oss.html
   const mapPath = (p) => {
     const [, pathname = '/', rest = ''] = p.match(/^([^?#]*)(.*)$/);
-    if (pathname === '/' || pathname === '') return `index.html${rest}`;
-    if (pathname === '/sok') return `sok.html${rest}`;
-    if (/^\/sok\/[^/]+$/.test(pathname)) return `sok-${pathname.slice(5)}.html${rest}`;
-    if (['/stilpaket', '/integritet', '/admin'].includes(pathname)) return `${pathname.slice(1)}.html${rest}`;
     if (pathname.startsWith('/assets/js/')) return `js/${pathname.slice(11)}${rest}`;
-    return `../public${pathname}${rest}`;
+    if (/\.[a-z0-9]+$/i.test(pathname)) return `../public${pathname}${rest}`;
+    const clean = pathname.replace(/^\/+|\/+$/g, '');
+    return `${clean ? clean.replace(/\//g, '-') : 'index'}.html${rest}`;
   };
   const transformHtml = (html, file) => {
     html = html
@@ -85,8 +84,9 @@ try {
   };
 
   const boot = await get('/api/public/bootstrap');
-  const pages = [['/', 'index.html'], ['/sok', 'sok.html'], ['/stilpaket', 'stilpaket.html'], ['/integritet', 'integritet.html'], ['/admin', 'admin.html'],
-    ...boot.debates.filter((d) => d.open).map((d) => [`/sok/${d.slug}`, `sok-${d.slug}.html`])];
+  const sitemap = await (await fetch(`${BASE}/sitemap.xml`)).text();
+  const routes = [...sitemap.matchAll(/<loc>[^<]*?127\.0\.0\.1:\d+([^<]*)<\/loc>/g)].map((m) => decodeURIComponent(m[1]));
+  const pages = [...new Set([...routes, '/stilpaket', '/admin'])].map((r) => [r, mapPath(r).replace(/\?.*$/, '')]);
   for (const [url, file] of pages) {
     const html = await (await fetch(BASE + url)).text();
     fs.writeFileSync(path.join(OUT, file), transformHtml(html, file));
@@ -129,7 +129,7 @@ Genererad med \`npm run build:demo\`. Öppna \`index.html\` via en statisk värd
 raw.githack.com. Formulären sparas inte och adminpanelen visar **fiktiv** demodata –
 kör den riktiga servern (\`npm start\`) för allt på riktigt.
 
-Sidor: index.html · sok.html · ${pages.filter(([, f]) => f.startsWith('sok-')).map(([, f]) => f).join(' · ')} · stilpaket.html · integritet.html · admin.html
+${pages.length} sidor, t.ex. index.html, debatter.html, format.html, avsnitt.html, profiler.html, om-oss.html, samarbeten.html, press.html, sok.html, stilpaket.html och admin.html.
 `);
   console.log(`Klart: ${pages.length} sidor, ${snapshot.applications.length} demoansökningar → demo/`);
 } finally {
