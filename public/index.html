@@ -3,11 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <!--HEAD-->
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="/assets/css/site.css?v=ASSET">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=ASSET">
   <script type="module" src="/assets/js/home.js?v=ASSET"></script>
 </head>
 <body>
@@ -22,14 +24,15 @@
         <span class="brand__word">Studio 3</span>
       </a>
       <nav class="nav" id="nav" aria-label="Huvudmeny">
-        <a href="/debatter">Debatter</a>
-        <a href="/format">Format</a>
-        <a href="/avsnitt">Avsnitt</a>
-        <a href="/profiler">Profiler</a>
-        <a href="/om-oss">Om oss</a>
-        <a href="/samarbeten">Samarbeten</a>
+        <a href="#debatter">Debatter</a>
+        <a href="#format">Format</a>
+        <a href="#avsnitt">Avsnitt</a>
+        <a href="#profiler">Profiler</a>
+        <a href="#om">Om oss</a>
+        <a href="#press">Press</a>
+        <a href="#samarbeten">Samarbeten</a>
       </nav>
-      <a class="btn header__cta" href="/sok">Sök till en debatt <span class="arrow">→</span></a>
+      <a class="btn header__cta" href="#debatter">Sök till en debatt <span class="arrow">→</span></a>
       <button class="menu-btn" id="menuBtn" aria-label="Öppna meny" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
     </div>
   </header>
@@ -95,9 +98,10 @@
             <h2>Vill du sitta<br>i stolen?</h2>
             <p class="lead">Vi söker hela tiden väljare, debattörer och publik med åsikter som spretar åt alla håll. Välj en debatt och sök på fem minuter.</p>
           </div>
-          <div class="row-btns"><a class="btn btn--ghost" href="/sok">Talangbanken</a><a class="btn" href="/debatter">Alla debatter →</a></div>
+          <button class="btn btn--ghost" type="button" data-apply="">Anmäl dig till talangbanken</button>
         </div>
         <div class="debates" id="debates"></div>
+        <div id="debatesMore"></div>
       </div>
     </section>
 
@@ -109,7 +113,6 @@
         </div>
         <div class="steps" id="steps"></div>
         <div class="faq" id="faq"></div>
-        <p style="margin-top:24px"><a class="link" href="/faq">Läs mer om hur det går till →</a></p>
       </div>
     </section>
 
@@ -121,7 +124,8 @@
           <p class="lead">Från en partiledare mot tjugo väljare till sex personer i en soffa. Varje format har sin egen puls.</p>
         </div>
         <div class="formats" id="formats"></div>
-        <div class="more"><a class="btn btn--ghost" href="/format">Jämför alla format →</a></div>
+        <h3 style="margin:56px 0 18px">Formaten i siffror</h3>
+        <div class="table-scroll" id="formatTable"></div>
       </div>
     </section>
 
@@ -146,8 +150,9 @@
           </label>
         </div>
         <div class="filters" id="formatFilters" role="group" aria-label="Filtrera på format" style="margin-bottom:28px"></div>
+        <p class="muted list-count" id="videoCount"></p>
         <div class="videos" id="videos" aria-live="polite"></div>
-        <div class="more"><button class="btn btn--ghost" id="moreBtn" type="button">Visa fler avsnitt</button><a class="btn" href="/avsnitt" style="margin-left:10px">Hela arkivet →</a></div>
+        <div class="more"><button class="btn btn--ghost" id="moreBtn" type="button">Visa fler avsnitt</button><button class="btn" id="allBtn" type="button" style="margin-left:10px">Visa alla</button></div>
       </div>
     </section>
 
@@ -165,8 +170,16 @@
             <input type="search" id="peopleSearch" placeholder="Sök namn…" autocomplete="off">
           </label>
         </div>
+        <div class="toolbar" style="margin-bottom:12px">
+          <div class="tabs" role="group" aria-label="Sortera profiler" id="peopleSort">
+            <button type="button" data-psort="count" aria-pressed="true">Flest avsnitt</button>
+            <button type="button" data-psort="views" aria-pressed="false">Flest visningar</button>
+            <button type="button" data-psort="name" aria-pressed="false">A–Ö</button>
+          </div>
+        </div>
+        <div class="filters" id="partyFilters" role="group" aria-label="Filtrera på parti" style="margin-bottom:24px"></div>
         <div class="people" id="people"></div>
-        <div class="more"><a class="btn btn--ghost" href="/profiler">Alla profiler →</a></div>
+        <div class="more"><button class="btn btn--ghost" id="morePeople" type="button">Visa alla profiler</button></div>
       </div>
     </section>
 
@@ -183,23 +196,32 @@
             <div class="why" id="why"></div>
           </div>
         </div>
+        <div class="two-col" style="margin-top:clamp(48px,6vw,80px)">
+          <div><span class="eyebrow">Tidslinje</span><h3 style="margin:16px 0 24px;font-size:clamp(1.6rem,3vw,2.4rem)">Från humor<br>till debatt</h3></div>
+          <ol class="timeline" id="timeline"></ol>
+        </div>
         <div class="team" id="team"></div>
         <figure class="quote" id="quote"></figure>
-        <div class="more"><a class="btn btn--ghost" href="/om-oss">Mer om oss →</a></div>
       </div>
     </section>
 
     <section class="section" id="press">
-      <div class="wrap proof">
-        <div>
-          <span class="eyebrow">Vad folk säger</span>
-          <div style="height:22px"></div>
-          <div class="ytcomment" id="ytcomment"></div>
+      <div class="wrap">
+        <div class="section__head">
+          <span class="eyebrow">Press &amp; media</span>
+          <h2>STUDIO 3<br>i korthet</h2>
+          <p class="lead">Fakta, siffror, pressklipp och loggor. Hör av er för intervjuer med Simon och Emil.</p>
         </div>
-        <div>
-          <h3 style="margin-bottom:18px">Omskrivna i</h3>
-          <div class="press" id="pressList"></div>
+        <div class="two-col">
+          <table class="ptable ptable--kv" id="facts"></table>
+          <div>
+            <div class="press" id="pressList"></div>
+            <div class="ytcomment" id="ytcomment" style="margin-top:28px"></div>
+          </div>
         </div>
+        <h3 style="margin:56px 0 18px">Loggor &amp; färger</h3>
+        <div class="assets" id="assets"></div>
+        <div class="swatches" id="swatches"></div>
       </div>
     </section>
 
@@ -211,6 +233,9 @@
           <p class="lead" id="partnerText" style="margin-top:20px"></p>
           <div class="kpis" id="kpis"></div>
           <div class="offers" id="offers"></div>
+          <div class="card" style="margin-top:28px"><span class="eyebrow">Exempel</span><h3 style="margin:12px 0 10px">Livedebatt på Stortorget i Örebro</h3><p class="muted" style="margin:0" id="partnerExample"></p></div>
+          <h3 style="margin:36px 0 18px">Så går det till</h3>
+          <ol class="timeline" id="partnerProcess"></ol>
         </div>
         <form class="card form" id="leadForm" novalidate>
           <h3>Berätta vad ni har i tankarna</h3>
@@ -271,6 +296,16 @@
         <div class="card swish" id="swish" hidden></div>
       </div>
     </section>
+
+    <section class="section section--alt" id="kontakt">
+      <div class="wrap">
+        <div class="section__head">
+          <span class="eyebrow">Kontakt</span>
+          <h2>Hör av dig</h2>
+        </div>
+        <div class="why why--4" id="contactCards"></div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -282,7 +317,7 @@
         </div>
         <div>
           <h4>Utforska</h4>
-          <ul><li><a href="/debatter">Öppna debatter</a></li><li><a href="/format">Format</a></li><li><a href="/avsnitt">Avsnitt</a></li><li><a href="/profiler">Profiler</a></li><li><a href="/om-oss">Om oss</a></li></ul>
+          <ul><li><a href="#debatter">Öppna debatter</a></li><li><a href="#format">Format</a></li><li><a href="#avsnitt">Avsnitt</a></li><li><a href="#profiler">Profiler</a></li><li><a href="#om">Om oss</a></li></ul>
         </div>
         <div>
           <h4>Följ oss</h4>
@@ -290,7 +325,7 @@
         </div>
         <div>
           <h4>Mer</h4>
-          <ul><li><a href="/sok">Talangbanken</a></li><li><a href="/faq">Så går det till</a></li><li><a href="/samarbeten">Samarbeten</a></li><li><a href="/press">Press</a></li><li><a href="/kontakt">Kontakt</a></li><li><a href="/nyhetsbrev">Nyhetsbrev</a></li><li><a href="/integritet">Integritet &amp; GDPR</a></li><li><a href="/stilpaket">Stilpaket</a></li><li><a href="/admin">Admin</a></li></ul>
+          <ul><li><a href="#debatter" data-apply="">Talangbanken</a></li><li><a href="#sa-funkar-det">Så går det till</a></li><li><a href="#samarbeten">Samarbeten</a></li><li><a href="#press">Press</a></li><li><a href="#kontakt">Kontakt</a></li><li><a href="#nyhetsbrev">Nyhetsbrev</a></li><li><a href="/integritet">Integritet &amp; GDPR</a></li><li><a href="/stilpaket">Stilpaket</a></li><li><a href="/admin">Admin</a></li></ul>
         </div>
       </div>
       <div class="footer__bottom">
@@ -301,6 +336,10 @@
   </footer>
 
   <div class="mobile-cta" id="mobileCta"><a class="btn" href="#debatter">Sök till en debatt →</a></div>
+  <div class="sheet" id="applySheet" role="dialog" aria-modal="true" aria-label="Ansökan" hidden>
+    <button class="sheet__close" type="button" id="applyClose" aria-label="Stäng ansökan">×</button>
+    <iframe id="applyFrame" title="Ansökningsformulär"></iframe>
+  </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>

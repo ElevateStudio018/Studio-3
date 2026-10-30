@@ -6,6 +6,7 @@ import { config } from './config.js';
 import { escapeHtml as e } from './mailer.js';
 import { bootstrap } from './routes/public.js';
 import { loadChannel } from './youtube.js';
+import { FORMAT_INFO, TIMELINE, PARTNER_PROCESS } from './content.js';
 
 const nf = new Intl.NumberFormat('sv-SE');
 const num = (n) => nf.format(n || 0);
@@ -31,16 +32,6 @@ const PARTY_COLORS = { S: '#e8112d', M: '#52bdec', SD: '#dddd00', V: '#da291c', 
 
 const NAV = [['/debatter', 'Debatter'], ['/format', 'Format'], ['/avsnitt', 'Avsnitt'], ['/profiler', 'Profiler'], ['/om-oss', 'Om oss'], ['/samarbeten', 'Samarbeten']];
 
-/** Mer om varje format – visas på /format/<format>. */
-export const FORMAT_INFO = {
-  '1vs20': { people: '1 + 20', rules: ['En känd profil sätter sig i mitten.', 'Tjugo personer med motsatt åsikt sitter runt hen och turas om att fråga och argumentera.', 'Ingen moderator räddar någon – det är personen i mitten som måste svara.'] },
-  soffan: { people: '6', rules: ['Ett aktuellt ämne och sex gäster från olika läger.', 'Samtalet får ta tid – här möts argumenten på djupet.', 'Ämnen från bistånd och klimat till abort, migration och public service.'] },
-  duellen: { people: '2', rules: ['Två debattörer möts vid samma bord.', 'Ministrar, partisekreterare, ungdomsförbund och opinionsbildare.', 'Öga mot öga – argument mot argument.'] },
-  partiledare: { people: '1 + 20', rules: ['En partiledare möter tjugo väljare.', 'Väljarna ställer sina egna frågor – inga förberedda journalistfrågor.', 'Ulf Kristersson, Simona Mohamsson och Daniel Helldén har suttit i stolen.'] },
-  panelen: { people: '2 + 2', rules: ['Två lag från två partier eller läger.', 'Två mot två – en lagdebatt där argumenten bollas.', 'S mot SD, S mot M, SD mot MP och KD mot C hittills.'] },
-  valvakan: { people: 'Live', rules: ['Kanalens egen valvaka under valet 2026.', 'Fem debatter, samtal med Markus Allard och livesändning hela kvällen.', 'Livesändningen har över 170 000 visningar.'] },
-  banditer: { people: 'Varierar', rules: ['När vi lämnar studion.', 'Utmaningar, en dag i någon annans skor och möten utanför politiken.', 'Till exempel en dag som Alexander Ernstberger och att byta liv med tre kändisar.'] },
-};
 
 let peakCache;
 function peaks() {
@@ -355,14 +346,7 @@ function pagePerson(D, slug) {
 
 function pageOm(D) {
   const a = D.site.about || {};
-  const timeline = [
-    ['2023', 'YouTube-kanalen STUDIO 3 skapas av Simon Claesson och Emil Widén – först med humor som tema.'],
-    ['Debatten tar över', 'Formaten 1 mot 20, Duellen och Studio Soffan sätter människor med helt olika åsikter i samma rum.'],
-    ['1 000 000', 'Jan Emanuel mot 20 miljöpartister blir kanalens första avsnitt med en miljon visningar.'],
-    ['Statsministern', 'Ulf Kristersson möter 20 väljare – liksom fler partiledare efter honom.'],
-    ['100 000', 'Kanalen passerar 100 000 prenumeranter.'],
-    ['Valet 2026', 'Egen valvaka live och en livedebatt på Stortorget i Örebro inför runt 300 personer.'],
-  ];
+  const timeline = TIMELINE;
   return {
     title: 'Om oss – STUDIO 3', active: '/om-oss', description: a.lead,
     body: `${banner({ eyebrow: 'Om oss', title: 'Olika åsikter.<br><span class="accent">Samma rum.</span>', lead: e(a.lead), crumbs: [[null, 'Om oss']], extra: statRow([[num(D.stats.subscribers), 'prenumeranter'], [`${(D.stats.views / 1e6).toLocaleString('sv-SE', { maximumFractionDigits: 1 })} mn`, 'visningar'], [num(D.stats.videos), 'videor'], [D.people.length, 'profiler']]) })}
@@ -389,7 +373,7 @@ function pageFaq(D) {
 
 function pageSamarbeten(D) {
   const pt = D.site.partner || {};
-  const process = [['Kontakt', 'Ni berättar vad ni vill uppnå. Vi återkommer inom två arbetsdagar.'], ['Upplägg', 'Vi föreslår format, tider, budget och hur samarbetet syns.'], ['Produktion', 'Vi spelar in i studion eller på er plats – med vår redaktion och teknik.'], ['Publicering', 'Avsnittet släpps i våra kanaler och ni får en uppföljning av resultatet.']];
+  const process = PARTNER_PROCESS;
   return {
     title: 'Samarbeten & livedebatter – STUDIO 3', active: '/samarbeten', description: pt.text,
     body: `${banner({ eyebrow: 'Samarbeten & event', title: e(pt.title || 'Samarbeta med oss'), lead: e(pt.text || ''), crumbs: [[null, 'Samarbeten']],

@@ -69,7 +69,7 @@ function renderPage(req, res, file, { meta = {}, data, status = 200, body } = {}
   ].join('\n  ');
   // Ersätt med funktioner så att $-tecken i innehållet aldrig tolkas som mönster
   const html = template(file)
-    .replace('<html lang="sv">', () => `<html lang="sv" data-theme="${theme.id}" data-tone="${isLight(theme) ? 'light' : 'dark'}" data-fx="${theme.fx.join(' ')}">`)
+    .replace('<html lang="sv">', () => `<html lang="sv"${url.searchParams.get('embed') === '1' ? ' class="embed"' : ''} data-theme="${theme.id}" data-tone="${isLight(theme) ? 'light' : 'dark'}" data-fx="${theme.fx.join(' ')}">`)
     .replace('<!--HEAD-->', () => head)
     .replace('<!--LOGO-->', () => LOGO_SYMBOL)
     .replace('<!--BODY-->', () => body || '')

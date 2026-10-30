@@ -98,7 +98,7 @@ export function securityHeaders(res) {
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com",
       "media-src 'self' blob: https:",
-      "frame-src https://www.youtube-nocookie.com https://www.youtube.com",
+      "frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com",
       "connect-src 'self'",
       "form-action 'self'",
       "base-uri 'self'",

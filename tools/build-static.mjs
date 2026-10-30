@@ -86,7 +86,9 @@ try {
   const boot = await get('/api/public/bootstrap');
   const sitemap = await (await fetch(`${BASE}/sitemap.xml`)).text();
   const routes = [...sitemap.matchAll(/<loc>[^<]*?127\.0\.0\.1:\d+([^<]*)<\/loc>/g)].map((m) => decodeURIComponent(m[1]));
-  const pages = [...new Set([...routes, '/stilpaket', '/admin'])].map((r) => [r, mapPath(r).replace(/\?.*$/, '')]);
+  // Allt ligger på startsidan – exportera bara den, ansökan (öppnas som lager), integritet, stilpaket och admin
+  const onePage = routes.filter((r) => r === '/' || r === '/integritet' || r === '/sok' || r.startsWith('/sok/'));
+  const pages = [...new Set([...onePage, '/stilpaket', '/admin'])].map((r) => [r, mapPath(r).replace(/\?.*$/, '')]);
   for (const [url, file] of pages) {
     const html = await (await fetch(BASE + url)).text();
     fs.writeFileSync(path.join(OUT, file), transformHtml(html, file));

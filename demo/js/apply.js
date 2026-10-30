@@ -1,5 +1,21 @@
 import { $, $$, esc, bootstrapData, dateSv, timeSv, daysLeft, thumb, api, track, toast, showErrors, styleBar } from './common.js';
 
+// Inbäddad som lager ovanpå startsidan (?embed=1): ingen egen header, länkar hem stänger lagret
+const EMBED = new URLSearchParams(location.search).get('embed') === '1' && window.parent !== window;
+if (EMBED) {
+  document.documentElement.classList.add('embed');
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href]');
+    if (!a) return;
+    const href = a.getAttribute('href');
+    if (href === '/' || href.startsWith('/#') || href === 'index.html' || href.startsWith('index.html#')) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.parent.postMessage({ s3: 'close-apply', hash: href.split('#')[1] || '' }, location.origin);
+    }
+  }, true);
+}
+
 const D = bootstrapData();
 const debate = D.debate || null;
 const form = $('#applyForm');

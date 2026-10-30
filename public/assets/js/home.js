@@ -1,6 +1,6 @@
 import {
   $, $$, esc, bootstrapData, num, compact, views, duration, dateSv, timeSv, daysLeft, initials, thumb, ytUrl,
-  api, track, toast, showErrors, formJson, reveal, styleBar, modal, ICON,
+  api, track, toast, showErrors, formJson, styleBar, modal, ICON,
 } from './common.js';
 
 const D = bootstrapData();
@@ -271,7 +271,37 @@ if (!reduceMotion) {
   io.observe($('#stats'));
 }
 
-/* ---------- öppna debatter ---------- */
+/* ---------- ansökan som lager på samma sida ---------- */
+const sheet = $('#applySheet');
+const frame = $('#applyFrame');
+function openApply(slug) {
+  const base = location.pathname.endsWith('.html') ? (slug ? `sok-${slug}.html` : 'sok.html') : (slug ? `/sok/${encodeURIComponent(slug)}` : '/sok');
+  const stil = new URLSearchParams(location.search).get('stil');
+  frame.src = `${base}?embed=1${stil ? `&stil=${encodeURIComponent(stil)}` : ''}`;
+  sheet.hidden = false;
+  document.body.style.overflow = 'hidden';
+  $('#applyClose').focus();
+}
+function closeApply(hash) {
+  sheet.hidden = true;
+  frame.src = 'about:blank';
+  document.body.style.overflow = '';
+  if (hash) document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+}
+$('#applyClose').addEventListener('click', () => closeApply());
+addEventListener('keydown', (e) => e.key === 'Escape' && !sheet.hidden && closeApply());
+addEventListener('message', (e) => {
+  if (e.origin === location.origin && e.data?.s3 === 'close-apply') closeApply(e.data.hash);
+});
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('[data-apply]');
+  if (!a) return;
+  e.preventDefault();
+  document.querySelector('.modal .modal__close')?.click();
+  openApply(a.dataset.apply);
+});
+
+/* ---------- debatter ---------- */
 const FORMAT_LOGO = { '1vs20': '20-vs-1.svg', partiledare: '20-vs-1.svg', soffan: 'studio-soffan.svg', duellen: 'duellen.svg', panelen: 'panelen.svg', valvakan: 'valvakan.svg' };
 const formatArt = (key) => {
   const f = D.formats.find((x) => x.key === key);
@@ -279,7 +309,7 @@ const formatArt = (key) => {
 };
 function countdown(d) {
   const left = daysLeft(d.deadline);
-  if (left == null) return '';
+  if (left == null || !d.open) return '<span></span>';
   const cls = left <= 3 ? 'countdown countdown--soon' : 'countdown';
   const txt = left <= 0 ? 'Stänger i dag' : left === 1 ? '1 dag kvar att söka' : `${left} dagar kvar att söka`;
   return `<span class="${cls}"><span class="dot"></span>${txt}</span>`;
@@ -288,54 +318,95 @@ function debateCard(d) {
   const art = d.cover_url || formatArt(d.format);
   const logo = FORMAT_LOGO[d.format];
   const needs = (d.needs || []).map((n) => `<div class="need"><span>${esc(n.label)}</span><strong>${n.count ? `${n.count} st` : 'Sökes'}</strong></div>`).join('');
+  const action = d.open
+    ? `<button class="btn" type="button" data-apply="${esc(d.slug)}">Sök nu <span class="arrow">→</span></button>`
+    : d.youtube_url ? `<a class="btn btn--ghost" href="${esc(d.youtube_url)}" target="_blank" rel="noopener">Se avsnittet ↗</a>` : '<span class="chip">Ansökan stängd</span>';
   const body = `
     <span class="badge-format">${esc(d.formatName)}</span>
     <h3>${esc(d.title)}</h3>
     ${d.statement ? `<p class="debate__statement">”${esc(d.statement)}”</p>` : ''}
     ${d.summary ? `<p class="muted" style="margin:0">${esc(d.summary)}</p>` : ''}
+    ${d.description ? `<details class="debate__more"><summary>Läs mer</summary><p class="muted">${esc(d.description)}</p></details>` : ''}
     <dl class="debate__meta">
       ${d.event_at ? `<div><dt>Inspelning</dt><dd>${dateSv(d.event_at)}${timeSv(d.event_at) ? `, ${timeSv(d.event_at)}` : ''}</dd></div>` : ''}
       ${d.location ? `<div><dt>Plats</dt><dd>${esc(d.location)}</dd></div>` : ''}
       ${d.deadline ? `<div><dt>Sista dag</dt><dd>${dateSv(d.deadline)}</dd></div>` : ''}
     </dl>
     ${needs ? `<div class="debate__needs"><span class="muted" style="font-size:.85rem;font-weight:700">VI SÖKER</span>${needs}</div>` : ''}
-    <div class="debate__foot">${countdown(d)}<a class="btn" href="/sok/${encodeURIComponent(d.slug)}">Sök nu <span class="arrow">→</span></a></div>`;
-  if (d.featured) {
-    return `<article class="card debate debate--featured reveal">
+    <div class="debate__foot">${countdown(d)}${action}</div>`;
+  if (d.featured && d.open) {
+    return `<article class="card debate debate--featured">
       <div class="debate__art">${art ? `<img src="${esc(art)}" alt="" loading="lazy">` : ''}${logo && d.cover_url ? `<img class="logo" src="/assets/img/logos/${logo}" alt="">` : ''}</div>
       <div class="debate__body">${body}</div></article>`;
   }
-  return `<article class="card debate reveal">${body}</article>`;
+  return `<article class="card debate">${body}</article>`;
 }
-$('#debates').innerHTML = openDebates.length
-  ? openDebates.map(debateCard).join('') + `
-    <article class="card debate debate--talent reveal">
-      <span class="badge-format">Talangbanken</span>
-      <h3>Hittar du inget som passar?</h3>
-      <p class="muted" style="margin:0">Anmäl dig till talangbanken. När vi planerar en debatt där just din röst behövs, hör vi av oss först.</p>
-      <div class="debate__foot"><span></span><a class="btn btn--ghost" href="/sok">Anmäl intresse <span class="arrow">→</span></a></div>
-    </article>`
-  : `<div class="empty"><h3>Inga öppna ansökningar just nu</h3><p>Prenumerera på nyhetsbrevet så får du veta direkt när nästa debatt öppnar.</p><a class="btn" href="#nyhetsbrev">Bevaka nya debatter</a></div>`;
+$('#debates').innerHTML = (openDebates.length
+  ? openDebates.map(debateCard).join('')
+  : `<div class="empty"><h3>Inga öppna ansökningar just nu</h3><p>Prenumerera på nyhetsbrevet så får du veta direkt när nästa debatt öppnar.</p><a class="btn" href="#nyhetsbrev">Bevaka nya debatter</a></div>`) + `
+  <article class="card debate debate--talent">
+    <span class="badge-format">Talangbanken</span>
+    <h3>Hittar du inget som passar?</h3>
+    <p class="muted" style="margin:0">Anmäl dig till talangbanken. När vi planerar en debatt där just din röst behövs, hör vi av oss först.</p>
+    <div class="debate__foot"><span></span><button class="btn btn--ghost" type="button" data-apply="">Anmäl intresse <span class="arrow">→</span></button></div>
+  </article>`;
+const upcoming = D.debates.filter((d) => !d.open && ['closed', 'recorded'].includes(d.status));
+const published = D.debates.filter((d) => d.status === 'published');
+$('#debatesMore').innerHTML = [
+  upcoming.length && `<h3 style="margin:56px 0 18px">Kommande avsnitt</h3><div class="debates">${upcoming.map(debateCard).join('')}</div>`,
+  published.length && `<h3 style="margin:56px 0 18px">Publicerade debatter</h3><div class="debates">${published.map(debateCard).join('')}</div>`,
+].filter(Boolean).join('');
 
 /* ---------- steg & FAQ ---------- */
-$('#steps').innerHTML = (site.steps || []).map((s) => `<div class="step reveal"><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`).join('');
-$('#faq').innerHTML = (site.faq || []).map((f) => `<details class="reveal"><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('');
+$('#steps').innerHTML = (site.steps || []).map((s) => `<div class="step"><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`).join('');
+$('#faq').innerHTML = (site.faq || []).map((f) => `<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('');
 
 /* ---------- format ---------- */
-$('#formats').innerHTML = D.formats.filter((f) => f.count > 0).map((f) => {
-  return `<article class="card format reveal">
+const formatsWithEpisodes = D.formats.filter((f) => f.count > 0);
+$('#formats').innerHTML = formatsWithEpisodes.map((f) => `<article class="card format" tabindex="0" role="button" data-format-open="${f.key}" aria-label="Allt om ${esc(f.name)}">
     <div class="format__bg">${f.top ? `<img src="${thumb(f.top, 'hqdefault')}" alt="" loading="lazy">` : ''}</div>
-    ${f.logo ? `<img class="format__logo ${f.logo === 'studio-soffan.svg' ? 'round' : ''}" src="/assets/img/logos/${f.logo}" alt="${esc(f.name)}">` : `<div class="format__name">${esc(f.name)}</div>`}
-    ${f.logo ? `<div class="format__name">${esc(f.name)}</div>` : ''}
+    ${f.logo ? `<img class="format__logo ${f.logo === 'studio-soffan.svg' ? 'round' : ''}" src="/assets/img/logos/${f.logo}" alt="">` : ''}
+    <div class="format__name">${esc(f.name)}</div>
     <p class="format__tag">${esc(f.tagline)}</p>
     <p>${esc(f.desc)}</p>
-    <div class="format__foot">
-      <span>${f.count} avsnitt · ${compact(f.views)} visningar</span>
-      ${f.top ? `<a class="link" href="${ytUrl(f.top)}" target="_blank" rel="noopener" data-video="${f.top}">Mest sedda ▶</a>` : ''}
-    </div>
-    <a class="link" href="/format/${f.key}">Allt om ${esc(f.name)} →</a>
-  </article>`;
-}).join('');
+    <div class="format__foot"><span>${f.count} avsnitt · ${compact(f.views)} visningar</span><span class="link">Allt om formatet →</span></div>
+  </article>`).join('');
+$('#formatTable').innerHTML = `<table class="ptable"><thead><tr><th>Format</th><th>Deltagare</th><th>Upplägg</th><th class="num">Avsnitt</th><th class="num">Visningar</th><th>Mest sedda</th></tr></thead><tbody>
+  ${formatsWithEpisodes.map((f) => `<tr><td><button class="linkbtn" type="button" data-format-open="${f.key}"><strong>${esc(f.name)}</strong></button></td><td>${esc(f.people || '–')}</td><td>${esc(f.tagline)}</td><td class="num">${f.count}</td><td class="num">${num(f.views)}</td><td>${f.top ? `<button class="linkbtn" type="button" data-video="${f.top}">${esc(videoById[f.top]?.display || '')}</button>` : '–'}</td></tr>`).join('')}
+  </tbody></table>`;
+const miniCard = (v) => `<button class="vcard vcard--mini" type="button" data-video="${v.id}">
+  <span class="vcard__thumb"><img src="${thumb(v.id)}" alt="" loading="lazy"><span class="vcard__dur">${duration(v.duration)}</span></span>
+  <span class="vcard__title">${v.quote ? `”${esc(v.display)}”` : esc(v.display)}</span><span class="muted" style="font-size:.82rem">${views(v.views)}</span></button>`;
+function openFormat(key) {
+  const f = D.formats.find((x) => x.key === key);
+  if (!f) return;
+  const vids = D.videos.filter((v) => v.format === key).sort((a, b) => (b.views || 0) - (a.views || 0));
+  const people = D.people.filter((p) => p.videos.some((id) => videoById[id]?.format === key));
+  const open = D.debates.filter((d) => d.open && (d.format === key || (key === '1vs20' && d.format === 'partiledare')));
+  modal(`<div class="modal__body" style="padding-top:28px">
+    ${f.logo ? `<img src="/assets/img/logos/${f.logo}" alt="" style="height:${f.logo === 'studio-soffan.svg' ? 80 : 40}px;width:auto">` : ''}
+    <h3 class="display" style="font-size:clamp(1.8rem,4vw,3rem)">${esc(f.name)}</h3>
+    <p class="lead" style="margin:0">${esc(f.tagline)} ${esc(f.desc)}</p>
+    <div class="statrow"><div><strong>${f.count}</strong><span>avsnitt</span></div><div><strong>${compact(f.views)}</strong><span>visningar</span></div><div><strong>${esc(f.people || '–')}</strong><span>deltagare</span></div><div><strong>${people.length}</strong><span>profiler</span></div></div>
+    ${f.rules?.length ? `<h4 style="margin:18px 0 0">Så funkar det</h4><ol class="rules">${f.rules.map((r) => `<li>${esc(r)}</li>`).join('')}</ol>` : ''}
+    ${open.length ? `<h4 style="margin:10px 0 0">Söker deltagare nu</h4><div class="chips">${open.map((d) => `<button class="btn btn--sm" type="button" data-apply="${esc(d.slug)}">Sök till ${esc(d.title)} →</button>`).join('')}</div>` : `<p><button class="btn btn--sm" type="button" data-apply="">Anmäl dig till talangbanken →</button></p>`}
+    <h4 style="margin:18px 0 0">Alla ${vids.length} avsnitt</h4>
+    <div class="mgrid">${vids.map(miniCard).join('')}</div>
+    ${people.length ? `<h4 style="margin:18px 0 0">Har medverkat</h4><div class="chips">${people.map((p) => `<button class="chip" type="button" data-person="${esc(p.name)}">${esc(p.name)}</button>`).join('')}</div>` : ''}
+    ${f.playlist ? `<p><a class="btn btn--ghost btn--sm" href="https://www.youtube.com/playlist?list=${f.playlist}" target="_blank" rel="noopener">Hela spellistan på YouTube ↗</a></p>` : ''}
+  </div>`, { label: f.name });
+}
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-format-open]');
+  if (!el) return;
+  e.preventDefault();
+  document.querySelector('.modal .modal__close')?.click();
+  openFormat(el.dataset.formatOpen);
+});
+$('#formats').addEventListener('keydown', (e) => {
+  const el = e.target.closest('[data-format-open]');
+  if (el && (e.key === 'Enter' || e.key === ' ')) (e.preventDefault(), openFormat(el.dataset.formatOpen));
+});
 
 /* ---------- avsnitt ---------- */
 const vstate = { sort: 'latest', format: '', q: '', limit: 12 };
@@ -354,7 +425,7 @@ function filteredVideos() {
 }
 function videoCard(v) {
   const people = (v.people || []).slice(0, 4).join(', ');
-  return `<article class="vcard reveal">
+  return `<article class="vcard">
     <button class="vcard__open" type="button" data-video="${v.id}" aria-label="Spela ${esc(v.display)}">
       <div class="vcard__thumb">
         <img src="${thumb(v.id)}" srcset="${thumb(v.id)} 320w, ${thumb(v.id, 'hqdefault')} 480w, ${thumb(v.id, 'sddefault')} 640w" sizes="(max-width: 700px) 100vw, 320px" alt="" loading="lazy" width="320" height="180">
@@ -364,7 +435,7 @@ function videoCard(v) {
         ${v.duration ? `<span class="vcard__dur">${duration(v.duration)}</span>` : ''}
       </div>
     </button>
-    <h3 class="vcard__title"><a href="/avsnitt/${encodeURIComponent(v.id)}" style="text-decoration:none">${v.quote ? `”${esc(v.display)}”` : esc(v.display)}</a></h3>
+    <h3 class="vcard__title"><button class="linkbtn" type="button" data-video="${v.id}">${v.quote ? `”${esc(v.display)}”` : esc(v.display)}</button></h3>
     ${people ? `<p class="vcard__people">${esc(people)}</p>` : ''}
     <div class="vcard__meta">${v.views ? `<span>${views(v.views)}</span>` : ''}${v.published ? `<span>${dateSv(v.published, { day: 'numeric', month: 'short', year: 'numeric' })}</span>` : ''}<a href="${ytUrl(v.id)}" target="_blank" rel="noopener">YouTube ↗</a></div>
   </article>`;
@@ -372,12 +443,13 @@ function videoCard(v) {
 function renderVideos() {
   const list = filteredVideos();
   $('#videos').innerHTML = list.length ? list.slice(0, vstate.limit).map(videoCard).join('') : '<div class="empty" style="grid-column:1/-1">Inga avsnitt matchar sökningen.</div>';
+  $('#videoCount').textContent = `Visar ${Math.min(vstate.limit, list.length)} av ${list.length} avsnitt`;
   $('#moreBtn').hidden = list.length <= vstate.limit;
-  reveal($('#videos'));
+  $('#allBtn').hidden = list.length <= vstate.limit;
 }
 renderVideos();
-$$('.tabs button').forEach((b) => b.addEventListener('click', () => {
-  $$('.tabs button').forEach((x) => x.setAttribute('aria-pressed', x === b));
+$$('#avsnitt .tabs button').forEach((b) => b.addEventListener('click', () => {
+  $$('#avsnitt .tabs button').forEach((x) => x.setAttribute('aria-pressed', x === b));
   vstate.sort = b.dataset.sort;
   vstate.limit = 12;
   renderVideos();
@@ -396,22 +468,32 @@ $('#videoSearch').addEventListener('input', (e) => {
   searchT = setTimeout(() => ((vstate.q = e.target.value), (vstate.limit = 12), renderVideos()), 160);
 });
 $('#moreBtn').addEventListener('click', () => ((vstate.limit += 12), renderVideos()));
+$('#allBtn').addEventListener('click', () => ((vstate.limit = 999), renderVideos()));
 
-function openVideo(v) {
+const clock = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+function openVideo(v, start = 0) {
   track('video_click', false);
-  const people = (v.people || []).map((p) => `<span class="chip">${esc(p)}</span>`).join('');
-  modal(`
-    <div class="player"><iframe src="https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0" title="${esc(v.display)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+  const people = (v.people || []).map((n) => (personByName[n] ? `<button class="chip" type="button" data-person="${esc(n)}">${esc(n)}</button>` : `<span class="chip">${esc(n)}</span>`)).join('');
+  const peaks = (D.peaks?.[v.id] || []).filter((p) => p.at);
+  const more = D.videos.filter((x) => x.format === v.format && x.id !== v.id).sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 4);
+  const m = modal(`
+    <div class="player"><iframe src="https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0&start=${Math.floor(start)}" title="${esc(v.display)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
     <div class="modal__body">
-      <span class="badge-format">${esc(formatName(v.format))}${v.views ? ` · ${views(v.views)}` : ''}</span>
-      <h3>${esc(v.display)}</h3>
+      <span class="badge-format">${esc(formatName(v.format))}${v.views ? ` · ${views(v.views)}` : ''}${v.duration ? ` · ${duration(v.duration)}` : ''}</span>
+      <h3>${v.quote ? `”${esc(v.display)}”` : esc(v.display)}</h3>
       ${people ? `<div class="chips">${people}</div>` : ''}
+      ${peaks.length ? `<div><strong>Hetaste ögonblicken</strong> <span class="muted">enligt YouTubes ”Mest uppspelade”</span><div class="chips" style="margin-top:8px">${peaks.map((p) => `<button class="chip chip--accent" type="button" data-seek="${Math.floor(p.at)}">▶ ${clock(p.at)}${p.source === 'mest-uppspelade' ? ' · mest uppspelade' : ''}</button>`).join('')}</div></div>` : ''}
       <div class="modal__actions">
         <a class="btn" href="${ytUrl(v.id)}" target="_blank" rel="noopener">${ICON.youtube} Se på YouTube</a>
-        <a class="btn btn--ghost" href="https://www.youtube.com/@studio3-se?sub_confirmation=1" target="_blank" rel="noopener">Prenumerera</a>
-        <a class="btn btn--ghost" href="/sok">Vill du vara med? Sök här</a>
+        <button class="btn btn--ghost" type="button" data-format-open="${esc(v.format)}">Mer ${esc(formatName(v.format))}</button>
+        <button class="btn btn--ghost" type="button" data-apply="">Vill du vara med? Sök här</button>
       </div>
+      ${more.length ? `<h4 style="margin:8px 0 0">Fler avsnitt</h4><div class="mgrid">${more.map(miniCard).join('')}</div>` : ''}
     </div>`, { label: v.display });
+  m.el.addEventListener('click', (ev) => {
+    const seek = ev.target.closest('[data-seek]');
+    if (seek) $('.player iframe', m.el).src = `https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0&start=${seek.dataset.seek}`;
+  });
 }
 document.addEventListener('click', (e) => {
   const el = e.target.closest('[data-video]');
@@ -419,33 +501,83 @@ document.addEventListener('click', (e) => {
   const v = videoById[el.dataset.video];
   if (!v) return;
   e.preventDefault();
-  openVideo(v);
+  document.querySelector('.modal .modal__close')?.click();
+  setTimeout(() => openVideo(v), document.querySelector('.modal') ? 260 : 0);
 });
 
 /* ---------- profiler ---------- */
 const PARTY_HUE = { S: '#e8112d', M: '#52bdec', SD: '#dddd00', V: '#da291c', C: '#009933', KD: '#000077', L: '#006ab3', MP: '#83cf39' };
-const pstate = { q: '' };
-$('#peopleLead').textContent = `${D.people.length} politiker, debattörer och opinionsbildare har debatterat hos oss. Klicka på en person för att se deras avsnitt.`;
+const personByName = Object.fromEntries(D.people.map((p) => [p.name, p]));
+const pstate = { q: '', party: '', sort: 'count', all: false };
+$('#peopleLead').textContent = `${D.people.length} politiker, debattörer och opinionsbildare har debatterat hos oss. Klicka på en person för att se alla avsnitt och vilka hen mött.`;
+const parties = Object.keys(PARTY_HUE).filter((p) => D.people.some((x) => x.party === p));
+$('#partyFilters').innerHTML = [`<button type="button" data-party="" aria-pressed="true">Alla partier</button>`, ...parties.map((p) => `<button type="button" data-party="${p}" aria-pressed="false">${p}</button>`)].join('');
+const avatar = (p, cls = '') => `<span class="avatar ${cls}" ${p.party && PARTY_HUE[p.party] ? `style="background:${PARTY_HUE[p.party]};color:${['M', 'SD', 'MP'].includes(p.party) ? '#111' : '#fff'}"` : ''}>${esc(initials(p.name))}</span>`;
 function renderPeople() {
   const q = pstate.q.toLowerCase();
-  const list = D.people.filter((p) => !q || p.name.toLowerCase().includes(q));
-  const shown = q ? list : list.slice(0, 15);
+  const sorters = { count: (a, b) => b.videos.length - a.videos.length || b.views - a.views, views: (a, b) => b.views - a.views, name: (a, b) => a.name.localeCompare(b.name, 'sv') };
+  const list = D.people.filter((p) => (!q || p.name.toLowerCase().includes(q)) && (!pstate.party || p.party === pstate.party)).sort(sorters[pstate.sort]);
+  const shown = q || pstate.party || pstate.all ? list : list.slice(0, 15);
   $('#people').innerHTML = shown.map((p) => `
-    <a class="person" href="/profiler/${encodeURIComponent(p.slug)}">
-      <span class="avatar" ${p.party && PARTY_HUE[p.party] ? `style="background:${PARTY_HUE[p.party]};color:${['M', 'SD', 'MP'].includes(p.party) ? '#111' : '#fff'}"` : ''}>${esc(initials(p.name))}</span>
+    <button class="person" type="button" data-person="${esc(p.name)}">
+      ${avatar(p)}
       <span><span class="person__name">${esc(p.name)}</span>${p.party ? `<span class="party party--${p.party}">${p.party}</span>` : ''}
         <span class="person__meta" style="display:block">${p.role ? `${esc(p.role)} · ` : ''}${p.videos.length} avsnitt · ${compact(p.views)} visningar</span></span>
-    </a>`).join('') || '<div class="empty" style="grid-column:1/-1">Ingen träff.</div>';
+    </button>`).join('') || '<div class="empty" style="grid-column:1/-1">Ingen träff.</div>';
+  $('#morePeople').hidden = shown.length === list.length;
+  $('#morePeople').textContent = `Visa alla ${list.length} profiler`;
 }
 renderPeople();
 $('#peopleSearch').addEventListener('input', (e) => ((pstate.q = e.target.value), renderPeople()));
+$('#morePeople').addEventListener('click', () => ((pstate.all = true), renderPeople()));
+$('#partyFilters').addEventListener('click', (e) => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  $$('#partyFilters button').forEach((x) => x.setAttribute('aria-pressed', x === b));
+  pstate.party = b.dataset.party;
+  renderPeople();
+});
+$('#peopleSort').addEventListener('click', (e) => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  $$('#peopleSort button').forEach((x) => x.setAttribute('aria-pressed', x === b));
+  pstate.sort = b.dataset.psort;
+  renderPeople();
+});
+function openPerson(name) {
+  const p = personByName[name];
+  if (!p) return;
+  const vids = p.videos.map((id) => videoById[id]).filter(Boolean).sort((a, b) => (b.views || 0) - (a.views || 0));
+  const met = {};
+  for (const v of vids) for (const n of v.people) if (n !== p.name && personByName[n]) met[n] = (met[n] || 0) + 1;
+  const opponents = Object.entries(met).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([n]) => n);
+  const formats = [...new Set(vids.map((v) => formatName(v.format)))];
+  modal(`<div class="modal__body" style="padding-top:28px">
+    <div style="display:flex;gap:16px;align-items:center">${avatar(p, 'avatar--xl')}<div><span class="badge-format">${esc(p.role || D.parties.find((x) => x.id === p.party)?.name || 'Profil')}</span><h3 class="display" style="font-size:clamp(1.8rem,4vw,3rem)">${esc(p.name)}</h3></div></div>
+    <div class="statrow"><div><strong>${vids.length}</strong><span>avsnitt</span></div><div><strong>${compact(p.views)}</strong><span>visningar</span></div><div><strong>${formats.length}</strong><span>format</span></div><div><strong>${opponents.length}</strong><span>motdebattörer</span></div></div>
+    <p class="muted" style="margin:0">Har medverkat i ${esc(formats.join(', '))}.</p>
+    <h4 style="margin:12px 0 0">Avsnitt</h4>
+    <div class="mgrid">${vids.map(miniCard).join('')}</div>
+    ${opponents.length ? `<h4 style="margin:12px 0 0">Har debatterat mot</h4><div class="chips">${opponents.map((n) => `<button class="chip" type="button" data-person="${esc(n)}">${esc(n)}</button>`).join('')}</div>` : ''}
+    <p><button class="btn btn--sm" type="button" data-apply="">Vill du möta ${esc(p.name.split(' ')[0])}? Anmäl dig →</button></p>
+  </div>`, { label: p.name });
+}
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-person]');
+  if (!el) return;
+  e.preventDefault();
+  const hadModal = !!document.querySelector('.modal');
+  document.querySelector('.modal .modal__close')?.click();
+  setTimeout(() => openPerson(el.dataset.person), hadModal ? 260 : 0);
+});
 
 /* ---------- om oss ---------- */
 $('#aboutLead').textContent = site.about?.lead || '';
 $('#aboutStory').innerHTML = (site.about?.story || []).map((p) => `<p>${esc(p)}</p>`).join('');
-$('#why').innerHTML = (site.about?.why || []).map((w) => `<div class="card reveal"><h3>${esc(w.title)}</h3><p>${esc(w.text)}</p></div>`).join('');
+$('#why').innerHTML = (site.about?.why || []).map((w) => `<div class="card"><h3>${esc(w.title)}</h3><p>${esc(w.text)}</p></div>`).join('');
+$('#timeline').innerHTML = (D.timeline || []).map(([t, x]) => `<li><strong>${esc(t)}</strong><p>${esc(x)}</p></li>`).join('');
 $('#team').innerHTML = (site.team || []).map((m) => `
-  <article class="card member reveal">
+  <article class="card member">
     <div class="member__mono" aria-hidden="true">${esc(initials(m.name))}</div>
     <h3>${esc(m.name)}</h3>
     <p class="member__role">${esc(m.role)}</p>
@@ -456,9 +588,17 @@ const q = D.quotes?.[0];
 if (q) $('#quote').innerHTML = `<blockquote>”${esc(q.text)}”</blockquote><figcaption>— ${esc(q.by)}, ${esc(q.source)}</figcaption>`;
 else $('#quote').remove();
 
-/* ---------- socialt bevis ---------- */
+/* ---------- press ---------- */
+$('#facts').innerHTML = `<tbody>${[
+  ['Grundare', 'Simon Claesson och Emil Widén'], ['Startade på YouTube', dateSv(D.joined, { day: 'numeric', month: 'long', year: 'numeric' })],
+  ['Prenumeranter', num(D.stats.subscribers)], ['Visningar totalt', num(D.stats.views)], ['Videor', `${num(D.stats.videos)}${D.shorts ? ` (varav ${D.shorts} Shorts)` : ''}`],
+  ['Största avsnittet', `${num(D.stats.topViews)} visningar`], ['Format', formatsWithEpisodes.map((f) => f.name).join(', ')], ['Kanaler', 'YouTube, TikTok, Instagram'],
+].map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</tbody>`;
 $('#ytcomment').innerHTML = `<span class="avatar">S</span><div><small>@Stanne-mp6lp · kommentar på YouTube</small><p>${esc(D.channel.bannerQuote)}</p><div class="likes"><span>👍 2</span><span>Svara</span></div></div>`;
 $('#pressList').innerHTML = (D.press || []).map((p) => `<a href="${esc(p.url)}" target="_blank" rel="noopener"><div><strong>${esc(p.outlet)}</strong><span>${esc(p.title)}</span></div><span aria-hidden="true">↗</span></a>`).join('');
+const ASSETS = [['s3-logo.svg', 'S3-logga (orange)'], ['s3-logo-currentcolor.svg', 'S3-logga (enfärgad)'], ['studio3-wordmark.svg', 'STUDIO 3. – ordmärke'], ['studio-soffan.svg', 'Studio Soffan'], ['duellen.svg', 'Duellen'], ['20-vs-1.svg', '20 VS 1'], ['panelen.svg', 'Panelen'], ['valvakan.svg', 'Valvakan']];
+$('#assets').innerHTML = ASSETS.map(([f, l]) => `<a class="asset" href="/assets/img/logos/${f}" download><span class="asset__img"${f.includes('currentcolor') ? ' style="background:#f1f1f1"' : ''}><img src="/assets/img/logos/${f}" alt=""></span><span>${l}</span><small>SVG ↓</small></a>`).join('');
+$('#swatches').innerHTML = [['#F1944F', 'Studio 3-orange'], ['#0F0F0F', 'Studiosvart'], ['#FFFFFF', 'Vit']].map(([c, n]) => `<div><i style="background:${c}"></i><strong>${n}</strong><span>${c}</span></div>`).join('');
 
 /* ---------- samarbeten ---------- */
 $('#partnerTitle').textContent = site.partner?.title || '';
@@ -468,6 +608,8 @@ $('#kpis').innerHTML = [
   [num(D.stats.topViews), 'visningar, toppavsnitt'], [String(D.people.length), 'profiler i stolen'],
 ].map(([a, b]) => `<div><strong>${a}</strong>${b}</div>`).join('');
 $('#offers').innerHTML = (site.partner?.offers || []).map((o) => `<div class="card"><h3>${esc(o.title)}</h3><p>${esc(o.text)}</p></div>`).join('');
+$('#partnerExample').textContent = D.partnerExample || '';
+$('#partnerProcess').innerHTML = (D.partnerProcess || []).map(([t, x]) => `<li><strong>${esc(t)}</strong><p>${esc(x)}</p></li>`).join('');
 $('#leadForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const form = e.currentTarget;
@@ -522,8 +664,16 @@ if (site.swish) {
   s.innerHTML = `<div><h3>Stötta STUDIO 3</h3><p class="muted" style="margin:6px 0 0">Vill du hjälpa oss göra fler debatter? Swisha valfritt belopp.</p></div><strong>${esc(site.swish)}</strong>`;
 }
 
-/* ---------- footer ---------- */
+/* ---------- kontakt ---------- */
 const soc = site.socials || {};
+$('#contactCards').innerHTML = [
+  `<button class="card card--link" type="button" data-apply=""><h3>Vill vara med</h3><p>Sök till en debatt eller anmäl dig till talangbanken.</p><span class="link">Anmäl dig →</span></button>`,
+  `<a class="card card--link" href="#samarbeten"><h3>Samarbeten &amp; event</h3><p>Sponsring, livedebatter, föreläsningar och egna serier.</p><span class="link">Skicka förfrågan →</span></a>`,
+  `<a class="card card--link" href="#press"><h3>Press</h3><p>Fakta, loggor och pressklipp – och intervjuförfrågningar.</p><span class="link">Till press →</span></a>`,
+  `<div class="card"><h3>Följ oss</h3><p class="muted">${[[soc.youtube, 'YouTube'], [soc.tiktok, 'TikTok'], [soc.instagramSimon, 'Instagram – Simon'], [soc.instagramEmil, 'Instagram – Emil']].filter(([h]) => h).map(([h, l]) => `<a class="link" href="${esc(h)}" target="_blank" rel="noopener">${l} ↗</a>`).join('<br>')}</p>${site.contactEmail ? `<p><a class="link" href="mailto:${esc(site.contactEmail)}">${esc(site.contactEmail)}</a></p>` : ''}</div>`,
+].join('');
+
+/* ---------- footer ---------- */
 $('#socials').innerHTML = [
   soc.youtube && `<li><a href="${esc(soc.youtube)}" target="_blank" rel="noopener">YouTube</a></li>`,
   soc.tiktok && `<li><a href="${esc(soc.tiktok)}" target="_blank" rel="noopener">TikTok</a></li>`,
@@ -532,6 +682,6 @@ $('#socials').innerHTML = [
 ].filter(Boolean).join('');
 $('#year').textContent = new Date().getFullYear();
 
-$$('.section__head, .about > div, .newsletter, .proof > div, .partner > *').forEach((el) => el.classList.add('reveal'));
-reveal();
+// Öppna rätt lager direkt från en delad länk, t.ex. #sok
+if (location.hash === '#sok') openApply('');
 styleBar();

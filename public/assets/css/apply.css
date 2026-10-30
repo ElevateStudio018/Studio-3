@@ -105,3 +105,8 @@
 .done__ref { font-family: var(--font-display); font-weight: var(--display-weight); font-size: 1.6rem; letter-spacing: .06em; padding: 10px 18px; border-radius: var(--radius); background: var(--surface-2); }
 .done ol { text-align: left; color: var(--muted); max-width: 480px; margin: 0; padding-left: 1.2em; }
 .done .actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+
+/* inbäddad i startsidans lager */
+.embed .header, .embed .skip { display: none; }
+.embed .apply { padding-top: 28px; }
+.embed .apply__info { top: 24px; }

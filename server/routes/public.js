@@ -6,7 +6,7 @@ import { HttpError, json, readJson, redirect, send } from '../http.js';
 import { rateLimit, randomToken, hashIp } from '../security.js';
 import { sendMail, templates, notifyAdmins, escapeHtml } from '../mailer.js';
 import { videoRows, loadChannel } from '../youtube.js';
-import { PARTIES, COUNTIES, FORMAT_NAMES } from '../content.js';
+import { PARTIES, COUNTIES, FORMAT_NAMES, FORMAT_INFO, TIMELINE, PARTNER_PROCESS, PARTNER_EXAMPLE } from '../content.js';
 
 export const str = (x, max = 500) => (typeof x === 'string' ? x.trim().slice(0, max) : typeof x === 'number' ? String(x) : '');
 export const int = (x, min, max) => {
@@ -52,15 +52,19 @@ export function peopleIndex(videos) {
   return [...map.values()].sort((a, b) => b.videos.length - a.videos.length || b.views - a.views);
 }
 
+function heroFile() {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(config.contentDir, 'hero-clips.json'), 'utf8'));
+  } catch {
+    return {};
+  }
+}
+
 /** Hero-klippen: egna klipp från admin, annars YouTubes "Mest uppspelade"-ögonblick (content/hero-clips.json). */
 export function heroClips() {
   const own = getSetting('site', {}).heroClips;
   if (Array.isArray(own) && own.length) return own;
-  try {
-    return JSON.parse(fs.readFileSync(path.join(config.contentDir, 'hero-clips.json'), 'utf8')).clips || [];
-  } catch {
-    return [];
-  }
+  return heroFile().clips || [];
 }
 
 export function bootstrap() {
@@ -71,7 +75,7 @@ export function bootstrap() {
     .map((d) => ({ ...debateOut(d), open: isOpen(d) }));
   const formats = ch.formats.map((f) => {
     const vs = videos.filter((v) => v.format === f.key);
-    return { ...f, count: vs.length, views: vs.reduce((s, v) => s + (v.views || 0), 0), top: vs.sort((a, b) => (b.views || 0) - (a.views || 0))[0]?.id || f.top };
+    return { ...f, ...FORMAT_INFO[f.key], count: vs.length, views: vs.reduce((s, v) => s + (v.views || 0), 0), top: vs.sort((a, b) => (b.views || 0) - (a.views || 0))[0]?.id || f.top };
   });
   return {
     site: publicSite(),
@@ -80,6 +84,8 @@ export function bootstrap() {
     formats, videos, people: peopleIndex(videos), debates,
     press: ch.press, quotes: ch.quotes, events: ch.events,
     parties: PARTIES, counties: COUNTIES, formatNames: FORMAT_NAMES, heroClips: heroClips(),
+    peaks: Object.fromEntries((heroFile().videos || []).map((v) => [v.id, v.peaks])),
+    timeline: TIMELINE, partnerProcess: PARTNER_PROCESS, partnerExample: PARTNER_EXAMPLE, joined: ch.channel.joined, shorts: ch.channel.shorts,
   };
 }
 
