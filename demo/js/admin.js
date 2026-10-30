@@ -835,6 +835,9 @@ async function viewContent() {
       <div class="cols"><div class="f"><label>Slutkort (sista två orden markeras)</label><input type="text" name="endline" value="${esc(site.endline)}"></div>
         <div class="f"><label>Toppnotis <span class="hint">(tom = dold)</span></label><input type="text" name="announcement" value="${esc(site.announcement)}"></div></div>
       <div class="cols"><div class="f"><label>Hero-video (desktop)</label><input type="text" name="heroVideo" value="${esc(site.heroVideo)}"></div><div class="f"><label>Hero-video (mobil)</label><input type="text" name="heroVideoMobile" value="${esc(site.heroVideoMobile)}"></div><div class="f"><label>Affischbild</label><input type="text" name="heroPoster" value="${esc(site.heroPoster)}"></div></div>
+      <div class="cols"><div class="f"><label>Hero-video</label><select name="heroMode"><option value="youtube" ${site.heroMode !== 'mp4' ? 'selected' : ''}>Riktiga klipp ur avsnitten (YouTube)</option><option value="mp4" ${site.heroMode === 'mp4' ? 'selected' : ''}>MP4-filen nedan</option></select></div></div>
+      <div class="f"><label>Klipp i heron <span class="hint">(en per rad: video-ID | start i sekunder | längd | titel). Töm rutan för att använda YouTubes ”Mest uppspelade” (npm run hero:heatmap).</span></label>
+        <textarea name="heroClips" rows="8" style="font-family:ui-monospace,monospace;font-size:.82rem">${esc((s.heroClips || []).map((c) => [c.id, c.start, c.len, c.title || ''].join(' | ')).join('\n'))}</textarea></div>
       <div class="cols"><div class="f"><label>Slogan visas till (sek)</label><input type="number" step="0.05" name="heroIntroEnd" value="${esc(site.heroIntroEnd ?? 2.25)}"></div><div class="f"><label>Slutkortet visas från (sek)</label><input type="number" step="0.05" name="heroEndAt" value="${esc(site.heroEndAt ?? 18.9)}"></div></div>
     </section>
     <section class="panel grid"><h2>Om oss</h2>
@@ -864,6 +867,7 @@ async function viewContent() {
     $$('[data-theme]', c).forEach((b) => b.setAttribute('aria-pressed', b === t));
     $('[name="theme"]', c).value = t.dataset.theme;
   });
+  const defaultClips = site.heroClips?.length ? null : (s.heroClips || []).map((c) => [c.id, c.start, c.len, c.title || ''].join(' | ')).join('\n');
   const pairs = (txt, keys) => txt.split('\n').map((l) => l.split('|').map((x) => x.trim())).filter((p) => p[0]).map((p) => Object.fromEntries(keys.map((k, i) => [k, p[i] || ''])));
   $('#contentForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -871,7 +875,8 @@ async function viewContent() {
     const v = (n) => f.querySelector(`[name="${n}"]`).value;
     const body = {
       theme: v('theme'), slogan: v('slogan'), subline: v('subline'), endline: v('endline'), announcement: v('announcement'),
-      heroVideo: v('heroVideo'), heroVideoMobile: v('heroVideoMobile'), heroPoster: v('heroPoster'), heroIntroEnd: v('heroIntroEnd'), heroEndAt: v('heroEndAt'), swish: v('swish'), contactEmail: v('contactEmail'),
+      heroVideo: v('heroVideo'), heroVideoMobile: v('heroVideoMobile'), heroPoster: v('heroPoster'), heroIntroEnd: v('heroIntroEnd'), heroEndAt: v('heroEndAt'), heroMode: v('heroMode'),
+      heroClips: (v('heroClips').trim() === defaultClips ? [] : pairs(v('heroClips'), ['id', 'start', 'len', 'title'])), swish: v('swish'), contactEmail: v('contactEmail'),
       about: { lead: v('about.lead'), story: v('about.story').split('\n').map((x) => x.trim()).filter(Boolean), why: pairs(v('about.why'), ['title', 'text']) },
       team: pairs(v('team'), ['name', 'role', 'bio', 'instagram']).map((m) => ({ ...m, instagram: m.instagram || null })),
       steps: pairs(v('steps'), ['title', 'text']), faq: pairs(v('faq'), ['q', 'a']),

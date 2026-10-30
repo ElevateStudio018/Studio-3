@@ -14,6 +14,8 @@
     "test": "node --disable-warning=ExperimentalWarning --test tests/*.test.js",
     "hero:thumbs": "python3 tools/hero/montage_from_thumbnails.py",
     "hero:footage": "node tools/hero/hero_from_footage.mjs",
-    "build:demo": "node tools/build-static.mjs"
+    "build:demo": "node tools/build-static.mjs",
+    "hero:heatmap": "node --no-warnings tools/hero/heatmap.mjs",
+    "hero:download": "node tools/hero/download_clips.mjs"
   }
 }

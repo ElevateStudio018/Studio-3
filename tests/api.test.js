@@ -60,6 +60,9 @@ test('startdata innehåller kanalens videor, profiler och exempeldebatter', asyn
   assert.equal(d.debates.filter((x) => x.open).length, 3);
   assert.equal(d.stats.subscribers, 103000);
   assert.ok(!('notifyEmail' in d.site), 'interna inställningar får inte läcka');
+  assert.ok(d.heroClips.length >= 6, 'heron ska ha klipp ur riktiga avsnitt');
+  assert.ok(d.heroClips.every((c) => /^[\w-]{11}$/.test(c.id) && c.start >= 0 && c.len > 0));
+  assert.equal(d.site.heroMode, 'youtube');
 });
 
 test('ansökningssidor: öppen debatt, talangbank och 404', async () => {
@@ -162,6 +165,15 @@ test('partnerförfrågan sparas', async () => {
   assert.equal(leads[0].type, 'livedebatt');
 });
 
+test('admin kan välja egna hero-klipp och MP4-läge', async () => {
+  await admin('/api/admin/settings', { method: 'PUT', body: JSON.stringify({ heroMode: 'mp4', heroClips: [{ id: '2D3DJt9OJxo', start: 100, len: 3 }, { id: 'ogiltigt', start: 1 }] }) });
+  const d = await (await fetch(`${BASE}/api/public/bootstrap`)).json();
+  assert.equal(d.site.heroMode, 'mp4');
+  assert.deepEqual(d.heroClips.map((c) => c.id), ['2D3DJt9OJxo']);
+  await admin('/api/admin/settings', { method: 'PUT', body: JSON.stringify({ heroMode: 'youtube', heroClips: [] }) });
+  assert.ok((await (await fetch(`${BASE}/api/public/bootstrap`)).json()).heroClips.length >= 6);
+});
+
 test('stilpaket kan bytas från admin', async () => {
   await admin('/api/admin/settings', { method: 'PUT', body: JSON.stringify({ theme: 'valvaka' }) });
   assert.match(await (await fetch(BASE)).text(), /data-theme="valvaka"/);
@@ -193,5 +205,6 @@ test('trasiga adresser kraschar inte servern', async () => {
 test('säkerhetshuvuden sätts', async () => {
   const r = await fetch(BASE);
   assert.match(r.headers.get('content-security-policy'), /default-src 'self'/);
+  assert.match(r.headers.get('content-security-policy'), /script-src 'self' https:\/\/www\.youtube\.com/);
   assert.equal(r.headers.get('x-content-type-options'), 'nosniff');
 });

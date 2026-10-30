@@ -12,6 +12,8 @@ export function defaultSite() {
     heroVideo: '/assets/video/hero.mp4',
     heroVideoMobile: '/assets/video/hero-mobile.mp4',
     heroPoster: '/assets/video/hero-poster.jpg',
+    heroMode: 'youtube',
+    heroClips: [],
     heroIntroEnd: 2.25,
     heroEndAt: 18.9,
     theme: 'studio',

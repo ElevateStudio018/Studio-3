@@ -16,11 +16,11 @@ const base = {
 
 export const THEMES = [
   {
-    id: 'studio', name: 'Studio 3 Original', tagline: 'Kanalens egna färger – mörk studio, orange signal.',
-    bestFor: 'Standardvalet. Känns direkt igen av befintliga tittare.',
+    id: 'studio', name: 'Studio 3 Original', tagline: 'Matchar YouTube-kanalen: YouTubes mörka färger och loggans orange.',
+    bestFor: 'Standardvalet. Ser ut som kanalen – tittare känner igen sig direkt.',
     fonts: 'family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600;700',
     display: '"Archivo", sans-serif', body: '"Inter", system-ui, sans-serif',
-    vars: { bg: '#0d0d0e', bg2: '#131315', surface: '#18181b', surface2: '#202024', text: '#f5f2ee', muted: '#a8a39c', accent: '#F1944F', accent2: '#ffcfa6', onAccent: '#1b0f05', displayStretch: '125%' },
+    vars: { bg: '#0f0f0f', bg2: '#151515', surface: '#1f1f1f', surface2: '#272727', text: '#f1f1f1', muted: '#aaaaaa', accent: '#F1944F', accent2: '#ffcfa6', onAccent: '#1b0f05', displayStretch: '125%' },
     fx: ['grain'],
   },
   {

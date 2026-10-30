@@ -36,7 +36,9 @@
 
   <section class="hero" id="hero" data-phase="intro" aria-label="Introduktion">
     <div class="hero__media">
-      <video id="heroVideo" muted playsinline preload="auto" aria-hidden="true"></video>
+      <video id="heroVideo" muted playsinline preload="none" aria-hidden="true"></video>
+      <div class="hero__yt" id="heroYt" aria-hidden="true"></div>
+      <div class="hero__flash" id="heroFlash" aria-hidden="true"></div>
     </div>
 
     <div class="hero__layer hero__intro" id="heroIntro">
@@ -64,10 +66,12 @@
       </div>
     </div>
 
+    <a class="hero__clip" id="heroClip" href="#" target="_blank" rel="noopener" hidden><span class="hero__clip-play">▶</span><span class="hero__clip-title"></span><span class="hero__clip-tag"></span></a>
     <a class="hero__live" id="heroLive" href="#debatter" hidden><span class="dot"></span><span></span></a>
     <div class="hero__controls">
       <button class="hero__ctrl" id="skipBtn" type="button">Hoppa över intro ⏭</button>
       <button class="hero__ctrl" id="replayBtn" type="button" hidden>↺ Spela igen</button>
+      <button class="hero__ctrl" id="soundBtn" type="button" aria-pressed="false" hidden>🔇 Ljud</button>
       <button class="hero__ctrl" id="pauseBtn" type="button" aria-label="Pausa bakgrundsvideon">❚❚</button>
     </div>
     <div class="hero__progress" id="heroProgress" aria-hidden="true"></div>

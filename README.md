@@ -45,7 +45,7 @@ Tester: `npm test` (18 integrationstester som startar servern mot en tom databas
 
 | Del | Innehåll |
 |---|---|
-| **Hero** | Sekvens i tre steg: sloganen *”Olika åsikter. Samma rum.”* → en hetsig, ihopklippt video av kanalens största debatter → slutkortet *”Debatten börjar här.”* med S3-loggan och formatloggorna (Studio Soffan, Duellen, 20 VS 1, Panelen, Valvakan). Därefter loopar videon tonat i bakgrunden. Knappar för att hoppa över, spela igen och pausa. Nyhetsrad med senaste avsnitten och en ”live”-etikett när debatter söker deltagare. |
+| **Hero** | Sekvens i tre steg: sloganen *”Olika åsikter. Samma rum.”* → ett hetsigt montage av **riktiga klipp ur avsnitten** (YouTubes *Mest uppspelade*-ögonblick) → slutkortet *”Debatten börjar här.”* med S3-loggan och formatloggorna (Studio Soffan, Duellen, 20 VS 1, Panelen, Valvakan). Därefter loopar videon tonat i bakgrunden. Knappar för att hoppa över, spela igen och pausa. Nyhetsrad med senaste avsnitten och en ”live”-etikett när debatter söker deltagare. |
 | **Siffror** | 103 000 prenumeranter · 19,7 mn visningar · 725 videor · 1 000 000 visningar på största debatten (räknas upp när de syns). |
 | **Öppna debatter** | Kort för varje debatt med påstående, inspelningsdatum, plats, nedräkning till sista ansökningsdag och vilka grupper som söks. Utvalda debatter visas stort. Talangbanken för den som inte hittar något. |
 | **Så går det till + FAQ** | Fyra steg från ansökan till publicering och vanliga frågor (ersättning, ålder, GDPR …). |
@@ -96,19 +96,31 @@ Efteråt: referensnummer (t.ex. `S3-260141`), bekräftelsemejl och delningsknapp
 
 ## Hero-videon
 
-`public/assets/video/hero.mp4` (desktop, 5 MB), `hero-mobile.mp4` (mobil, 2,3 MB) och `hero-poster.jpg`.
+**Heron spelar riktiga klipp ur avsnitten.** Det är de ögonblick som tittarna har spelat om mest i kanalens tolv största avsnitt, enligt YouTubes egen data för *Mest uppspelade*: Jan Emanuel, Markus Allard, Nick Alinia, Ulf Kristersson, Gustav Kasselstrand, Klimatkrisen, *”Gapa svennejävel”* och fler. Klippen spelas med YouTubes officiella spelare utan ljud, i snabba klipp med blixtar. En etikett visar vilket avsnitt man ser och länkar dit, och knappen *Ljud* slår på ljudet.
 
-**Nuvarande version** är klippt av kanalens egna thumbnails: snabba klipp med zoom, skakningar, RGB-split och blixtar, textslag som *1 MOT 20.*, *VÄNSTER. / HÖGER.*, citaten *”GAPA SVENNEJÄVEL”*, *”SKICKA BARA UT FOLK!”* och *”NI HAR SLAKTAT A-KASSAN”*, *INGET MANUS. INGEN FLYKT.*, en räknare till 1 000 000 visningar och till sist en vägg av alla debatter som slutkortet visas ovanpå. Bygg om den med `npm run hero:thumbs` (Python 3 + Pillow + numpy + ffmpeg).
+Två spelare turas om, så att nästa klipp är förladdat och bytet sker utan paus. Tidslinjen är:
 
-> Varför thumbnails och inte filmklipp? YouTube kräver inloggning för att ladda ner videor från den här miljön, och den spärren ska inte kringgås. Ni har originalfilerna – använd verktyget nedan.
+1. sloganen visas över första klippet,
+2. montaget,
+3. slutkortet *Debatten börjar här.* efter sju klipp.
 
-**Klipp av riktiga inspelningar** (rekommenderas före lansering): lägg era exporterade avsnitt i en mapp och kör
+Därefter fortsätter montaget tonat i bakgrunden.
+
+- **Hämta nya klipp:** `npm run hero:heatmap` läser in de senaste *Mest uppspelade*-tiderna till `content/hero-clips.json`. Använd `--top 20` för fler avsnitt.
+- **Välja egna klipp:** i admin, *Innehåll & stil → Klipp i heron* (en rad per klipp: video-ID | start | längd | titel).
+- **MP4 som reserv:** om YouTube inte kan spelas, till exempel i ett nätverk som blockerar YouTube, visas `public/assets/video/hero.mp4` i stället. MP4:an används också vid sparat dataläge, och den kan väljas som standard i admin.
+
+**Bränna en egen MP4 av de riktiga klippen** (ger snabbast laddning och fungerar utan YouTube). Kör på er egen dator med [yt-dlp](https://github.com/yt-dlp/yt-dlp) och ffmpeg installerade:
 
 ```bash
-npm run hero:footage -- --in ./footage
+npm run hero:download
 ```
 
-Verktyget mäter ljudnivån i varje avsnitt (EBU R128), väljer de högljuddaste – oftast hetaste – ögonblicken, varvar dem mellan avsnitten och klipper ihop dem med vita blixtar, mörkt intro för sloganen och ett lugnt slut för slutkortet (samma tidslinje som sajten: slogan till 2,25 s, slutkort från 18,9 s; kan ändras i admin). Vill ni välja exakta klipp själva: `--cutlist tools/hero/cutlist.example.json`. Testa urvalet utan att rendera med `--dry`.
+Kommandot hämtar bara de sekunder som behövs ur varje avsnitt och klipper ihop dem till `public/assets/video/hero.mp4`. Välj sedan *MP4-filen* som hero-video i admin.
+
+Har ni originalfilerna från inspelningarna kan ni i stället köra `npm run hero:footage -- --in ./footage`. Verktyget hittar själv de högljuddaste, oftast hetaste, ögonblicken.
+
+Den nuvarande MP4:an är klippt av kanalens thumbnails. Den kan byggas om med `npm run hero:thumbs`. YouTube blockerar nedladdning och uppspelning från servermiljön där sajten byggdes, så riktiga filmklipp kunde inte brännas in där.
 
 ## 20 stilpaket
 
@@ -157,7 +169,7 @@ Sajten är en enda Node-process och passar t.ex. Render, Railway, Fly.io eller e
 
 - [ ] Simon och Emil läser igenom texterna under *Om oss*, teamets presentationer och Olivers roll (Innehåll & stil i admin).
 - [ ] Ersätt de tre **exempeldebatterna** med riktiga (eller sätt `SEED_SAMPLE_DEBATES=0` före första start).
-- [ ] Klipp hero-videon av riktiga inspelningar med `npm run hero:footage`.
+- [ ] Kör `npm run hero:download` på en egen dator för att bränna MP4-reserven av de riktiga klippen.
 - [ ] Byt formatloggorna mot originalfiler om ni har dem.
 - [ ] Fyll i Swish-nummer och kontaktadress om de ska synas.
 - [ ] Sätt `ADMIN_PASSWORD`, `SITE_URL`, `RESEND_API_KEY` och `NOTIFY_EMAIL`.
@@ -169,7 +181,7 @@ server.js                 HTTP-server, sidrendering med stilpaket, bakgrundsjobb
 server/                   databas, säkerhet, mejl, YouTube-synk, publika och admin-API:er
 public/                   startsida, ansökan, stilpaket, integritet, admin och alla assets
 content/channel.json      insamlad kanaldata (videor, format, profiler, press)
-tools/hero/               bygga hero-videon (thumbnails eller riktiga inspelningar)
+tools/hero/               hero-klipp: Mest uppspelade (heatmap), nedladdning, MP4 av inspelningar eller thumbnails
 tools/seed-demo.js        fiktiv demodata för admin
 tools/build-static.mjs    bygger den statiska demon i demo/ (githack)
 demo/                     statisk förhandsvisning utan server

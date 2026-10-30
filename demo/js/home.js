@@ -86,13 +86,17 @@ function showEnd(settled = false) {
 }
 
 const small = innerWidth < 760 || navigator.connection?.saveData;
+const clips = (D.heroClips || []).filter((c) => c.id && Number.isFinite(Number(c.start)));
+const useYoutube = (site.heroMode || 'youtube') === 'youtube' && clips.length >= 2;
+const END_CLIP = Math.min(7, clips.length);  // slutkortet visas efter så här många klipp
+let driver = null;
 video.poster = site.heroPoster || '../public/assets/video/hero-poster.jpg';
-if (reduceMotion || navigator.connection?.saveData) {
-  showEnd(true);
-  $('#pauseBtn').hidden = true;
-} else {
+
+// MP4 (fallback eller vald i admin): tidslinjen styrs av videons tid
+function mp4Driver() {
+  hero.dataset.mode = 'mp4';
+  video.preload = 'auto';
   video.src = (small && site.heroVideoMobile) || site.heroVideo || '../public/assets/video/hero.mp4';
-  showIntro();
   video.play().catch(() => showEnd(true));
   video.addEventListener('timeupdate', () => {
     const t = video.currentTime;
@@ -111,36 +115,106 @@ if (reduceMotion || navigator.connection?.saveData) {
     video.currentTime = 0;
     video.play().catch(() => {});
   });
+  return {
+    play: () => video.play().catch(() => {}),
+    pause: () => video.pause(),
+    restart: () => {
+      video.loop = false;
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    },
+    skip: () => (video.currentTime = END_AT + 0.4),
+  };
+}
+
+// Riktiga avsnitt: de mest uppspelade ögonblicken, spelade via YouTube
+async function youtubeDriver() {
+  hero.dataset.mode = 'youtube';
+  $('.hero__media').style.background = `#000 url("${video.poster}") center / cover`; // syns tills första klippet laddat
+  const { youtubeHero } = await import('./hero-youtube.js');
+  const flash = $('#heroFlash');
+  const caption = $('#heroClip');
+  const yt = youtubeHero({
+    container: $('#heroYt'),
+    clips,
+    onCut(clip, i, loop) {
+      flash.classList.remove('is-on', 'alt');
+      void flash.offsetWidth;
+      flash.classList.add('is-on');
+      flash.classList.toggle('alt', i % 3 === 2);
+      caption.hidden = false;
+      caption.href = `${ytUrl(clip.id)}&t=${Math.floor(clip.start)}s`;
+      $('.hero__clip-title', caption).textContent = clip.title || videoById[clip.id]?.display || '';
+      $('.hero__clip-tag', caption).textContent = clip.source === 'mest-uppspelade' ? 'Mest uppspelade' : '';
+      if (hero.dataset.phase === 'settled') return;
+      const step = loop * clips.length + i;
+      $('#heroProgress').style.width = `${Math.min(1, step / END_CLIP) * 100}%`;
+      if (loop > 0) {
+        track('hero_complete');
+        showEnd(true);
+      } else if (step >= END_CLIP && hero.dataset.phase !== 'end') showEnd();
+      else if (step >= 1 && hero.dataset.phase === 'intro') {
+        $('#heroIntro').hidden = true;
+        setPhase('montage');
+      }
+    },
+    onFail() {
+      driver = mp4Driver();
+      $('#soundBtn').hidden = true;
+    },
+  });
+  $('#soundBtn').hidden = false;
+  return {
+    play: () => yt.play(),
+    pause: () => yt.pause(),
+    restart: () => yt.restart(),
+    skip: () => {},
+    sound: (on) => yt.setMuted(!on),
+  };
+}
+
+if (reduceMotion || navigator.connection?.saveData) {
+  showEnd(true);
+  $('#pauseBtn').hidden = true;
+} else {
+  showIntro();
+  if (useYoutube) youtubeDriver().then((d) => (driver ??= d)).catch(() => (driver = mp4Driver()));
+  else driver = mp4Driver();
   // Spara batteri: pausa när hero inte syns
   new IntersectionObserver(([e]) => {
-    if (video.dataset.userPaused) return;
-    if (e.isIntersecting) video.play().catch(() => {});
-    else video.pause();
+    if (hero.dataset.userPaused || !driver) return;
+    if (e.isIntersecting) driver.play();
+    else driver.pause();
   }, { threshold: 0.1 }).observe(hero);
 }
 $('#skipBtn').addEventListener('click', () => {
-  video.currentTime = END_AT + 0.4;
+  driver?.skip();
   showEnd();
 });
 $('#replayBtn').addEventListener('click', () => {
-  video.loop = false;
-  video.currentTime = 0;
-  delete video.dataset.userPaused;
-  video.play().catch(() => {});
+  delete hero.dataset.userPaused;
+  driver?.restart();
+  driver?.play();
   showIntro();
 });
 $('#pauseBtn').addEventListener('click', (e) => {
-  if (video.paused) {
-    delete video.dataset.userPaused;
-    video.play();
+  if (hero.dataset.userPaused) {
+    delete hero.dataset.userPaused;
+    driver?.play();
     e.currentTarget.textContent = '❚❚';
     e.currentTarget.setAttribute('aria-label', 'Pausa bakgrundsvideon');
   } else {
-    video.dataset.userPaused = '1';
-    video.pause();
+    hero.dataset.userPaused = '1';
+    driver?.pause();
     e.currentTarget.textContent = '▶';
     e.currentTarget.setAttribute('aria-label', 'Spela bakgrundsvideon');
   }
+});
+$('#soundBtn').addEventListener('click', (e) => {
+  const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
+  e.currentTarget.setAttribute('aria-pressed', on);
+  e.currentTarget.textContent = on ? '🔊 Ljud' : '🔇 Ljud';
+  driver?.sound?.(on);
 });
 
 // Ticker med senaste avsnitten

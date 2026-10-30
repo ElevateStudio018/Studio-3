@@ -1,0 +1,404 @@
+{
+ "generatedAt": "2026-10-30",
+ "clipLength": 2.6,
+ "clips": [
+  {
+   "id": "2D3DJt9OJxo",
+   "title": "Jan Emanuel vs 20 miljöpartister",
+   "format": "1vs20",
+   "start": 547.5,
+   "len": 2.6,
+   "source": "mest-uppspelade"
+  },
+  {
+   "id": "R90i6AIv3zw",
+   "title": "Markus Allard vs 20 väljare",
+   "format": "1vs20",
+   "start": 1294.6,
+   "len": 2.6,
+   "source": "mest-uppspelade"
+  },
+  {
+   "id": "dh-BWEvy2wE",
+   "title": "Nick Alinia vs 20 från vänstern",
+   "format": "1vs20",
+   "start": 688.2,
+   "len": 2.6,
+   "source": "mest-uppspelade"
+  },
+  {
+   "id": "EggtcghwlAA",
+   "title": "Ulf Kristersson vs 20 väljare",
+   "format": "partiledare",
+   "start": 596.2,
+   "len": 2.6,
+   "source": "mest-uppspelade"
+  },
+  {
+   "id": "qWp6O2RULRI",
+   "title": "Gustav Kasselstrand vs 20 från vänster",
+   "format": "1vs20",
+   "start": 640.5,
+   "len": 2.6,
+   "source": "mest-uppspelade"
+  },
+  {
+   "id": "VXzihX-9ocM",
+   "title": "Klimatkrisen är här nu, vad ska vi göra åt det?",
+   "format": "soffan",
+   "start": 4079.9,
+   "len": 2.6,
+   "source": "mest-uppspelade"
+  },
+  {
+   "id": "oFYNhWQN3qs",
+   "title": "Markus Allard vs Martin Melin",
+   "format": "duellen",
+   "start": 782.4,
+   "len": 2.6,
+   "source": "mest-uppspelade"
+  },
+  {
+   "id": "_ykNB-TMR_s",
+   "title": "Det är klart man inte ska ha en mängdrabatt",
+   "format": "soffan",
+   "start": 43.2,
+   "len": 2.6,
+   "source": "mest-uppspelade"
+  },
+  {
+   "id": "wWOaROItj-o",
+   "title": "Dom fattiga länderna ska hjälpa sig själva",
+   "format": "soffan",
+   "start": 3629.4,
+   "len": 2.6,
+   "source": "mest-uppspelade"
+  },
+  {
+   "id": "B1IAy3WvnXg",
+   "title": "Gapa svennejävel",
+   "format": "soffan",
+   "start": 41.7,
+   "len": 2.6,
+   "source": "mest-uppspelade"
+  },
+  {
+   "id": "yDF-JtVWPl4",
+   "title": "Tobias Andersson vs 20 socialdemokrater",
+   "format": "1vs20",
+   "start": 631,
+   "len": 2.6,
+   "source": "mest-uppspelade"
+  },
+  {
+   "id": "lDHvf8fvh5c",
+   "title": "Ett stort hot mot kvinnors trygghet är högerpolitiker",
+   "format": "soffan",
+   "start": 39.8,
+   "len": 2.6,
+   "source": "mest-uppspelade"
+  }
+ ],
+ "videos": [
+  {
+   "id": "2D3DJt9OJxo",
+   "title": "Jan Emanuel vs 20 miljöpartister",
+   "format": "1vs20",
+   "views": 1000000,
+   "embeddable": true,
+   "markers": 100,
+   "peaks": [
+    {
+     "at": 548.31,
+     "heat": 1,
+     "source": "mest-uppspelade"
+    },
+    {
+     "at": 1109.675,
+     "heat": 0.781,
+     "source": "heatmap"
+    },
+    {
+     "at": 2049.6349999999998,
+     "heat": 0.604,
+     "source": "heatmap"
+    }
+   ]
+  },
+  {
+   "id": "R90i6AIv3zw",
+   "title": "Markus Allard vs 20 väljare",
+   "format": "1vs20",
+   "views": 995000,
+   "embeddable": true,
+   "markers": 100,
+   "peaks": [
+    {
+     "at": 1295.43,
+     "heat": 1,
+     "source": "mest-uppspelade"
+    },
+    {
+     "at": 2836.545,
+     "heat": 0.953,
+     "source": "heatmap"
+    },
+    {
+     "at": 3863.955,
+     "heat": 0.697,
+     "source": "heatmap"
+    }
+   ]
+  },
+  {
+   "id": "dh-BWEvy2wE",
+   "title": "Nick Alinia vs 20 från vänstern",
+   "format": "1vs20",
+   "views": 749000,
+   "embeddable": true,
+   "markers": 100,
+   "peaks": [
+    {
+     "at": 688.95,
+     "heat": 1,
+     "source": "mest-uppspelade"
+    },
+    {
+     "at": 1354.935,
+     "heat": 0.845,
+     "source": "heatmap"
+    },
+    {
+     "at": 2732.835,
+     "heat": 0.648,
+     "source": "heatmap"
+    }
+   ]
+  },
+  {
+   "id": "EggtcghwlAA",
+   "title": "Ulf Kristersson vs 20 väljare",
+   "format": "partiledare",
+   "views": 379000,
+   "embeddable": true,
+   "markers": 100,
+   "peaks": [
+    {
+     "at": 596.96,
+     "heat": 1,
+     "source": "mest-uppspelade"
+    },
+    {
+     "at": 2273.04,
+     "heat": 0.966,
+     "source": "heatmap"
+    },
+    {
+     "at": 1767.92,
+     "heat": 0.937,
+     "source": "heatmap"
+    }
+   ]
+  },
+  {
+   "id": "qWp6O2RULRI",
+   "title": "Gustav Kasselstrand vs 20 från vänster",
+   "format": "1vs20",
+   "views": 373000,
+   "embeddable": true,
+   "markers": 100,
+   "peaks": [
+    {
+     "at": 641.25,
+     "heat": 1,
+     "source": "mest-uppspelade"
+    },
+    {
+     "at": 1265.625,
+     "heat": 0.864,
+     "source": "heatmap"
+    },
+    {
+     "at": 1940.625,
+     "heat": 0.696,
+     "source": "heatmap"
+    }
+   ]
+  },
+  {
+   "id": "VXzihX-9ocM",
+   "title": "Klimatkrisen är här nu, vad ska vi göra åt det?",
+   "format": "soffan",
+   "views": 370000,
+   "embeddable": true,
+   "markers": 100,
+   "peaks": [
+    {
+     "at": 4080.72,
+     "heat": 1,
+     "source": "mest-uppspelade"
+    },
+    {
+     "at": 2113.23,
+     "heat": 0.647,
+     "source": "heatmap"
+    },
+    {
+     "at": 3522.05,
+     "heat": 0.413,
+     "source": "heatmap"
+    }
+   ]
+  },
+  {
+   "id": "oFYNhWQN3qs",
+   "title": "Markus Allard vs Martin Melin",
+   "format": "duellen",
+   "views": 351000,
+   "embeddable": true,
+   "markers": 100,
+   "peaks": [
+    {
+     "at": 783.19,
+     "heat": 1,
+     "source": "mest-uppspelade"
+    },
+    {
+     "at": 2326.535,
+     "heat": 0.776,
+     "source": "heatmap"
+    },
+    {
+     "at": 1543.345,
+     "heat": 0.757,
+     "source": "heatmap"
+    }
+   ]
+  },
+  {
+   "id": "_ykNB-TMR_s",
+   "title": "Det är klart man inte ska ha en mängdrabatt",
+   "format": "soffan",
+   "views": 329000,
+   "embeddable": true,
+   "markers": 100,
+   "peaks": [
+    {
+     "at": 43.96,
+     "heat": 1,
+     "source": "mest-uppspelade"
+    },
+    {
+     "at": 1340.78,
+     "heat": 0.921,
+     "source": "heatmap"
+    },
+    {
+     "at": 3143.14,
+     "heat": 0.86,
+     "source": "heatmap"
+    }
+   ]
+  },
+  {
+   "id": "wWOaROItj-o",
+   "title": "Dom fattiga länderna ska hjälpa sig själva",
+   "format": "soffan",
+   "views": 252000,
+   "embeddable": true,
+   "markers": 100,
+   "peaks": [
+    {
+     "at": 3630.24,
+     "heat": 1,
+     "source": "mest-uppspelade"
+    },
+    {
+     "at": 3705.87,
+     "heat": 0.711,
+     "source": "heatmap"
+    },
+    {
+     "at": 579.83,
+     "heat": 0.536,
+     "source": "heatmap"
+    }
+   ]
+  },
+  {
+   "id": "B1IAy3WvnXg",
+   "title": "Gapa svennejävel",
+   "format": "soffan",
+   "views": 231000,
+   "embeddable": true,
+   "markers": 100,
+   "peaks": [
+    {
+     "at": 42.48,
+     "heat": 1,
+     "source": "mest-uppspelade"
+    },
+    {
+     "at": 2952.3599999999997,
+     "heat": 0.91,
+     "source": "heatmap"
+    },
+    {
+     "at": 3292.2,
+     "heat": 0.758,
+     "source": "heatmap"
+    }
+   ]
+  },
+  {
+   "id": "yDF-JtVWPl4",
+   "title": "Tobias Andersson vs 20 socialdemokrater",
+   "format": "1vs20",
+   "views": 230000,
+   "embeddable": true,
+   "markers": 100,
+   "peaks": [
+    {
+     "at": 631.75,
+     "heat": 1,
+     "source": "mest-uppspelade"
+    },
+    {
+     "at": 1712.375,
+     "heat": 0.831,
+     "source": "heatmap"
+    },
+    {
+     "at": 1147.125,
+     "heat": 0.655,
+     "source": "heatmap"
+    }
+   ]
+  },
+  {
+   "id": "lDHvf8fvh5c",
+   "title": "Ett stort hot mot kvinnors trygghet är högerpolitiker",
+   "format": "soffan",
+   "views": 213000,
+   "embeddable": true,
+   "markers": 100,
+   "peaks": [
+    {
+     "at": 40.62,
+     "heat": 1,
+     "source": "mest-uppspelade"
+    },
+    {
+     "at": 3432.39,
+     "heat": 0.652,
+     "source": "heatmap"
+    },
+    {
+     "at": 1766.97,
+     "heat": 0.542,
+     "source": "heatmap"
+    }
+   ]
+  }
+ ]
+}

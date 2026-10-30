@@ -8,7 +8,7 @@ import { sendMail, sendBulk, templates, escapeHtml, layout } from '../mailer.js'
 import { syncYoutube, videoRows } from '../youtube.js';
 import { THEMES } from '../../public/assets/js/themes.js';
 import { APP_STATUSES, DEBATE_STATUSES, PARTIES, COUNTIES, FORMAT_NAMES } from '../content.js';
-import { debateOut, isOpen, str, int, peopleIndex } from './public.js';
+import { debateOut, isOpen, str, int, peopleIndex, heroClips } from './public.js';
 
 const SHORTLISTED = ['shortlist', 'intervju', 'uttagen', 'bekraftad'];
 const APP_STATUS_IDS = new Set(APP_STATUSES.map((s) => s.id));
@@ -508,9 +508,9 @@ export function registerAdmin(r) {
   // ---------- inställningar ----------
   r.get('/api/admin/settings', (req, res) => {
     requireAdmin(req);
-    json(res, 200, { site: getSetting('site', {}), themes: THEMES.map(({ id, name, tagline }) => ({ id, name, tagline })), channel: getSetting('channelStats', {}), users: all('SELECT id, email, name, role, created_at, last_login FROM users ORDER BY id') });
+    json(res, 200, { site: getSetting('site', {}), heroClips: heroClips(), themes: THEMES.map(({ id, name, tagline }) => ({ id, name, tagline })), channel: getSetting('channelStats', {}), users: all('SELECT id, email, name, role, created_at, last_login FROM users ORDER BY id') });
   });
-  const SITE_KEYS = ['name', 'slogan', 'subline', 'endline', 'announcement', 'heroVideo', 'heroVideoMobile', 'heroPoster', 'heroIntroEnd', 'heroEndAt', 'theme', 'contactEmail', 'swish',
+  const SITE_KEYS = ['name', 'slogan', 'subline', 'endline', 'announcement', 'heroVideo', 'heroVideoMobile', 'heroPoster', 'heroIntroEnd', 'heroEndAt', 'heroMode', 'heroClips', 'theme', 'contactEmail', 'swish',
     'notifyEmail', 'retentionMonths', 'autoNotifyVideos', 'socials', 'about', 'team', 'steps', 'faq', 'partner'];
   r.put('/api/admin/settings', async (req, res) => {
     requireAdmin(req);
@@ -520,6 +520,10 @@ export function registerAdmin(r) {
     if (!THEMES.some((t) => t.id === site.theme)) site.theme = 'studio';
     site.retentionMonths = int(site.retentionMonths, 0, 120) ?? 12;
     for (const k of ['heroIntroEnd', 'heroEndAt']) site[k] = Number.isFinite(Number(site[k])) ? Number(site[k]) : undefined;
+    site.heroMode = site.heroMode === 'mp4' ? 'mp4' : 'youtube';
+    site.heroClips = (Array.isArray(site.heroClips) ? site.heroClips : []).slice(0, 30).map((c) => ({
+      id: str(c.id, 20).replace(/[^\w-]/g, ''), start: Math.max(0, Number(c.start) || 0), len: Math.min(10, Math.max(1, Number(c.len) || 2.6)), title: str(c.title, 160) || undefined,
+    })).filter((c) => /^[\w-]{11}$/.test(c.id));
     setSetting('site', site);
     if (b.channelStats) {
       const prev = getSetting('channelStats', {});

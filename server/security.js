@@ -93,7 +93,7 @@ export function securityHeaders(res) {
     'Content-Security-Policy',
     [
       "default-src 'self'",
-      "script-src 'self'",
+      "script-src 'self' https://www.youtube.com https://s.ytimg.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com",

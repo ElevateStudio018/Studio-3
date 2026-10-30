@@ -52,6 +52,17 @@ export function peopleIndex(videos) {
   return [...map.values()].sort((a, b) => b.videos.length - a.videos.length || b.views - a.views);
 }
 
+/** Hero-klippen: egna klipp från admin, annars YouTubes "Mest uppspelade"-ögonblick (content/hero-clips.json). */
+export function heroClips() {
+  const own = getSetting('site', {}).heroClips;
+  if (Array.isArray(own) && own.length) return own;
+  try {
+    return JSON.parse(fs.readFileSync(path.join(config.contentDir, 'hero-clips.json'), 'utf8')).clips || [];
+  } catch {
+    return [];
+  }
+}
+
 export function bootstrap() {
   const ch = loadChannel();
   const videos = videoRows();
@@ -68,7 +79,7 @@ export function bootstrap() {
     channel: { url: ch.channel.url, handle: ch.channel.handle, bannerQuote: ch.channel.bannerQuote },
     formats, videos, people: peopleIndex(videos), debates,
     press: ch.press, quotes: ch.quotes, events: ch.events,
-    parties: PARTIES, counties: COUNTIES, formatNames: FORMAT_NAMES,
+    parties: PARTIES, counties: COUNTIES, formatNames: FORMAT_NAMES, heroClips: heroClips(),
   };
 }
 
