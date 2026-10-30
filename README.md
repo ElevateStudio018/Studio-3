@@ -9,6 +9,17 @@ Komplett webbplats för YouTube-kanalen [STUDIO 3](https://www.youtube.com/@stud
 
 Fler bilder finns i [`docs/screenshots/`](docs/screenshots/). All information som samlats in om kanalen finns i [`docs/KANALEN.md`](docs/KANALEN.md), och de 20 stilpaketen beskrivs i [`docs/STILPAKET.md`](docs/STILPAKET.md).
 
+## Se demon direkt i webbläsaren (githack)
+
+En statisk förhandsvisning ligger i [`demo/`](demo/) och kan öppnas utan server:
+
+- **Startsida:** https://raw.githack.com/ElevateStudio018/Studio-3/claude/pensive-pascal-73j87n/demo/index.html
+- **Ansökan:** https://raw.githack.com/ElevateStudio018/Studio-3/claude/pensive-pascal-73j87n/demo/sok-partiledare-vs-20-valjare.html
+- **20 stilpaket:** https://raw.githack.com/ElevateStudio018/Studio-3/claude/pensive-pascal-73j87n/demo/stilpaket.html
+- **Admin (fiktiv demodata):** https://raw.githack.com/ElevateStudio018/Studio-3/claude/pensive-pascal-73j87n/demo/admin.html
+
+I demon sparas inga formulär och admin visar påhittade ansökningar – ändringar försvinner när sidan laddas om. Bygg om den efter ändringar med `npm run build:demo`.
+
 ---
 
 ## Kom igång
@@ -160,6 +171,8 @@ public/                   startsida, ansökan, stilpaket, integritet, admin och 
 content/channel.json      insamlad kanaldata (videor, format, profiler, press)
 tools/hero/               bygga hero-videon (thumbnails eller riktiga inspelningar)
 tools/seed-demo.js        fiktiv demodata för admin
+tools/build-static.mjs    bygger den statiska demon i demo/ (githack)
+demo/                     statisk förhandsvisning utan server
 tests/                    integrationstester
 docs/                     kanalinformation, stilpaket och skärmdumpar
 ```
