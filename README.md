@@ -7,7 +7,7 @@ Komplett webbplats för YouTube-kanalen [STUDIO 3](https://www.youtube.com/@stud
 ![Hero: slogan](docs/screenshots/01-hero-slogan.jpg)
 ![Hero: Debatten börjar här](docs/screenshots/03-hero-debatten-borjar-har.jpg)
 
-Fler bilder finns i [`docs/screenshots/`](docs/screenshots/). All information som samlats in om kanalen finns i [`docs/KANALEN.md`](docs/KANALEN.md), och de 20 stilpaketen beskrivs i [`docs/STILPAKET.md`](docs/STILPAKET.md).
+Fler bilder finns i [`docs/screenshots/`](docs/screenshots/). All information som samlats in om kanalen finns i [`docs/KANALEN.md`](docs/KANALEN.md), de 20 stilpaketen beskrivs i [`docs/STILPAKET.md`](docs/STILPAKET.md) och kanalens grafiska profil (färger, typsnitt, citatlådor, namnplattor) i [`docs/GRAFISK-PROFIL.md`](docs/GRAFISK-PROFIL.md).
 
 ## Se demon direkt i webbläsaren (githack)
 

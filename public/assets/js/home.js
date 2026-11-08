@@ -8,6 +8,9 @@ const site = D.site;
 const formatName = (k) => D.formatNames[k] || k;
 const videoById = Object.fromEntries(D.videos.map((v) => [v.id, v]));
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Titlar som i thumbnails: versaler med orange "VS"
+const titleHtml = (t) => esc(t).replace(/\s+vs\.?\s+/i, ' <span class="vs">VS</span> ');
+const quoteBox = (q, cls = '') => `<span class="quotebox ${cls}"><span>”${esc(q)}”</span></span>`;
 
 /* ---------- header & meny ---------- */
 const header = $('#header');
@@ -56,7 +59,8 @@ const setPhase = (p) => (hero.dataset.phase = p);
 
 function renderSlogan() {
   const lines = (site.slogan || 'Olika åsikter.\nSamma rum.').split('\n');
-  $('#slogan').innerHTML = lines.map((l) => `<span class="line"><span>${esc(l)}</span></span>`).join('');
+  let n = 0;
+  $('#slogan').innerHTML = lines.map((l) => `<span class="line">${l.split(/\s+/).map((w) => `<span class="w" style="animation-delay:${(n++ * 0.22).toFixed(2)}s">${esc(w)}</span>`).join(' ')}</span>`).join('');
   $('#subline').textContent = site.subline || '';
 }
 function renderEndline() {
@@ -322,9 +326,9 @@ function debateCard(d) {
     ? `<button class="btn" type="button" data-apply="${esc(d.slug)}">Sök nu</button>`
     : d.youtube_url ? `<a class="btn btn--ghost" href="${esc(d.youtube_url)}" target="_blank" rel="noopener">Se avsnittet</a>` : '<span class="chip">Ansökan stängd</span>';
   const body = `
-    <span class="badge-format">${esc(d.formatName)}</span>
-    <h3>${esc(d.title)}</h3>
-    ${d.statement ? `<p class="debate__statement">”${esc(d.statement)}”</p>` : ''}
+    <span class="tagbox">${esc(d.formatName)}</span>
+    <h3>${titleHtml(d.title)}</h3>
+    ${d.statement ? quoteBox(d.statement, 'quotebox--left') : ''}
     ${d.summary ? `<p class="muted" style="margin:0">${esc(d.summary)}</p>` : ''}
     ${d.description ? `<details class="debate__more"><summary>Läs mer</summary><p class="muted">${esc(d.description)}</p></details>` : ''}
     <dl class="debate__meta">
@@ -336,16 +340,17 @@ function debateCard(d) {
     <div class="debate__foot">${countdown(d)}${action}</div>`;
   if (d.featured && d.open) {
     return `<article class="card debate debate--featured">
-      <div class="debate__art">${art ? `<img src="${esc(art)}" alt="" loading="lazy">` : ''}${logo && d.cover_url ? `<img class="logo" src="/assets/img/logos/${logo}" alt="">` : ''}</div>
+      <span class="sticker debate__flag">Söker nu</span>
+      <div class="debate__art dust">${art ? `<img src="${esc(art)}" alt="" loading="lazy">` : ''}${logo && d.cover_url ? `<img class="logo" src="/assets/img/logos/${logo}" alt="">` : ''}</div>
       <div class="debate__body">${body}</div></article>`;
   }
-  return `<article class="card debate">${body}</article>`;
+  return `<article class="card debate">${d.open ? '<span class="sticker debate__flag">Söker nu</span>' : ''}${body}</article>`;
 }
 $('#debates').innerHTML = (openDebates.length
   ? openDebates.map(debateCard).join('')
   : `<div class="empty"><h3>Inga öppna ansökningar just nu</h3><p>Prenumerera på nyhetsbrevet så mejlar vi när nästa öppnar.</p></div>`) + `
   <article class="card debate debate--talent">
-    <span class="badge-format">Talangbanken</span>
+    <span class="tagbox">Talangbanken</span>
     <h3>Inget som passar?</h3>
     <p class="muted" style="margin:0">Anmäl dig till talangbanken så hör vi av oss när vi planerar något där du passar in.</p>
     <div class="debate__foot"><span></span><button class="btn btn--ghost" type="button" data-apply="">Anmäl dig</button></div>
@@ -362,7 +367,7 @@ $('#faq').innerHTML = (site.faq || []).map((f) => `<details><summary>${esc(f.q)}
 
 /* ---------- format ---------- */
 const formatsWithEpisodes = D.formats.filter((f) => f.count > 0);
-$('#formats').innerHTML = formatsWithEpisodes.map((f) => `<article class="card format" tabindex="0" role="button" data-format-open="${f.key}" aria-label="Allt om ${esc(f.name)}">
+$('#formats').innerHTML = formatsWithEpisodes.map((f) => `<article class="card format dust" data-format="${f.key}" tabindex="0" role="button" data-format-open="${f.key}" aria-label="Allt om ${esc(f.name)}">
     <div class="format__bg">${f.top ? `<img src="${thumb(f.top, 'hqdefault')}" alt="" loading="lazy">` : ''}</div>
     ${f.logo ? `<img class="format__logo ${f.logo === 'studio-soffan.svg' ? 'round' : ''}" src="/assets/img/logos/${f.logo}" alt="">` : ''}
     <div class="format__name">${esc(f.name)}</div>
@@ -372,7 +377,7 @@ $('#formats').innerHTML = formatsWithEpisodes.map((f) => `<article class="card f
   </article>`).join('');
 const miniCard = (v) => `<button class="vcard vcard--mini" type="button" data-video="${v.id}">
   <span class="vcard__thumb"><img src="${thumb(v.id)}" alt="" loading="lazy"><span class="vcard__dur">${duration(v.duration)}</span></span>
-  <span class="vcard__title">${v.quote ? `”${esc(v.display)}”` : esc(v.display)}</span><span class="muted" style="font-size:.82rem">${views(v.views)}</span></button>`;
+  <span class="vcard__title">${v.quote ? `”${esc(v.display)}”` : titleHtml(v.display)}</span><span class="muted" style="font-size:.82rem">${views(v.views)}</span></button>`;
 function openFormat(key) {
   const f = D.formats.find((x) => x.key === key);
   if (!f) return;
@@ -431,7 +436,7 @@ function videoCard(v) {
         ${v.duration ? `<span class="vcard__dur">${duration(v.duration)}</span>` : ''}
       </div>
     </button>
-    <h3 class="vcard__title"><button class="linkbtn" type="button" data-video="${v.id}">${v.quote ? `”${esc(v.display)}”` : esc(v.display)}</button></h3>
+    <h3 class="vcard__title"><button class="linkbtn" type="button" data-video="${v.id}">${v.quote ? quoteBox(v.display, 'quotebox--left') : titleHtml(v.display)}</button></h3>
     ${people ? `<p class="vcard__people">${esc(people)}</p>` : ''}
     <div class="vcard__meta">${v.views ? `<span>${views(v.views)}</span>` : ''}${v.published ? `<span>${dateSv(v.published, { day: 'numeric', month: 'short', year: 'numeric' })}</span>` : ''}<a href="${ytUrl(v.id)}" target="_blank" rel="noopener">YouTube</a></div>
   </article>`;
@@ -476,7 +481,7 @@ function openVideo(v, start = 0) {
     <div class="player"><iframe src="https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0&start=${Math.floor(start)}" title="${esc(v.display)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
     <div class="modal__body">
       <span class="badge-format">${esc(formatName(v.format))}${v.views ? ` · ${views(v.views)}` : ''}${v.duration ? ` · ${duration(v.duration)}` : ''}</span>
-      <h3>${v.quote ? `”${esc(v.display)}”` : esc(v.display)}</h3>
+      <h3>${v.quote ? quoteBox(v.display, 'quotebox--left') : titleHtml(v.display)}</h3>
       ${people ? `<div class="chips">${people}</div>` : ''}
       ${peaks.length ? `<div><strong>Mest uppspelade</strong><div class="chips" style="margin-top:8px">${peaks.map((p) => `<button class="chip chip--accent" type="button" data-seek="${Math.floor(p.at)}">${clock(p.at)}</button>`).join('')}</div></div>` : ''}
       <div class="modal__actions">
@@ -560,7 +565,7 @@ document.addEventListener('click', (e) => {
 
 /* ---------- om oss ---------- */
 $('#aboutStory').innerHTML = (site.about?.story || []).map((p) => `<p>${esc(p)}</p>`).join('');
-$('#team').innerHTML = (site.team || []).map((m) => `<div class="member--row"><strong>${esc(m.name)}</strong><span class="muted">${esc(m.role)}</span>${m.instagram ? `<a class="link" href="${esc(m.instagram)}" target="_blank" rel="noopener">Instagram</a>` : ''}</div>`).join('');
+$('#team').innerHTML = `<div class="nameplate team-names">${(site.team || []).map((m) => `<span>${m.instagram ? `<a href="${esc(m.instagram)}" target="_blank" rel="noopener">${esc(m.name)}</a>` : esc(m.name)}<small>${esc(m.role)}</small></span>`).join('')}</div>`;
 $('#pressList').innerHTML = (D.press || []).map((p) => `<a href="${esc(p.url)}" target="_blank" rel="noopener"><div><strong>${esc(p.outlet)}</strong><span>${esc(p.title)}</span></div></a>`).join('');
 
 /* ---------- samarbeten ---------- */

@@ -34,7 +34,7 @@ function renderInfo() {
   if (!debate) {
     info.innerHTML = `
       <div class="apply__art"><img src="../public/assets/video/hero-poster.jpg" alt=""><svg class="logo" viewBox="0 0 1025 452" style="color:var(--accent)" aria-hidden="true"><use href="#s3logo"/></svg></div>
-      <span class="badge-format">Talangbanken</span>
+      <span class="tagbox">Talangbanken</span>
       <h1>Talangbanken</h1>
       <p class="apply__desc">Anmäl dig här så hör vi av oss när vi planerar en debatt där du passar in. Du måste vara över 18. Du behöver inte vara med i något parti.</p>`;
     return;
@@ -45,9 +45,9 @@ function renderInfo() {
   const left = daysLeft(debate.deadline);
   info.innerHTML = `
     <div class="apply__art"><img src="${esc(art)}" alt="">${logo && debate.cover_url ? `<img class="logo ${logo === 'studio-soffan.svg' ? 'round' : ''}" src="../public/assets/img/logos/${logo}" alt="${esc(debate.formatName)}">` : ''}</div>
-    <span class="badge-format">${esc(debate.formatName)}</span>
-    <h1>${esc(debate.title)}</h1>
-    ${debate.statement ? `<p class="debate__statement">”${esc(debate.statement)}”</p>` : ''}
+    <span class="tagbox">${esc(debate.formatName)}</span>
+    <h1>${esc(debate.title).replace(/\s+vs\.?\s+/i, ' <span class="vs">VS</span> ')}</h1>
+    ${debate.statement ? `<span class="quotebox quotebox--left"><span>”${esc(debate.statement)}”</span></span>` : ''}
     <dl class="debate__meta">
       ${debate.event_at ? `<div><dt>Inspelning</dt><dd>${dateSv(debate.event_at, { weekday: 'short', day: 'numeric', month: 'long' })}${timeSv(debate.event_at) ? `, ${timeSv(debate.event_at)}` : ''}</dd></div>` : ''}
       ${debate.location ? `<div><dt>Plats</dt><dd>${esc(debate.location)}</dd></div>` : ''}

@@ -498,3 +498,108 @@ button.card--link { font: inherit; color: inherit; text-align: left; cursor: poi
 .footer__links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
 .footer__simple > .muted { margin-left: auto; font-size: .88rem; }
 .footer { padding: 36px 0; }
+
+/* ==========================================================================
+   STUDIO 3:s grafiska paket (hämtat från kanalens thumbnails och Shorts)
+   Orange #F1944F · svart · vit · terrakotta #B87A4B→#915F3E · marin #213F63
+   Rubriker: Archivo Black (som Arial Black i thumbnails) · namn/etiketter: Montserrat 800
+   ========================================================================== */
+:root {
+  --s3-orange: #F1944F; --s3-orange-2: #F9A447; --s3-terra: #B87A4B; --s3-terra-dark: #915F3E; --s3-navy: #213F63; --s3-studio: #ececec;
+  --tshadow: 0 3px 10px rgba(0,0,0,.55);
+}
+/* Rubriker med thumbnail-skugga */
+[data-fx~="brand"] h1, [data-fx~="brand"] h2, [data-fx~="brand"] .hero__slogan, [data-fx~="brand"] .hero__end h2 { text-shadow: var(--tshadow); }
+
+/* Namnplatta: namn i versaler mellan två tunna vita linjer */
+.nameplate { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 18px; padding: 7px 4px; border-top: 2px solid rgba(255,255,255,.88); border-bottom: 2px solid rgba(255,255,255,.88); color: #fff; font-family: var(--font-body); font-weight: 800; font-size: .74rem; line-height: 1.35; letter-spacing: .03em; text-transform: uppercase; text-align: center; text-shadow: 0 2px 6px rgba(0,0,0,.5); }
+[data-tone="light"] .nameplate { color: var(--text); border-color: var(--text); text-shadow: none; }
+.nameplate--left { justify-content: flex-start; text-align: left; }
+
+/* Citatlåda: vit låda med orange text, orange låda med vit text */
+.quotebox { display: inline-grid; justify-items: center; max-width: 100%; font-family: var(--font-body); font-weight: 800; text-transform: uppercase; letter-spacing: .01em; line-height: 1.15; }
+.quotebox > span { display: block; padding: .32em .65em; background: #fff; color: var(--accent); box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+.quotebox > span + span { background: var(--accent); color: #fff; margin: 0 5%; }
+.quotebox--left { justify-items: start; }
+.quotebox--left > span + span { margin: 0 0 0 4%; }
+
+/* Orange "VS" som i titlarna */
+.vs { display: inline-block; padding: 0 .12em; color: var(--accent); background: linear-gradient(180deg, #ffc46b 0%, var(--accent) 55%, #e07b2e 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; filter: drop-shadow(0 2px 8px color-mix(in srgb, var(--accent) 45%, transparent)); }
+
+/* Vit etikettlåda med orange text ("STUDIO 3" överst i thumbnails) */
+.tagbox { display: inline-block; padding: .42em .62em; background: #fff; color: var(--accent); font-family: var(--font-body); font-weight: 800; font-size: .7rem; line-height: 1; letter-spacing: .07em; text-transform: uppercase; }
+[data-tone="light"] .tagbox { background: var(--text); color: var(--bg); }
+
+/* Lutande sticker som DUELLEN-skylten */
+.sticker { display: inline-block; padding: .14em .42em .1em; background: #fff; color: #0b0b0b; font-family: var(--font-display); font-weight: var(--display-weight); text-transform: uppercase; line-height: 1; transform: rotate(-3deg); box-shadow: 4px 4px 0 rgba(0,0,0,.35); }
+
+/* Dammig, repig textur över bilder och färgytor */
+.dust { position: relative; isolation: isolate; }
+.dust::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: url("../img/dust.png") repeat; background-size: 360px; opacity: .45; mix-blend-mode: screen; }
+.hero.dust::after { z-index: 2; opacity: .3; }
+
+/* Hero: slogan ord för ord som i kanalens Shorts-texter */
+.hero__slogan .w { display: inline-block; opacity: 0; transform: translateY(.25em) scale(.92); animation: word .45s var(--ease) forwards; margin: 0 .12em; }
+@keyframes word { to { opacity: 1; transform: none; } }
+[data-fx~="brand"] .hero__end h2 .accent { background: linear-gradient(180deg, #ffc46b 0%, var(--accent) 55%, #e07b2e 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; filter: drop-shadow(0 4px 14px rgba(0,0,0,.45)); }
+.hero__clip-title { font-family: var(--font-body); font-weight: 800; }
+
+/* Avsnittskort */
+.vcard__fmt { left: 8px; bottom: 8px; padding: .42em .55em; border-radius: 0; background: #fff; color: var(--accent); font-weight: 800; font-size: .64rem; letter-spacing: .07em; }
+.vcard__title { font-family: var(--font-display); font-weight: var(--display-weight); text-transform: uppercase; font-size: .98rem; letter-spacing: .005em; line-height: 1.2; }
+.vcard__title .quotebox { font-size: .8rem; justify-items: start; }
+.vcard__people { font-family: var(--font-body); font-weight: 700; text-transform: uppercase; font-size: .72rem; letter-spacing: .03em; }
+
+/* Debattkort */
+.debate .tagbox { align-self: flex-start; }
+.debate h3 { font-family: var(--font-display); }
+.debate .quotebox { font-size: .9rem; }
+.debate__flag { position: absolute; top: 16px; right: 16px; z-index: 3; font-size: .95rem; }
+.debate--featured .debate__art::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, transparent 45%, color-mix(in srgb, var(--s3-terra) 80%, transparent) 85%, var(--s3-terra-dark)); }
+.need span { font-weight: 700; }
+
+/* Formatkort i respektive formats färger, som i deras thumbnails */
+.format { min-height: 320px; }
+.format[data-format="soffan"] { background: linear-gradient(180deg, color-mix(in srgb, var(--s3-terra) 35%, transparent), var(--s3-terra) 55%, var(--s3-terra-dark)); border-color: transparent; }
+.format[data-format="soffan"]::before { background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--s3-terra-dark) 70%, transparent)); }
+.format[data-format="panelen"] { background: var(--s3-navy); border-color: transparent; }
+.format[data-format="panelen"]::before, .format[data-format="duellen"]::before { background: linear-gradient(90deg, transparent calc(50% - 1px), rgba(255,255,255,.75) calc(50% - 1px), rgba(255,255,255,.75) calc(50% + 1px), transparent calc(50% + 1px)) top / 100% 90px no-repeat, linear-gradient(180deg, transparent, rgba(0,0,0,.55)); }
+.format[data-format="duellen"] { background: linear-gradient(90deg, #7a1620 0%, #2a2a2a 50%, #1a3a72 100%); border-color: transparent; }
+.format[data-format="valvakan"] { background: linear-gradient(180deg, #4b2c4f, #b8603a 60%, #e8994f); border-color: transparent; }
+.format[data-format="banditer"] { background: repeating-linear-gradient(90deg, var(--s3-orange-2) 0 calc(16.66% - 1px), rgba(255,255,255,.55) calc(16.66% - 1px) 16.66%); border-color: transparent; }
+.format[data-format="banditer"] p, .format[data-format="banditer"] .format__foot { color: #3a1d08; }
+.format[data-format="1vs20"], .format[data-format="partiledare"] { background: var(--s3-studio); color: #111; border-color: transparent; }
+.format[data-format="1vs20"] p, .format[data-format="partiledare"] p, .format[data-format="1vs20"] .format__foot, .format[data-format="partiledare"] .format__foot { color: #444; }
+.format[data-format="1vs20"]::before, .format[data-format="partiledare"]::before { background: linear-gradient(180deg, rgba(236,236,236,.55), var(--s3-studio) 70%); }
+.format[data-format="1vs20"] .format__logo, .format[data-format="partiledare"] .format__logo { filter: drop-shadow(0 2px 6px rgba(0,0,0,.35)); }
+.format[data-format="1vs20"] .format__tag, .format[data-format="partiledare"] .format__tag { color: #c4621b; }
+.format__name { font-family: var(--font-display); text-shadow: var(--tshadow); }
+.format[data-format="1vs20"] .format__name, .format[data-format="partiledare"] .format__name { text-shadow: none; }
+.format p, .format__tag { position: relative; z-index: 2; }
+.format[data-format="soffan"] .format__tag, .format[data-format="panelen"] .format__tag, .format[data-format="duellen"] .format__tag, .format[data-format="valvakan"] .format__tag { color: #fff; }
+.format[data-format="soffan"] p, .format[data-format="panelen"] p, .format[data-format="duellen"] p, .format[data-format="valvakan"] p, .format[data-format="soffan"] .format__foot, .format[data-format="panelen"] .format__foot, .format[data-format="duellen"] .format__foot, .format[data-format="valvakan"] .format__foot { color: rgba(255,255,255,.88); }
+.format .format__logo, .format .format__name, .format .format__tag, .format .format__foot { position: relative; z-index: 2; }
+
+/* Medverkande och team som namnplattor */
+.person__name { font-weight: 800; text-transform: uppercase; font-size: .86rem; letter-spacing: .02em; }
+.team-plate { display: grid; gap: 10px; }
+.team-plate .nameplate { font-size: .9rem; padding: 12px 4px; gap: 6px 26px; }
+.team-roles { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 26px; color: var(--muted); font-size: .82rem; }
+
+/* Siffror */
+.stat__num { font-family: var(--font-display); font-weight: var(--display-weight); font-stretch: 100%; }
+.stat__label { font-weight: 600; }
+.stats.dust::after { opacity: .25; }
+
+.team-names { gap: 10px 30px; padding: 14px 4px; font-size: .92rem; }
+.team-names a { text-decoration: none; }
+.team-names a:hover { color: var(--accent); }
+.nameplate small { display: block; margin-top: 2px; font-weight: 600; font-size: .78em; letter-spacing: 0; text-transform: none; opacity: .75; }
+.debate { position: relative; }
+.format[data-format] .format__bg { opacity: .14; }
+.format[data-format="1vs20"] .format__logo, .format[data-format="partiledare"] .format__logo { filter: invert(1) hue-rotate(180deg); }
+.format[data-format="banditer"] .format__tag { color: #3a1d08; }
+.format[data-format="banditer"] .format__name { color: #fff; }
+.hero__slogan .line > .w { transform: translateY(.25em) scale(.92); animation: word .45s var(--ease) forwards; }
+.hero__slogan .line:nth-child(2) > .w { color: var(--accent); }
+.hero__slogan .line > .w { margin: 0 .02em; }

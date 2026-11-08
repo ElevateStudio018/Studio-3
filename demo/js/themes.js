@@ -16,12 +16,12 @@ const base = {
 
 export const THEMES = [
   {
-    id: 'studio', name: 'Studio 3 Original', tagline: 'Matchar YouTube-kanalen: YouTubes mörka färger och loggans orange.',
-    bestFor: 'Standardvalet. Ser ut som kanalen – tittare känner igen sig direkt.',
-    fonts: 'family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600;700',
-    display: '"Archivo", sans-serif', body: '"Inter", system-ui, sans-serif',
-    vars: { bg: '#0f0f0f', bg2: '#151515', surface: '#1f1f1f', surface2: '#272727', text: '#f1f1f1', muted: '#aaaaaa', accent: '#F1944F', accent2: '#ffcfa6', onAccent: '#1b0f05', displayStretch: '125%' },
-    fx: [],
+    id: 'studio', name: 'Studio 3 Original', tagline: 'Kanalens grafiska profil från YouTube: orange, svart, Archivo Black och Montserrat.',
+    bestFor: 'Standardvalet. Samma typsnitt, färger och element som i kanalens thumbnails.',
+    fonts: 'family=Archivo+Black&family=Montserrat:wght@500;600;700;800;900',
+    display: '"Archivo Black", "Arial Black", sans-serif', body: '"Montserrat", system-ui, sans-serif',
+    vars: { bg: '#0f0f0f', bg2: '#151515', surface: '#1e1e1e', surface2: '#272727', text: '#f5f5f5', muted: '#b0aaa4', accent: '#F1944F', accent2: '#F9A447', onAccent: '#1b0f05', displayWeight: '400', displayStretch: '100%', displayTracking: '0' },
+    fx: ['brand'],
   },
   {
     id: 'riksdag', name: 'Riksdagen', tagline: 'Marinblått och guld. Seriöst, tryggt, institutionellt.',

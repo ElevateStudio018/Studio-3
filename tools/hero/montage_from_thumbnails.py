@@ -27,6 +27,10 @@ channel = json.loads((ROOT / "content" / "channel.json").read_text(encoding="utf
 videos = {v["id"]: v for v in channel["videos"]}
 FONT_WIDE = str(HERE / "fonts" / "Archivo-ExpandedBlack.woff")
 FONT_ITAL = str(HERE / "fonts" / "Archivo-BlackItalic.woff")
+# Kanalens egna typsnitt: Archivo Black (rubriker) och Montserrat Black (citatlådor)
+FONT_BLACK = str(HERE / "fonts" / "ArchivoBlack.woff")
+FONT_MONT = str(HERE / "fonts" / "Montserrat-Black.woff")
+DUST = np.asarray(Image.open(ROOT / "public" / "assets" / "img" / "dust.png").convert("RGBA").resize((W, W))).astype(np.float32)[:H] / 255.0
 
 
 def thumb(vid):
@@ -62,6 +66,8 @@ def grade(arr, frame, dark=1.0):
     a = (a - 0.5) * 1.22 + 0.5                      # kontrast
     a = a + np.array([0.035, 0.0, -0.03]) * lum      # varm ton i högdagrar
     a = a * VIGNETTE * dark
+    d = DUST[..., 3:4] * 0.35
+    a = 1 - (1 - a) * (1 - d)  # "screen" som i kanalens thumbnails
     a = a * 255.0 + GRAIN[frame % len(GRAIN)]
     return a.clip(0, 255).astype(np.uint8)
 
@@ -109,10 +115,50 @@ def text_layer(text, path, size, color, max_w=1120, scale=1.0, sub=None):
     d.text((x + 6, y + 8), text, font=f, fill=(0, 0, 0, 160))
     d.text((x, y), text, font=f, fill=color)
     if sub:
-        fs = ImageFont.truetype(FONT_WIDE, 30)
+        fs = ImageFont.truetype(FONT_MONT, 30)
         sb = d.textbbox((0, 0), sub, font=fs)
         d.text(((W - (sb[2] - sb[0])) / 2, y + th + bb[1] + 34), sub, font=fs, fill=(255, 255, 255, 230))
     return layer
+
+
+def quote_layer(text, scale=1.0):
+    """Vit låda med orange text och orange låda med vit text, som i kanalens thumbnails."""
+    words = text.split()
+    lines = [text] if len(words) <= 2 else [" ".join(words[: (len(words) + 1) // 2]), " ".join(words[(len(words) + 1) // 2:])]
+    layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    size = int(64 * scale)
+    font = fit_font(FONT_MONT, max(lines, key=len), 1060, size)
+    boxes = []
+    for i, line in enumerate(lines):
+        bb = d.textbbox((0, 0), line, font=font)
+        boxes.append((line, bb[2] - bb[0], bb[3] - bb[1], bb))
+    total_h = sum(b[2] + 36 for b in boxes)
+    y = (H - total_h) / 2
+    for i, (line, tw, th, bb) in enumerate(boxes):
+        pad_x = 34 if i == 0 else 26
+        bw = tw + pad_x * 2
+        x = (W - bw) / 2
+        bg, fg = ((255, 255, 255, 255), ORANGE + (255,)) if i == 0 else (ORANGE + (255,), (255, 255, 255, 255))
+        d.rectangle((x + 6, y + 8, x + bw + 6, y + th + 36 + 8), fill=(0, 0, 0, 90))
+        d.rectangle((x, y, x + bw, y + th + 36), fill=bg)
+        d.text((x + pad_x - bb[0], y + 18 - bb[1]), line, font=font, fill=fg)
+        y += th + 36
+    return layer
+
+
+def seg_quote(text, n, bg_vid):
+    bg = img(bg_vid).filter(ImageFilter.GaussianBlur(10))
+    for i in range(n):
+        def r(fi, i=i):
+            scale = 1.0 + max(0, 3 - i) * 0.06
+            base = np.asarray(ken_burns(bg, i / n, 1.12, 1.22, 0.5, 0.45))
+            base = (base.astype(np.float32) * 0.42).astype(np.uint8)
+            canvas = Image.fromarray(base).convert("RGBA")
+            canvas.alpha_composite(quote_layer(text, scale))
+            a = grade(np.asarray(canvas.convert("RGB")), fi)
+            return rgb_split(a, 8 - i * 4) if i < 2 else a
+        frames.append(r)
 
 
 # ---------- segment ----------
@@ -139,7 +185,7 @@ def seg_flash(color, n=2):
         frames.append(lambda fi, i=i: np.full((H, W, 3), color, np.uint8) if i == 0 else flash(np.zeros((H, W, 3), np.uint8), color, 0.5))
 
 
-def seg_slam(text, n, color=ORANGE, bg_vid=None, font=FONT_WIDE, size=170, sub=None):
+def seg_slam(text, n, color=ORANGE, bg_vid=None, font=FONT_BLACK, size=170, sub=None):
     bg = None
     if bg_vid:
         bg = img(bg_vid).filter(ImageFilter.GaussianBlur(14))
@@ -168,7 +214,7 @@ def seg_counter(vid, n, target, label):
             val = int(target * min(1, (t * 1.25) ** 0.6))
             txt = f"{val:,}".replace(",", " ")
             canvas = Image.fromarray(a).convert("RGBA")
-            canvas.alpha_composite(text_layer(txt, FONT_WIDE, 150, ORANGE + (255,), sub=label))
+            canvas.alpha_composite(text_layer(txt, FONT_BLACK, 150, ORANGE + (255,), sub=label))
             return np.asarray(canvas.convert("RGB"))
         frames.append(r)
 
@@ -225,7 +271,7 @@ for k, word in enumerate(["VÄNSTER.", "HÖGER.", "VÄNSTER.", "HÖGER."]):
     seg_slam(word, 7, color=ORANGE if k % 2 == 0 else (255, 255, 255))
     seg_kb(RAPID[k], 5, 1.3, 1.4, 0.5, 0.4, shake=8, split=2)
 for vid, quote in [("B1IAy3WvnXg", "”GAPA SVENNEJÄVEL”"), ("-R31ScHr8IM", "”SKICKA BARA UT FOLK!”"), ("nieUt0p7DXA", "”NI HAR SLAKTAT A-KASSAN”")]:
-    seg_slam(quote, 17, color=(255, 255, 255), bg_vid=vid, font=FONT_ITAL, size=110)
+    seg_quote(quote, 17, vid)
     seg_kb(vid, 9, 1.25, 1.12, 0.5, 0.4, shake=4, split=3, flash_in=ORANGE)
 for k, vid in enumerate(RAPID[4:]):                              # acceleration
     seg_kb(vid, 4 if k < 10 else 3, 1.3, 1.22, 0.5, 0.42, shake=10, split=2)
