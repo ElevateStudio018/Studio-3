@@ -9,16 +9,20 @@ Komplett webbplats för YouTube-kanalen [STUDIO 3](https://www.youtube.com/@stud
 
 Fler bilder finns i [`docs/screenshots/`](docs/screenshots/). All information som samlats in om kanalen finns i [`docs/KANALEN.md`](docs/KANALEN.md), de 20 stilpaketen beskrivs i [`docs/STILPAKET.md`](docs/STILPAKET.md) och kanalens grafiska profil (färger, typsnitt, citatlådor, namnplattor) i [`docs/GRAFISK-PROFIL.md`](docs/GRAFISK-PROFIL.md).
 
-## Se demon direkt i webbläsaren (githack)
+## Se demon direkt i webbläsaren
 
-En statisk förhandsvisning ligger i [`demo/`](demo/) och kan öppnas utan server:
+En statisk förhandsvisning ligger i [`demo/`](demo/) och kan öppnas utan server.
 
-- **Startsida:** https://raw.githack.com/ElevateStudio018/Studio-3/claude/pensive-pascal-73j87n/demo/index.html
-- **Ansökan:** https://raw.githack.com/ElevateStudio018/Studio-3/claude/pensive-pascal-73j87n/demo/sok-partiledare-vs-20-valjare.html
-- **20 stilpaket:** https://raw.githack.com/ElevateStudio018/Studio-3/claude/pensive-pascal-73j87n/demo/stilpaket.html
-- **Admin (fiktiv demodata):** https://raw.githack.com/ElevateStudio018/Studio-3/claude/pensive-pascal-73j87n/demo/admin.html
+**GitHub Pages (länken som skickas till kanalen).** Slå på det en gång: Settings → Pages → Source "Deploy from a branch" → gren `claude/pensive-pascal-73j87n`, mapp `/ (root)` → Save. Efter någon minut finns:
 
-I demon sparas inga formulär och admin visar påhittade ansökningar – ändringar försvinner när sidan laddas om. Bygg om den efter ändringar med `npm run build:demo`.
+- **Sajten:** https://elevatestudio018.github.io/Studio-3/
+- **Adminpanelen:** https://elevatestudio018.github.io/Studio-3/admin/ (e-post `demo@studio3.se`, lösenord `debatt2026`)
+
+`index.html` och `admin/index.html` i roten skickar bara vidare till `demo/`. Alla demosidor har `noindex`, så de hamnar inte i Google.
+
+**githack (utan inställningar):** https://raw.githack.com/ElevateStudio018/Studio-3/claude/pensive-pascal-73j87n/demo/index.html
+
+I demon sparas inga formulär och admin visar påhittade ansökningar. Ändringar försvinner när sidan laddas om. Bygg om den efter ändringar med `npm run build:demo`.
 
 ---
 

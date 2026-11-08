@@ -30,7 +30,6 @@ FONT_ITAL = str(HERE / "fonts" / "Archivo-BlackItalic.woff")
 # Kanalens egna typsnitt: Archivo Black (rubriker) och Montserrat Black (citatlådor)
 FONT_BLACK = str(HERE / "fonts" / "ArchivoBlack.woff")
 FONT_MONT = str(HERE / "fonts" / "Montserrat-Black.woff")
-DUST = np.asarray(Image.open(ROOT / "public" / "assets" / "img" / "dust.png").convert("RGBA").resize((W, W))).astype(np.float32)[:H] / 255.0
 
 
 def thumb(vid):
@@ -56,7 +55,6 @@ def img(vid):
 # ---------- effekter ----------
 yy, xx = np.mgrid[0:H, 0:W]
 VIGNETTE = (1 - 0.55 * (((xx - W / 2) / (W / 1.6)) ** 2 + ((yy - H / 2) / (H / 1.3)) ** 2)).clip(0.25, 1)[..., None].astype(np.float32)
-GRAIN = [np.random.default_rng(i).normal(0, 2.5, (H, W, 1)).astype(np.float32) for i in range(6)]
 
 
 def grade(arr, frame, dark=1.0):
@@ -66,9 +64,7 @@ def grade(arr, frame, dark=1.0):
     a = (a - 0.5) * 1.22 + 0.5                      # kontrast
     a = a + np.array([0.035, 0.0, -0.03]) * lum      # varm ton i högdagrar
     a = a * VIGNETTE * dark
-    d = DUST[..., 3:4] * 0.35
-    a = 1 - (1 - a) * (1 - d)  # "screen" som i kanalens thumbnails
-    a = a * 255.0 + GRAIN[frame % len(GRAIN)]
+    a = a * 255.0
     return a.clip(0, 255).astype(np.uint8)
 
 

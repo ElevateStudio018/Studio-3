@@ -30,10 +30,10 @@ Hämtad från kanalens thumbnails, Shorts, banner och logga på YouTube och anv�
 | DUELLEN som lutande sticker | ![](grafisk-profil/duellen-sticker.jpg) | `.sticker` – "Söker nu" på öppna debatter |
 | Orange "VS" med glöd | ![](grafisk-profil/vs-orange.jpg) | `.vs` – i alla titlar med "vs" |
 | Marinblå bakgrund och vit mittlinje | ![](grafisk-profil/panelen-marin.jpg) | Panelens och Duellens formatkort |
-| Vit etikett med orange text och dammig, repig textur | ![](grafisk-profil/etikett-och-damm.jpg) | `.tagbox` (formatetiketter) och `.dust` (hero, siffror, formatkort) |
+| Vit etikett med orange text och dammig, repig textur | ![](grafisk-profil/etikett-och-damm.jpg) | `.tagbox` (formatetiketter). Den dammiga texturen används inte på sajten. |
 | Studio Soffan-badge: vit insida, orange ring, "STUDIO 3." på ringen | (se första bilden) | `public/assets/img/logos/studio-soffan.svg` |
 | Shorts: ett ord i taget i orange versaler på svart | – | Sloganen i heron kommer fram ord för ord |
 
 Varje format har dessutom sitt eget formatkort i samma färger som formatets thumbnails: terrakotta (Studio Soffan), studiovitt (1 mot 20, Partiledare), partifärger med mittlinje (Duellen), marin (Panelen), solnedgång (Valvakan) och orange paneler (Studio Banditer).
 
-Reservvideon i heron (`npm run hero:thumbs`) använder samma typsnitt, citatlådor och textur.
+Reservvideon i heron (`npm run hero:thumbs`) använder samma typsnitt och citatlådor, utan damm och filmkorn.

@@ -341,7 +341,7 @@ function debateCard(d) {
   if (d.featured && d.open) {
     return `<article class="card debate debate--featured">
       <span class="sticker debate__flag">Söker nu</span>
-      <div class="debate__art dust">${art ? `<img src="${esc(art)}" alt="" loading="lazy">` : ''}${logo && d.cover_url ? `<img class="logo" src="/assets/img/logos/${logo}" alt="">` : ''}</div>
+      <div class="debate__art">${art ? `<img src="${esc(art)}" alt="" loading="lazy">` : ''}${logo && d.cover_url ? `<img class="logo" src="/assets/img/logos/${logo}" alt="">` : ''}</div>
       <div class="debate__body">${body}</div></article>`;
   }
   return `<article class="card debate">${d.open ? '<span class="sticker debate__flag">Söker nu</span>' : ''}${body}</article>`;
@@ -367,7 +367,7 @@ $('#faq').innerHTML = (site.faq || []).map((f) => `<details><summary>${esc(f.q)}
 
 /* ---------- format ---------- */
 const formatsWithEpisodes = D.formats.filter((f) => f.count > 0);
-$('#formats').innerHTML = formatsWithEpisodes.map((f) => `<article class="card format dust" data-format="${f.key}" tabindex="0" role="button" data-format-open="${f.key}" aria-label="Allt om ${esc(f.name)}">
+$('#formats').innerHTML = formatsWithEpisodes.map((f) => `<article class="card format" data-format="${f.key}" tabindex="0" role="button" data-format-open="${f.key}" aria-label="Allt om ${esc(f.name)}">
     <div class="format__bg">${f.top ? `<img src="${thumb(f.top, 'hqdefault')}" alt="" loading="lazy">` : ''}</div>
     ${f.logo ? `<img class="format__logo ${f.logo === 'studio-soffan.svg' ? 'round' : ''}" src="/assets/img/logos/${f.logo}" alt="">` : ''}
     <div class="format__name">${esc(f.name)}</div>

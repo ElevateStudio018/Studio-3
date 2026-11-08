@@ -1,4 +1,4 @@
-// Demo-shim för den statiska versionen (t.ex. via raw.githack.com).
+// Demo-shim för den statiska versionen (GitHub Pages eller raw.githack.com).
 // Ersätter serverns API med låtsassvar och mappar sajtens adresser till de
 // statiska filerna. Laddas före allt annat på demo-sidorna.
 (function () {
@@ -62,7 +62,14 @@
 
   // ---------- admin med fiktiv demodata ----------
   var db = null;
-  var loggedIn = true;
+  // Demoinloggning: uppgifterna står i demo/README.md och i mejlet till kanalen
+  var DEMO_LOGIN = { email: 'demo@studio3.se', password: 'debatt2026' };
+  var loggedIn = false;
+  try { loggedIn = sessionStorage.getItem('s3-demo-admin') === '1'; } catch (e) {}
+  function setLoggedIn(v) {
+    loggedIn = v;
+    try { if (v) sessionStorage.setItem('s3-demo-admin', '1'); else sessionStorage.removeItem('s3-demo-admin'); } catch (e) {}
+  }
   function load() {
     if (db) return Promise.resolve(db);
     return realFetch('data/admin-demo.json').then(function (r) { return r.json(); }).then(function (d) {
@@ -129,9 +136,14 @@
     return load().then(function () {
       var m;
       if (!db.debateById) { db.debateById = {}; db.debateDetails.forEach(function (d) { db.debateById[d.id] = d; }); }
-      if (path === '/api/admin/login') { loggedIn = true; return json({ ok: true, user: db.me.user }); }
-      if (path === '/api/admin/logout') { loggedIn = false; return json({ ok: true }); }
-      if (!loggedIn) return json({ error: 'Logga in (valfritt lösenord i demon).' }, 401);
+      if (path === '/api/admin/login') {
+        var email = String((body && body.email) || '').trim().toLowerCase();
+        if (email !== DEMO_LOGIN.email || String((body && body.password) || '') !== DEMO_LOGIN.password) return json({ error: 'Fel e-post eller lösenord.' }, 401);
+        setLoggedIn(true);
+        return json({ ok: true, user: db.me.user });
+      }
+      if (path === '/api/admin/logout') { setLoggedIn(false); return json({ ok: true }); }
+      if (!loggedIn) return json({ error: 'Inte inloggad' }, 401);
       if (path === '/api/admin/me') return json(db.me);
       if (path === '/api/admin/dashboard') return json(db.dashboard);
       if (path === '/api/admin/debates' && method === 'GET') return json(db.debates);
@@ -222,8 +234,8 @@
   if (isAdmin) {
     document.addEventListener('DOMContentLoaded', function () {
       var b = document.createElement('div');
-      b.textContent = 'DEMO – fiktiva ansökningar, ändringar sparas inte';
-      b.style.cssText = 'position:fixed;left:50%;top:10px;transform:translateX(-50%);z-index:200;background:#F1944F;color:#1b0f05;font:700 12px/1 Inter,system-ui,sans-serif;padding:7px 12px;border-radius:999px;letter-spacing:.04em;pointer-events:none';
+      b.textContent = 'Demoversion: påhittade ansökningar, ändringar sparas inte';
+      b.style.cssText = 'position:fixed;left:50%;top:10px;transform:translateX(-50%);z-index:200;background:#F1944F;color:#1b0f05;font:700 12px/1 Montserrat,system-ui,sans-serif;padding:7px 12px;border-radius:999px;letter-spacing:.04em;pointer-events:none';
       document.body.appendChild(b);
     });
   }

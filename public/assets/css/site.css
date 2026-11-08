@@ -533,11 +533,6 @@ button.card--link { font: inherit; color: inherit; text-align: left; cursor: poi
 /* Lutande sticker som DUELLEN-skylten */
 .sticker { display: inline-block; padding: .14em .42em .1em; background: #fff; color: #0b0b0b; font-family: var(--font-display); font-weight: var(--display-weight); text-transform: uppercase; line-height: 1; transform: rotate(-3deg); box-shadow: 4px 4px 0 rgba(0,0,0,.35); }
 
-/* Dammig, repig textur över bilder och färgytor */
-.dust { position: relative; isolation: isolate; }
-.dust::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: url("../img/dust.png") repeat; background-size: 360px; opacity: .45; mix-blend-mode: screen; }
-.hero.dust::after { z-index: 2; opacity: .3; }
-
 /* Hero: slogan ord för ord som i kanalens Shorts-texter */
 .hero__slogan .w { display: inline-block; opacity: 0; transform: translateY(.25em) scale(.92); animation: word .45s var(--ease) forwards; margin: 0 .12em; }
 @keyframes word { to { opacity: 1; transform: none; } }
@@ -589,7 +584,6 @@ button.card--link { font: inherit; color: inherit; text-align: left; cursor: poi
 /* Siffror */
 .stat__num { font-family: var(--font-display); font-weight: var(--display-weight); font-stretch: 100%; }
 .stat__label { font-weight: 600; }
-.stats.dust::after { opacity: .25; }
 
 .team-names { gap: 10px 30px; padding: 14px 4px; font-size: .92rem; }
 .team-names a { text-decoration: none; }

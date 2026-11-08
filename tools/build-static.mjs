@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Bygger en statisk demoversion av sajten i demo/ som kan visas utan server,
- * t.ex. via https://raw.githack.com/<ägare>/<repo>/<gren>/demo/index.html
+ * t.ex. via GitHub Pages (https://<ägare>.github.io/<repo>/) eller raw.githack.com.
  *
  * Startar servern mot en tillfällig databas med FIKTIV demodata, sparar de
  * renderade sidorna och en ögonblicksbild av admin-API:t. Bilder, video och
@@ -71,7 +71,8 @@ try {
       .replace(/<link rel="canonical"[^>]*>/, '')
       .replace(/<meta property="og:(url|image)"[^>]*>/g, '')
       .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, '')
-      .replace('<head>', '<head>\n  <script src="js/static-shim.js"></script>')
+      .replace(/\s*<meta name="robots"[^>]*>/g, '')
+      .replace('<head>', '<head>\n  <meta name="robots" content="noindex, nofollow">\n  <script src="js/static-shim.js"></script>')
       .replace(/(href|src)="(\/(?!\/)[^"]*)"/g, (_, attr, p) => `${attr}="${mapPath(p)}"`)
       .replace(/"\/assets\//g, '"../public/assets/');
     // Startdata: demonotis överst och relativa sökvägar
@@ -128,8 +129,11 @@ try {
   fs.writeFileSync(path.join(OUT, 'README.md'), `# Statisk demo
 
 Genererad med \`npm run build:demo\`. Öppna \`index.html\` via en statisk värd, t.ex.
-raw.githack.com. Formulären sparas inte och adminpanelen visar **fiktiv** demodata –
-kör den riktiga servern (\`npm start\`) för allt på riktigt.
+GitHub Pages eller raw.githack.com. Formulären sparas inte och adminpanelen visar
+**fiktiv** demodata. Kör den riktiga servern (\`npm start\`) för allt på riktigt.
+
+Inloggning till admin.html i demon: e-post \`demo@studio3.se\`, lösenord \`debatt2026\`
+(står i \`tools/static/shim.js\`). Sidorna har \`noindex\` så att demon inte hamnar i Google.
 
 ${pages.length} sidor, t.ex. index.html, debatter.html, format.html, avsnitt.html, profiler.html, om-oss.html, samarbeten.html, press.html, sok.html, stilpaket.html och admin.html.
 `);
