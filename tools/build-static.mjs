@@ -21,7 +21,7 @@ const DATA = fs.mkdtempSync(path.join(os.tmpdir(), 's3-demo-'));
 const PORT = 4300 + Math.floor(Math.random() * 500);
 const BASE = `http://127.0.0.1:${PORT}`;
 const env = { ...process.env, DATA_DIR: DATA, ADMIN_EMAIL: 'demo@studio3.se', ADMIN_PASSWORD: 'demo-losenord-123', YOUTUBE_SYNC: '0', PORT: String(PORT), HOST: '127.0.0.1', SITE_URL: BASE, RESEND_API_KEY: '' };
-const NOTICE = 'Förhandsvisning – formulären sparas inte här. Kör servern (npm start) för riktiga ansökningar och admin.';
+const NOTICE = 'Det här är ett förslag till ny webbplats. Formulären skickas inte på riktigt.';
 
 const seeded = spawnSync(process.execPath, ['--disable-warning=ExperimentalWarning', 'tools/seed-demo.js'], { cwd: ROOT, env, encoding: 'utf8' });
 if (seeded.status !== 0) throw new Error(seeded.stderr);

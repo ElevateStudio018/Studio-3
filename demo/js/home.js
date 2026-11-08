@@ -147,7 +147,7 @@ async function youtubeDriver(retry = false) {
       caption.hidden = false;
       caption.href = `${ytUrl(clip.id)}&t=${Math.floor(clip.start)}s`;
       $('.hero__clip-title', caption).textContent = clip.title || videoById[clip.id]?.display || '';
-      $('.hero__clip-tag', caption).textContent = clip.source === 'mest-uppspelade' ? 'Mest uppspelade' : '';
+      $('.hero__clip-tag', caption).textContent = '';
       if (hero.dataset.phase === 'settled') return;
       const step = loop * clips.length + i;
       $('#heroProgress').style.width = `${Math.min(1, step / END_CLIP) * 100}%`;
@@ -167,7 +167,7 @@ async function youtubeDriver(retry = false) {
       driver.play();
       $('#soundBtn').hidden = true;
       $('#realBtn').hidden = false;
-      if (retry) toast('YouTube kunde inte spelas i den här webbläsaren.');
+      if (retry) toast('YouTube går inte att spela här.');
     },
   });
   $('#soundBtn').hidden = false;
@@ -226,7 +226,7 @@ $('#realBtn').addEventListener('click', async (e) => {
 $('#soundBtn').addEventListener('click', (e) => {
   const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
   e.currentTarget.setAttribute('aria-pressed', on);
-  e.currentTarget.textContent = on ? '🔊 Ljud' : '🔇 Ljud';
+  e.currentTarget.textContent = on ? 'Ljud på' : 'Ljud av';
   driver?.sound?.(on);
 });
 
@@ -242,15 +242,15 @@ const openDebates = D.debates.filter((d) => d.open);
 if (openDebates.length) {
   const live = $('#heroLive');
   live.hidden = false;
-  live.lastElementChild.textContent = openDebates.length === 1 ? '1 debatt söker deltagare nu' : `${openDebates.length} debatter söker deltagare nu`;
+  live.lastElementChild.textContent = openDebates.length === 1 ? '1 debatt söker deltagare' : `${openDebates.length} debatter söker deltagare`;
 }
 
 /* ---------- statistik ---------- */
 const statItems = [
   { value: D.stats.subscribers, label: 'prenumeranter på YouTube', fmt: (n) => num(n) },
   { value: D.stats.views, label: 'visningar totalt', fmt: (n) => `${(n / 1e6).toLocaleString('sv-SE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} mn` },
-  { value: D.stats.videos, label: 'videor och klipp', fmt: (n) => num(n) },
-  { value: D.stats.topViews, label: 'visningar på största debatten', fmt: (n) => num(n) },
+  { value: D.stats.videos, label: 'videor', fmt: (n) => num(n) },
+  { value: D.stats.topViews, label: 'visningar på mest sedda avsnittet', fmt: (n) => num(n) },
 ];
 $('#stats').innerHTML = statItems.map((s, i) => `<div class="stat"><div class="stat__num" data-i="${i}">${s.fmt(s.value)}</div><div class="stat__label">${esc(s.label)}</div></div>`).join('');
 if (!reduceMotion) {
@@ -311,16 +311,16 @@ function countdown(d) {
   const left = daysLeft(d.deadline);
   if (left == null || !d.open) return '<span></span>';
   const cls = left <= 3 ? 'countdown countdown--soon' : 'countdown';
-  const txt = left <= 0 ? 'Stänger i dag' : left === 1 ? '1 dag kvar att söka' : `${left} dagar kvar att söka`;
-  return `<span class="${cls}"><span class="dot"></span>${txt}</span>`;
+  const txt = left <= 0 ? 'Sista dagen i dag' : left === 1 ? '1 dag kvar' : `${left} dagar kvar`;
+  return `<span class="${cls}">${txt}</span>`;
 }
 function debateCard(d) {
   const art = d.cover_url || formatArt(d.format);
   const logo = FORMAT_LOGO[d.format];
   const needs = (d.needs || []).map((n) => `<div class="need"><span>${esc(n.label)}</span><strong>${n.count ? `${n.count} st` : 'Sökes'}</strong></div>`).join('');
   const action = d.open
-    ? `<button class="btn" type="button" data-apply="${esc(d.slug)}">Sök nu <span class="arrow">→</span></button>`
-    : d.youtube_url ? `<a class="btn btn--ghost" href="${esc(d.youtube_url)}" target="_blank" rel="noopener">Se avsnittet ↗</a>` : '<span class="chip">Ansökan stängd</span>';
+    ? `<button class="btn" type="button" data-apply="${esc(d.slug)}">Sök nu</button>`
+    : d.youtube_url ? `<a class="btn btn--ghost" href="${esc(d.youtube_url)}" target="_blank" rel="noopener">Se avsnittet</a>` : '<span class="chip">Ansökan stängd</span>';
   const body = `
     <span class="badge-format">${esc(d.formatName)}</span>
     <h3>${esc(d.title)}</h3>
@@ -343,22 +343,21 @@ function debateCard(d) {
 }
 $('#debates').innerHTML = (openDebates.length
   ? openDebates.map(debateCard).join('')
-  : `<div class="empty"><h3>Inga öppna ansökningar just nu</h3><p>Prenumerera på nyhetsbrevet så får du veta direkt när nästa debatt öppnar.</p><a class="btn" href="#nyhetsbrev">Bevaka nya debatter</a></div>`) + `
+  : `<div class="empty"><h3>Inga öppna ansökningar just nu</h3><p>Prenumerera på nyhetsbrevet så mejlar vi när nästa öppnar.</p></div>`) + `
   <article class="card debate debate--talent">
     <span class="badge-format">Talangbanken</span>
-    <h3>Hittar du inget som passar?</h3>
-    <p class="muted" style="margin:0">Anmäl dig till talangbanken. När vi planerar en debatt där just din röst behövs, hör vi av oss först.</p>
-    <div class="debate__foot"><span></span><button class="btn btn--ghost" type="button" data-apply="">Anmäl intresse <span class="arrow">→</span></button></div>
+    <h3>Inget som passar?</h3>
+    <p class="muted" style="margin:0">Anmäl dig till talangbanken så hör vi av oss när vi planerar något där du passar in.</p>
+    <div class="debate__foot"><span></span><button class="btn btn--ghost" type="button" data-apply="">Anmäl dig</button></div>
   </article>`;
 const upcoming = D.debates.filter((d) => !d.open && ['closed', 'recorded'].includes(d.status));
 const published = D.debates.filter((d) => d.status === 'published');
 $('#debatesMore').innerHTML = [
-  upcoming.length && `<h3 style="margin:56px 0 18px">Kommande avsnitt</h3><div class="debates">${upcoming.map(debateCard).join('')}</div>`,
+  upcoming.length && `<h3 style="margin:56px 0 18px">Inspelade, kommer snart</h3><div class="debates">${upcoming.map(debateCard).join('')}</div>`,
   published.length && `<h3 style="margin:56px 0 18px">Publicerade debatter</h3><div class="debates">${published.map(debateCard).join('')}</div>`,
 ].filter(Boolean).join('');
 
-/* ---------- steg & FAQ ---------- */
-$('#steps').innerHTML = (site.steps || []).map((s) => `<div class="step"><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`).join('');
+/* ---------- vanliga frågor ---------- */
 $('#faq').innerHTML = (site.faq || []).map((f) => `<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('');
 
 /* ---------- format ---------- */
@@ -369,11 +368,8 @@ $('#formats').innerHTML = formatsWithEpisodes.map((f) => `<article class="card f
     <div class="format__name">${esc(f.name)}</div>
     <p class="format__tag">${esc(f.tagline)}</p>
     <p>${esc(f.desc)}</p>
-    <div class="format__foot"><span>${f.count} avsnitt · ${compact(f.views)} visningar</span><span class="link">Allt om formatet →</span></div>
+    <div class="format__foot"><span>${f.count} avsnitt · ${compact(f.views)} visningar</span></div>
   </article>`).join('');
-$('#formatTable').innerHTML = `<table class="ptable"><thead><tr><th>Format</th><th>Deltagare</th><th>Upplägg</th><th class="num">Avsnitt</th><th class="num">Visningar</th><th>Mest sedda</th></tr></thead><tbody>
-  ${formatsWithEpisodes.map((f) => `<tr><td><button class="linkbtn" type="button" data-format-open="${f.key}"><strong>${esc(f.name)}</strong></button></td><td>${esc(f.people || '–')}</td><td>${esc(f.tagline)}</td><td class="num">${f.count}</td><td class="num">${num(f.views)}</td><td>${f.top ? `<button class="linkbtn" type="button" data-video="${f.top}">${esc(videoById[f.top]?.display || '')}</button>` : '–'}</td></tr>`).join('')}
-  </tbody></table>`;
 const miniCard = (v) => `<button class="vcard vcard--mini" type="button" data-video="${v.id}">
   <span class="vcard__thumb"><img src="${thumb(v.id)}" alt="" loading="lazy"><span class="vcard__dur">${duration(v.duration)}</span></span>
   <span class="vcard__title">${v.quote ? `”${esc(v.display)}”` : esc(v.display)}</span><span class="muted" style="font-size:.82rem">${views(v.views)}</span></button>`;
@@ -389,11 +385,11 @@ function openFormat(key) {
     <p class="lead" style="margin:0">${esc(f.tagline)} ${esc(f.desc)}</p>
     <div class="statrow"><div><strong>${f.count}</strong><span>avsnitt</span></div><div><strong>${compact(f.views)}</strong><span>visningar</span></div><div><strong>${esc(f.people || '–')}</strong><span>deltagare</span></div><div><strong>${people.length}</strong><span>profiler</span></div></div>
     ${f.rules?.length ? `<h4 style="margin:18px 0 0">Så funkar det</h4><ol class="rules">${f.rules.map((r) => `<li>${esc(r)}</li>`).join('')}</ol>` : ''}
-    ${open.length ? `<h4 style="margin:10px 0 0">Söker deltagare nu</h4><div class="chips">${open.map((d) => `<button class="btn btn--sm" type="button" data-apply="${esc(d.slug)}">Sök till ${esc(d.title)} →</button>`).join('')}</div>` : `<p><button class="btn btn--sm" type="button" data-apply="">Anmäl dig till talangbanken →</button></p>`}
+    ${open.length ? `<h4 style="margin:10px 0 0">Söker deltagare nu</h4><div class="chips">${open.map((d) => `<button class="btn btn--sm" type="button" data-apply="${esc(d.slug)}">Sök till ${esc(d.title)}</button>`).join('')}</div>` : `<p><button class="btn btn--sm" type="button" data-apply="">Anmäl dig till talangbanken</button></p>`}
     <h4 style="margin:18px 0 0">Alla ${vids.length} avsnitt</h4>
     <div class="mgrid">${vids.map(miniCard).join('')}</div>
     ${people.length ? `<h4 style="margin:18px 0 0">Har medverkat</h4><div class="chips">${people.map((p) => `<button class="chip" type="button" data-person="${esc(p.name)}">${esc(p.name)}</button>`).join('')}</div>` : ''}
-    ${f.playlist ? `<p><a class="btn btn--ghost btn--sm" href="https://www.youtube.com/playlist?list=${f.playlist}" target="_blank" rel="noopener">Hela spellistan på YouTube ↗</a></p>` : ''}
+    ${f.playlist ? `<p><a class="btn btn--ghost btn--sm" href="https://www.youtube.com/playlist?list=${f.playlist}" target="_blank" rel="noopener">Spellistan på YouTube</a></p>` : ''}
   </div>`, { label: f.name });
 }
 document.addEventListener('click', (e) => {
@@ -437,7 +433,7 @@ function videoCard(v) {
     </button>
     <h3 class="vcard__title"><button class="linkbtn" type="button" data-video="${v.id}">${v.quote ? `”${esc(v.display)}”` : esc(v.display)}</button></h3>
     ${people ? `<p class="vcard__people">${esc(people)}</p>` : ''}
-    <div class="vcard__meta">${v.views ? `<span>${views(v.views)}</span>` : ''}${v.published ? `<span>${dateSv(v.published, { day: 'numeric', month: 'short', year: 'numeric' })}</span>` : ''}<a href="${ytUrl(v.id)}" target="_blank" rel="noopener">YouTube ↗</a></div>
+    <div class="vcard__meta">${v.views ? `<span>${views(v.views)}</span>` : ''}${v.published ? `<span>${dateSv(v.published, { day: 'numeric', month: 'short', year: 'numeric' })}</span>` : ''}<a href="${ytUrl(v.id)}" target="_blank" rel="noopener">YouTube</a></div>
   </article>`;
 }
 function renderVideos() {
@@ -482,11 +478,11 @@ function openVideo(v, start = 0) {
       <span class="badge-format">${esc(formatName(v.format))}${v.views ? ` · ${views(v.views)}` : ''}${v.duration ? ` · ${duration(v.duration)}` : ''}</span>
       <h3>${v.quote ? `”${esc(v.display)}”` : esc(v.display)}</h3>
       ${people ? `<div class="chips">${people}</div>` : ''}
-      ${peaks.length ? `<div><strong>Hetaste ögonblicken</strong> <span class="muted">enligt YouTubes ”Mest uppspelade”</span><div class="chips" style="margin-top:8px">${peaks.map((p) => `<button class="chip chip--accent" type="button" data-seek="${Math.floor(p.at)}">▶ ${clock(p.at)}${p.source === 'mest-uppspelade' ? ' · mest uppspelade' : ''}</button>`).join('')}</div></div>` : ''}
+      ${peaks.length ? `<div><strong>Mest uppspelade</strong><div class="chips" style="margin-top:8px">${peaks.map((p) => `<button class="chip chip--accent" type="button" data-seek="${Math.floor(p.at)}">${clock(p.at)}</button>`).join('')}</div></div>` : ''}
       <div class="modal__actions">
-        <a class="btn" href="${ytUrl(v.id)}" target="_blank" rel="noopener">${ICON.youtube} Se på YouTube</a>
+        <a class="btn" href="${ytUrl(v.id)}" target="_blank" rel="noopener">Se på YouTube</a>
         <button class="btn btn--ghost" type="button" data-format-open="${esc(v.format)}">Mer ${esc(formatName(v.format))}</button>
-        <button class="btn btn--ghost" type="button" data-apply="">Vill du vara med? Sök här</button>
+        
       </div>
       ${more.length ? `<h4 style="margin:8px 0 0">Fler avsnitt</h4><div class="mgrid">${more.map(miniCard).join('')}</div>` : ''}
     </div>`, { label: v.display });
@@ -508,15 +504,14 @@ document.addEventListener('click', (e) => {
 /* ---------- profiler ---------- */
 const PARTY_HUE = { S: '#e8112d', M: '#52bdec', SD: '#dddd00', V: '#da291c', C: '#009933', KD: '#000077', L: '#006ab3', MP: '#83cf39' };
 const personByName = Object.fromEntries(D.people.map((p) => [p.name, p]));
-const pstate = { q: '', party: '', sort: 'count', all: false };
-$('#peopleLead').textContent = `${D.people.length} politiker, debattörer och opinionsbildare har debatterat hos oss. Klicka på en person för att se alla avsnitt och vilka hen mött.`;
+const pstate = { q: '', party: '', all: false };
+$('#peopleLead').textContent = `${D.people.length} personer har varit med i våra avsnitt.`;
 const parties = Object.keys(PARTY_HUE).filter((p) => D.people.some((x) => x.party === p));
-$('#partyFilters').innerHTML = [`<button type="button" data-party="" aria-pressed="true">Alla partier</button>`, ...parties.map((p) => `<button type="button" data-party="${p}" aria-pressed="false">${p}</button>`)].join('');
+$('#partyFilters').innerHTML = [`<button type="button" data-party="" aria-pressed="true">Alla</button>`, ...parties.map((p) => `<button type="button" data-party="${p}" aria-pressed="false">${p}</button>`)].join('');
 const avatar = (p, cls = '') => `<span class="avatar ${cls}" ${p.party && PARTY_HUE[p.party] ? `style="background:${PARTY_HUE[p.party]};color:${['M', 'SD', 'MP'].includes(p.party) ? '#111' : '#fff'}"` : ''}>${esc(initials(p.name))}</span>`;
 function renderPeople() {
   const q = pstate.q.toLowerCase();
-  const sorters = { count: (a, b) => b.videos.length - a.videos.length || b.views - a.views, views: (a, b) => b.views - a.views, name: (a, b) => a.name.localeCompare(b.name, 'sv') };
-  const list = D.people.filter((p) => (!q || p.name.toLowerCase().includes(q)) && (!pstate.party || p.party === pstate.party)).sort(sorters[pstate.sort]);
+  const list = D.people.filter((p) => (!q || p.name.toLowerCase().includes(q)) && (!pstate.party || p.party === pstate.party));
   const shown = q || pstate.party || pstate.all ? list : list.slice(0, 15);
   $('#people').innerHTML = shown.map((p) => `
     <button class="person" type="button" data-person="${esc(p.name)}">
@@ -525,7 +520,6 @@ function renderPeople() {
         <span class="person__meta" style="display:block">${p.role ? `${esc(p.role)} · ` : ''}${p.videos.length} avsnitt · ${compact(p.views)} visningar</span></span>
     </button>`).join('') || '<div class="empty" style="grid-column:1/-1">Ingen träff.</div>';
   $('#morePeople').hidden = shown.length === list.length;
-  $('#morePeople').textContent = `Visa alla ${list.length} profiler`;
 }
 renderPeople();
 $('#peopleSearch').addEventListener('input', (e) => ((pstate.q = e.target.value), renderPeople()));
@@ -535,13 +529,6 @@ $('#partyFilters').addEventListener('click', (e) => {
   if (!b) return;
   $$('#partyFilters button').forEach((x) => x.setAttribute('aria-pressed', x === b));
   pstate.party = b.dataset.party;
-  renderPeople();
-});
-$('#peopleSort').addEventListener('click', (e) => {
-  const b = e.target.closest('button');
-  if (!b) return;
-  $$('#peopleSort button').forEach((x) => x.setAttribute('aria-pressed', x === b));
-  pstate.sort = b.dataset.psort;
   renderPeople();
 });
 function openPerson(name) {
@@ -559,7 +546,7 @@ function openPerson(name) {
     <h4 style="margin:12px 0 0">Avsnitt</h4>
     <div class="mgrid">${vids.map(miniCard).join('')}</div>
     ${opponents.length ? `<h4 style="margin:12px 0 0">Har debatterat mot</h4><div class="chips">${opponents.map((n) => `<button class="chip" type="button" data-person="${esc(n)}">${esc(n)}</button>`).join('')}</div>` : ''}
-    <p><button class="btn btn--sm" type="button" data-apply="">Vill du möta ${esc(p.name.split(' ')[0])}? Anmäl dig →</button></p>
+    
   </div>`, { label: p.name });
 }
 document.addEventListener('click', (e) => {
@@ -572,44 +559,14 @@ document.addEventListener('click', (e) => {
 });
 
 /* ---------- om oss ---------- */
-$('#aboutLead').textContent = site.about?.lead || '';
 $('#aboutStory').innerHTML = (site.about?.story || []).map((p) => `<p>${esc(p)}</p>`).join('');
-$('#why').innerHTML = (site.about?.why || []).map((w) => `<div class="card"><h3>${esc(w.title)}</h3><p>${esc(w.text)}</p></div>`).join('');
-$('#timeline').innerHTML = (D.timeline || []).map(([t, x]) => `<li><strong>${esc(t)}</strong><p>${esc(x)}</p></li>`).join('');
-$('#team').innerHTML = (site.team || []).map((m) => `
-  <article class="card member">
-    <div class="member__mono" aria-hidden="true">${esc(initials(m.name))}</div>
-    <h3>${esc(m.name)}</h3>
-    <p class="member__role">${esc(m.role)}</p>
-    <p>${esc(m.bio)}</p>
-    ${m.instagram ? `<a class="link" href="${esc(m.instagram)}" target="_blank" rel="noopener">Instagram ↗</a>` : ''}
-  </article>`).join('');
-const q = D.quotes?.[0];
-if (q) $('#quote').innerHTML = `<blockquote>”${esc(q.text)}”</blockquote><figcaption>— ${esc(q.by)}, ${esc(q.source)}</figcaption>`;
-else $('#quote').remove();
-
-/* ---------- press ---------- */
-$('#facts').innerHTML = `<tbody>${[
-  ['Grundare', 'Simon Claesson och Emil Widén'], ['Startade på YouTube', dateSv(D.joined, { day: 'numeric', month: 'long', year: 'numeric' })],
-  ['Prenumeranter', num(D.stats.subscribers)], ['Visningar totalt', num(D.stats.views)], ['Videor', `${num(D.stats.videos)}${D.shorts ? ` (varav ${D.shorts} Shorts)` : ''}`],
-  ['Största avsnittet', `${num(D.stats.topViews)} visningar`], ['Format', formatsWithEpisodes.map((f) => f.name).join(', ')], ['Kanaler', 'YouTube, TikTok, Instagram'],
-].map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</tbody>`;
-$('#ytcomment').innerHTML = `<span class="avatar">S</span><div><small>@Stanne-mp6lp · kommentar på YouTube</small><p>${esc(D.channel.bannerQuote)}</p><div class="likes"><span>👍 2</span><span>Svara</span></div></div>`;
-$('#pressList').innerHTML = (D.press || []).map((p) => `<a href="${esc(p.url)}" target="_blank" rel="noopener"><div><strong>${esc(p.outlet)}</strong><span>${esc(p.title)}</span></div><span aria-hidden="true">↗</span></a>`).join('');
-const ASSETS = [['s3-logo.svg', 'S3-logga (orange)'], ['s3-logo-currentcolor.svg', 'S3-logga (enfärgad)'], ['studio3-wordmark.svg', 'STUDIO 3. – ordmärke'], ['studio-soffan.svg', 'Studio Soffan'], ['duellen.svg', 'Duellen'], ['20-vs-1.svg', '20 VS 1'], ['panelen.svg', 'Panelen'], ['valvakan.svg', 'Valvakan']];
-$('#assets').innerHTML = ASSETS.map(([f, l]) => `<a class="asset" href="../public/assets/img/logos/${f}" download><span class="asset__img"${f.includes('currentcolor') ? ' style="background:#f1f1f1"' : ''}><img src="../public/assets/img/logos/${f}" alt=""></span><span>${l}</span><small>SVG ↓</small></a>`).join('');
-$('#swatches').innerHTML = [['#F1944F', 'Studio 3-orange'], ['#0F0F0F', 'Studiosvart'], ['#FFFFFF', 'Vit']].map(([c, n]) => `<div><i style="background:${c}"></i><strong>${n}</strong><span>${c}</span></div>`).join('');
+$('#team').innerHTML = (site.team || []).map((m) => `<div class="member--row"><strong>${esc(m.name)}</strong><span class="muted">${esc(m.role)}</span>${m.instagram ? `<a class="link" href="${esc(m.instagram)}" target="_blank" rel="noopener">Instagram</a>` : ''}</div>`).join('');
+$('#pressList').innerHTML = (D.press || []).map((p) => `<a href="${esc(p.url)}" target="_blank" rel="noopener"><div><strong>${esc(p.outlet)}</strong><span>${esc(p.title)}</span></div></a>`).join('');
 
 /* ---------- samarbeten ---------- */
 $('#partnerTitle').textContent = site.partner?.title || '';
 $('#partnerText').textContent = site.partner?.text || '';
-$('#kpis').innerHTML = [
-  [num(D.stats.subscribers), 'prenumeranter'], [`${(D.stats.views / 1e6).toLocaleString('sv-SE', { maximumFractionDigits: 1 })} mn`, 'visningar'],
-  [num(D.stats.topViews), 'visningar, toppavsnitt'], [String(D.people.length), 'profiler i stolen'],
-].map(([a, b]) => `<div><strong>${a}</strong>${b}</div>`).join('');
-$('#offers').innerHTML = (site.partner?.offers || []).map((o) => `<div class="card"><h3>${esc(o.title)}</h3><p>${esc(o.text)}</p></div>`).join('');
 $('#partnerExample').textContent = D.partnerExample || '';
-$('#partnerProcess').innerHTML = (D.partnerProcess || []).map(([t, x]) => `<li><strong>${esc(t)}</strong><p>${esc(x)}</p></li>`).join('');
 $('#leadForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const form = e.currentTarget;
@@ -623,7 +580,7 @@ $('#leadForm').addEventListener('submit', async (e) => {
     form.reset();
     showErrors(form, {});
     status.className = 'form-status ok';
-    status.textContent = 'Tack! Vi återkommer inom två arbetsdagar.';
+    status.textContent = 'Tack, vi hör av oss.';
   } catch (err) {
     showErrors(form, err.fields);
     status.className = 'form-status err';
@@ -634,7 +591,6 @@ $('#leadForm').addEventListener('submit', async (e) => {
 });
 
 /* ---------- nyhetsbrev ---------- */
-$('#n-county').insertAdjacentHTML('beforeend', D.counties.map((c) => `<option>${esc(c)}</option>`).join(''));
 $('#newsForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const form = e.currentTarget;
@@ -645,7 +601,7 @@ $('#newsForm').addEventListener('submit', async (e) => {
     const r = await api('/api/public/subscribe', { method: 'POST', body: { ...formJson(form), source: 'startsida' } });
     showErrors(form, {});
     status.className = 'form-status ok';
-    status.textContent = r.status === 'already' ? 'Du prenumererar redan – dina val är uppdaterade.' : 'Nästan klart! Kolla din inkorg och bekräfta.';
+    status.textContent = r.status === 'already' ? 'Du prenumererar redan.' : 'Kolla din inkorg och bekräfta.';
     form.reset();
   } catch (err) {
     showErrors(form, err.fields);
@@ -656,24 +612,16 @@ $('#newsForm').addEventListener('submit', async (e) => {
   }
 });
 const nl = new URLSearchParams(location.search).get('nyhetsbrev');
-if (nl) toast({ bekraftad: 'Tack! Din prenumeration är bekräftad.', avslutad: 'Du är avregistrerad från nyhetsbrevet.', ogiltig: 'Länken är ogiltig eller har redan använts.' }[nl] || '');
+if (nl) toast({ bekraftad: 'Prenumerationen är bekräftad.', avslutad: 'Du är avregistrerad från nyhetsbrevet.', ogiltig: 'Länken är ogiltig eller har redan använts.' }[nl] || '');
 
 if (site.swish) {
   const s = $('#swish');
   s.hidden = false;
-  s.innerHTML = `<div><h3>Stötta STUDIO 3</h3><p class="muted" style="margin:6px 0 0">Vill du hjälpa oss göra fler debatter? Swisha valfritt belopp.</p></div><strong>${esc(site.swish)}</strong>`;
+  s.innerHTML = `<div><h3>Stötta STUDIO 3</h3><p class="muted" style="margin:6px 0 0">Swisha valfritt belopp.</p></div><strong>${esc(site.swish)}</strong>`;
 }
 
-/* ---------- kontakt ---------- */
-const soc = site.socials || {};
-$('#contactCards').innerHTML = [
-  `<button class="card card--link" type="button" data-apply=""><h3>Vill vara med</h3><p>Sök till en debatt eller anmäl dig till talangbanken.</p><span class="link">Anmäl dig →</span></button>`,
-  `<a class="card card--link" href="#samarbeten"><h3>Samarbeten &amp; event</h3><p>Sponsring, livedebatter, föreläsningar och egna serier.</p><span class="link">Skicka förfrågan →</span></a>`,
-  `<a class="card card--link" href="#press"><h3>Press</h3><p>Fakta, loggor och pressklipp – och intervjuförfrågningar.</p><span class="link">Till press →</span></a>`,
-  `<div class="card"><h3>Följ oss</h3><p class="muted">${[[soc.youtube, 'YouTube'], [soc.tiktok, 'TikTok'], [soc.instagramSimon, 'Instagram – Simon'], [soc.instagramEmil, 'Instagram – Emil']].filter(([h]) => h).map(([h, l]) => `<a class="link" href="${esc(h)}" target="_blank" rel="noopener">${l} ↗</a>`).join('<br>')}</p>${site.contactEmail ? `<p><a class="link" href="mailto:${esc(site.contactEmail)}">${esc(site.contactEmail)}</a></p>` : ''}</div>`,
-].join('');
-
 /* ---------- footer ---------- */
+const soc = site.socials || {};
 $('#socials').innerHTML = [
   soc.youtube && `<li><a href="${esc(soc.youtube)}" target="_blank" rel="noopener">YouTube</a></li>`,
   soc.tiktok && `<li><a href="${esc(soc.tiktok)}" target="_blank" rel="noopener">TikTok</a></li>`,

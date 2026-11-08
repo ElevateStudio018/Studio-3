@@ -2,8 +2,8 @@
 // av webbläsaren (stilpaket-sidan och förhandsvisning via ?stil=<id>).
 
 const base = {
-  radius: '14px',
-  radiusLg: '26px',
+  radius: '10px',
+  radiusLg: '16px',
   displayWeight: '900',
   displayStretch: '100%',
   displayCase: 'uppercase',
@@ -21,7 +21,7 @@ export const THEMES = [
     fonts: 'family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600;700',
     display: '"Archivo", sans-serif', body: '"Inter", system-ui, sans-serif',
     vars: { bg: '#0f0f0f', bg2: '#151515', surface: '#1f1f1f', surface2: '#272727', text: '#f1f1f1', muted: '#aaaaaa', accent: '#F1944F', accent2: '#ffcfa6', onAccent: '#1b0f05', displayStretch: '125%' },
-    fx: ['grain'],
+    fx: [],
   },
   {
     id: 'riksdag', name: 'Riksdagen', tagline: 'Marinblått och guld. Seriöst, tryggt, institutionellt.',

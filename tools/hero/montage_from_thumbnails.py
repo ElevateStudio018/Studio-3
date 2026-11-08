@@ -231,8 +231,8 @@ for k, vid in enumerate(RAPID[4:]):                              # acceleration
     seg_kb(vid, 4 if k < 10 else 3, 1.3, 1.22, 0.5, 0.42, shake=10, split=2)
     if k in (5, 11):
         seg_flash(ORANGE, 2)
-seg_slam("INGET MANUS.", 14, color=(255, 255, 255))
-seg_slam("INGEN FLYKT.", 14)
+for vid in ["oFYNhWQN3qs", "GewqhtFL_qg", "j_U6t12ZSdw", "zFtd14n4lnM", "4ipLbWJppIQ", "B1IAy3WvnXg", "dh-BWEvy2wE"]:
+    seg_kb(vid, 4, 1.28, 1.2, 0.5, 0.42, shake=8, split=2)
 seg_counter("2D3DJt9OJxo", 40, 1000000, "VISNINGAR · JAN EMANUEL VS 20 MILJÖPARTISTER")
 seg_flash((255, 255, 255))
 seg_mosaic(54, 3.4, 1.0, 0.9, 0.5)                               # väggen av debatter

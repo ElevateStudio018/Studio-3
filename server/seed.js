@@ -17,8 +17,8 @@ export const SAMPLE_DEBATES = () => [
   {
     slug: 'partiledare-vs-20-valjare', title: 'Partiledare vs 20 väljare', format: 'partiledare',
     statement: 'Regeringen har gjort Sverige till ett bättre land de senaste fyra åren.',
-    summary: 'Vi söker 20 väljare från hela det politiska spektrumet som vill ställa en partiledare mot väggen.',
-    description: 'En partiledare sätter sig i mitten. Runt hen sitter tjugo väljare – och ni bestämmer frågorna. Vi vill ha en blandning av åldrar, bakgrunder och partisympatier. Du behöver inte vara expert, bara ha en åsikt och våga säga den.',
+    summary: 'Vi söker 20 väljare med olika partisympatier.',
+    description: 'En partiledare sitter i mitten och tjugo väljare ställer frågor. Vi vill ha en blandning av åldrar och partisympatier.',
     event_at: inDays(24), location: 'Studio 3, Stockholm', deadline: inDays(12, 23), spots: 20, status: 'open', featured: 1,
     needs: [{ label: 'Rödgröna väljare (S, V, MP, C)', count: 10, parties: ['S', 'V', 'MP', 'C'] }, { label: 'Tidöväljare (M, SD, KD, L)', count: 10, parties: ['M', 'SD', 'KD', 'L'] }],
     questions: [{ id: 'fraga', label: 'Vilken fråga skulle du ställa till partiledaren?', type: 'textarea', required: true }],
@@ -26,8 +26,8 @@ export const SAMPLE_DEBATES = () => [
   {
     slug: 'studio-soffan-mobilforbud', title: 'Studio Soffan: Mobilförbud i skolan', format: 'soffan',
     statement: 'Mobiltelefoner ska förbjudas helt under hela skoldagen.',
-    summary: 'Sex personer, en soffa och frågan alla föräldrar, lärare och elever har en åsikt om.',
-    description: 'Är du lärare, förälder, elev eller bara har en stark åsikt om mobiler i skolan? Vi söker sex personer som tycker olika – på riktigt.',
+    summary: 'Vi söker sex personer som tycker olika om mobiler i skolan.',
+    description: 'Lärare, föräldrar och elever är särskilt välkomna att söka.',
     event_at: inDays(17), location: 'Studio 3, Stockholm', deadline: inDays(9, 23), spots: 6, status: 'open', featured: 0,
     needs: [{ label: 'För förbud', count: 3, stance: 'for' }, { label: 'Emot förbud', count: 3, stance: 'emot' }],
     questions: [
@@ -37,8 +37,8 @@ export const SAMPLE_DEBATES = () => [
   {
     slug: '1-mot-20-karnkraft', title: '1 mot 20: Kärnkraft', format: '1vs20',
     statement: 'Sverige ska bygga ut kärnkraften kraftigt.',
-    summary: 'Tjugo personer som är emot ny kärnkraft möter en av landets mest kända kärnkraftsförespråkare.',
-    description: 'Är du kritisk till ny kärnkraft – av miljöskäl, ekonomiska skäl eller något helt annat? Då vill vi ha dig bland de tjugo.',
+    summary: 'Vi söker 20 personer som är emot ny kärnkraft.',
+    description: 'Gästen i mitten är för en kraftig utbyggnad. Vi söker dig som är emot, oavsett skäl.',
     event_at: inDays(31), location: 'Studio 3, Stockholm', deadline: inDays(18, 23), spots: 20, status: 'open', featured: 0,
     needs: [{ label: 'Emot ny kärnkraft', count: 20, stance: 'emot' }],
     questions: [],

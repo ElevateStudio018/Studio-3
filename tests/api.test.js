@@ -93,15 +93,16 @@ test('undersidor renderas på servern', async () => {
 
 test('allt på startsidan: menyn scrollar och ansökan öppnas som lager', async () => {
   const html = await (await fetch(BASE)).text();
-  for (const id of ['debatter', 'sa-funkar-det', 'format', 'avsnitt', 'profiler', 'om', 'press', 'samarbeten', 'nyhetsbrev', 'kontakt']) assert.match(html, new RegExp(`id="${id}"`), id);
+  for (const id of ['debatter', 'avsnitt', 'format', 'profiler', 'om', 'samarbeten', 'nyhetsbrev']) assert.match(html, new RegExp(`id="${id}"`), id);
   assert.match(html, /<a href="#format">Format<\/a>/);
+  assert.doesNotMatch(html, /class="eyebrow"|→/, 'inga etiketter eller pilar på startsidan');
   assert.match(html, /id="applySheet"/);
   const embed = await fetch(`${BASE}/sok/partiledare-vs-20-valjare?embed=1`);
   assert.match(await embed.text(), /<html lang="sv" class="embed"/);
   assert.match(embed.headers.get('content-security-policy'), /frame-src 'self'/);
   const d = await (await fetch(`${BASE}/api/public/bootstrap`)).json();
-  assert.ok(d.formats.find((f) => f.key === '1vs20').rules.length >= 3, 'formatregler ska finnas för formatlagret');
-  assert.ok(d.timeline.length >= 5);
+  assert.ok(d.formats.find((f) => f.key === '1vs20').rules.length >= 2, 'formatregler ska finnas för formatlagret');
+  assert.ok(d.timeline.length >= 3);
   assert.ok(d.peaks['2D3DJt9OJxo']?.length >= 1);
 });
 

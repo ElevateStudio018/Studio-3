@@ -35,9 +35,8 @@ function renderInfo() {
     info.innerHTML = `
       <div class="apply__art"><img src="/assets/video/hero-poster.jpg" alt=""><svg class="logo" viewBox="0 0 1025 452" style="color:var(--accent)" aria-hidden="true"><use href="#s3logo"/></svg></div>
       <span class="badge-format">Talangbanken</span>
-      <h1>Vill du vara med i STUDIO 3?</h1>
-      <p class="apply__desc">Anmäl dig till vår talangbank. Varje gång vi planerar en debatt letar vi först här efter rätt personer – oavsett om det gäller 1 mot 20, Studio Soffan, Duellen eller publik till en livedebatt.</p>
-      <div class="debate__needs"><div class="need"><span>Alla åldrar över 18</span><strong>✓</strong></div><div class="need"><span>Alla partier – och de utan parti</span><strong>✓</strong></div><div class="need"><span>Hela Sverige</span><strong>✓</strong></div></div>`;
+      <h1>Talangbanken</h1>
+      <p class="apply__desc">Anmäl dig här så hör vi av oss när vi planerar en debatt där du passar in. Du måste vara över 18. Du behöver inte vara med i något parti.</p>`;
     return;
   }
   const f = D.formats.find((x) => x.key === debate.format);
@@ -56,7 +55,6 @@ function renderInfo() {
     </dl>
     ${debate.description ? `<p class="apply__desc">${esc(debate.description)}</p>` : ''}
     ${debate.needs?.length ? `<div class="debate__needs"><span class="muted" style="font-size:.85rem;font-weight:700">VI SÖKER</span>${debate.needs.map((n) => `<div class="need"><span>${esc(n.label)}</span><strong>${n.count ? `${n.count} st` : ''}</strong></div>`).join('')}</div>` : ''}
-    ${debate.applicants >= 10 ? `<p class="muted" style="margin:0">🔥 ${debate.applicants} personer har redan sökt.</p>` : ''}
     ${!debate.open ? `<div class="apply__closed"><strong>Ansökan har stängt.</strong><br>Anmäl dig till <a class="link" href="/sok">talangbanken</a> eller <a class="link" href="/#nyhetsbrev">bevaka nya debatter</a>.</div>` : ''}`;
 }
 renderInfo();
@@ -98,7 +96,7 @@ $('#office').addEventListener('change', (e) => ($('#officeDetailField').hidden =
 $('#media_experience').addEventListener('change', (e) => ($('#mediaDetailField').hidden = !e.target.checked));
 const motCounter = () => {
   const n = $('#motivation').value.trim().length;
-  $('#motCounter').textContent = n < 30 ? `${n} / minst 30 tecken` : `${n} tecken ✓`;
+  $('#motCounter').textContent = n < 30 ? `${n} / minst 30 tecken` : `${n} tecken`;
 };
 $('#motivation').addEventListener('input', motCounter);
 
@@ -180,7 +178,7 @@ $('#photoInput').addEventListener('change', async (e) => {
     $('#photoPreview').src = photoData;
     $('#photoPreview').hidden = false;
     $('#photoRemove').hidden = false;
-    $('#photoPick span').textContent = '📸 Byt bild';
+    $('#photoPick span').textContent = 'Byt bild';
   } catch {
     toast('Bilden kunde inte läsas. Prova en JPG eller PNG.');
   }
@@ -190,7 +188,7 @@ $('#photoRemove').addEventListener('click', () => {
   $('#photoInput').value = '';
   $('#photoPreview').hidden = true;
   $('#photoRemove').hidden = true;
-  $('#photoPick span').textContent = '📸 Välj en bild';
+  $('#photoPick span').textContent = 'Välj en bild';
 });
 
 /* ---------- steg ---------- */
@@ -277,7 +275,7 @@ function renderSummary() {
     ['Namn', v.name], ['E-post', v.email], ['Telefon', v.phone], ['Född', v.birth_year], ['Ort', [v.municipality, v.county].filter(Boolean).join(', ')],
     kind() === 'deltagare' && ['Parti', party], kind() === 'deltagare' && ['Kompass', $('#econ').value !== '' ? $('#compassRead').textContent : 'Inte angivet'],
     debate?.statement && kind() === 'deltagare' && ['Ståndpunkt', form.querySelector('[name="stance"]:checked')?.nextElementSibling.textContent],
-    v.need_label && ['Grupp', v.need_label], ['Bild', photoData ? 'Bifogad ✓' : 'Ingen'], kind() === 'publik' && ['Typ', 'Publikplats'],
+    v.need_label && ['Grupp', v.need_label], ['Bild', photoData ? 'Bifogad' : 'Ingen'], kind() === 'publik' && ['Typ', 'Publikplats'],
   ].filter(Boolean).filter((r) => r[1]);
   $('#summary').innerHTML = `<strong style="margin-bottom:4px">Sammanfattning</strong>${rows.map(([k, val]) => `<div><dt>${esc(k)}</dt><dd>${esc(val)}</dd></div>`).join('')}`;
 }
@@ -381,7 +379,7 @@ function showDone(ref, name) {
     <ol><li>Vi läser varje ansökan själva.</li><li>Om du går vidare ringer eller mejlar vi dig${debate?.deadline ? ` efter ${dateSv(debate.deadline)}` : ''}.</li><li>Under tiden: se våra debatter och prenumerera på YouTube.</li></ol>
     <div class="actions">
       <button class="btn" type="button" id="shareBtn">Dela debatten med en vän</button>
-      <a class="btn btn--ghost" href="https://www.youtube.com/@studio3-se?sub_confirmation=1" target="_blank" rel="noopener">Prenumerera på YouTube ↗</a>
+      <a class="btn btn--ghost" href="https://www.youtube.com/@studio3-se?sub_confirmation=1" target="_blank" rel="noopener">Prenumerera på YouTube</a>
       <a class="btn btn--ghost" href="/">Till startsidan</a>
     </div>`;
   $('#shareBtn').addEventListener('click', async () => {

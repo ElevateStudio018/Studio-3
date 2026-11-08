@@ -6,7 +6,7 @@ export function defaultSite() {
   return {
     name: 'STUDIO 3',
     slogan: 'Olika åsikter.\nSamma rum.',
-    subline: 'Politiker, väljare och opinionsbildare – ansikte mot ansikte. Utan manus. Utan mellanhänder.',
+    subline: 'Debatter på YouTube med politiker, opinionsbildare och vanliga väljare.',
     endline: 'Debatten börjar här.',
     announcement: '',
     heroVideo: '/assets/video/hero.mp4',
@@ -24,43 +24,30 @@ export function defaultSite() {
     autoNotifyVideos: false,
     socials: ch.channel.socials,
     about: {
-      lead: 'STUDIO 3 sätter människor med helt olika åsikter i samma rum – och låter kamerorna rulla.',
+      lead: 'STUDIO 3 är en YouTube-kanal med politiska debatter.',
       story: [
-        'Kanalen startades av Simon Claesson och Emil Widén och började som en humorkanal på YouTube. Det som hände sedan gick fort: när de satte politiker, väljare och opinionsbildare mitt emot varandra exploderade intresset.',
-        'I dag har STUDIO 3 över 100 000 prenumeranter och nästan 20 miljoner visningar. Statsministern, partiledare, ministrar och partisekreterare har suttit i våra stolar – liksom hundratals vanliga väljare.',
-        'Under valåret 2026 sände vi en egen valvaka live, och på Stortorget i Örebro samlade en livedebatt runt 300 personer. Nästa steg är fler livedebatter, fler format och fler röster som annars aldrig får plats.',
+        'Kanalen drivs av Simon Claesson och Emil Widén. Den startade 2023 som en humorkanal och blev en debattkanal när de började sätta människor med olika åsikter mot varandra.',
+        'Ulf Kristersson, Nooshi Dadgostar, Mikael Damberg och Jan Emanuel är några av dem som har varit med, tillsammans med många vanliga väljare. Kanalen har över 100 000 prenumeranter.',
+        'Under valet 2026 sände vi en valvaka och höll en livedebatt på Stortorget i Örebro.',
       ],
-      why: [
-        { title: 'Prata med – inte om', text: 'I ett polariserat Sverige pratar vi mest om varandra, i kommentarsfält och flöden. Hos oss sitter man mitt emot den man inte håller med – och måste lyssna.' },
-        { title: 'Samma stol för alla', text: 'En minister och en förstagångsväljare får samma stol, samma mikrofon och samma tid. Argumenten får avgöra – inte titeln.' },
-        { title: 'Gap och skrik säljer inte', text: 'Vi letar efter de riktiga argumenten och de ärliga ögonblicken. Det hetsiga är bara bra när det leder någonstans.' },
-        { title: 'Politik där unga faktiskt är', text: 'Våra format är byggda för YouTube, TikTok och Instagram – så att debatten når de som sällan ser en traditionell tv-debatt.' },
-      ],
+      why: [],
     },
     team: ch.team,
     steps: [
-      { title: 'Sök', text: 'Välj en öppen debatt eller anmäl dig till talangbanken. Det tar fem minuter.' },
-      { title: 'Vi hör av oss', text: 'Vi läser varje ansökan och ringer de vi vill träffa för ett kort samtal.' },
-      { title: 'Inspelning', text: 'Du får tid, plats och allt du behöver veta. Inget manus – bara du och dina argument.' },
-      { title: 'Publicering', text: 'Avsnittet släpps på YouTube och i våra sociala kanaler. Dela det med alla du känner.' },
+      { title: 'Sök', text: 'Fyll i formuläret. Det tar några minuter.' },
+      { title: 'Vi hör av oss', text: 'Vi ringer eller mejlar dem vi vill ha med.' },
+      { title: 'Inspelning', text: 'Du får tid och plats i god tid.' },
     ],
     faq: [
-      { q: 'Måste jag vara medlem i ett parti?', a: 'Nej. De flesta som söker är vanliga väljare. Vi frågar om partisympati och uppdrag för att kunna sätta ihop en balanserad grupp – inte för att sålla bort någon.' },
-      { q: 'Hur gammal måste jag vara?', a: 'Du måste ha fyllt 18 år för att söka.' },
-      { q: 'Får jag betalt?', a: 'Det står i varje debattannons om det utgår ersättning eller reseersättning.' },
-      { q: 'Blir jag filmad?', a: 'Ja. Debatterna spelas in och publiceras på YouTube och i sociala medier. Om du blir uttagen går vi igenom allt i detalj innan inspelningen.' },
-      { q: 'Hur hanterar ni mina uppgifter?', a: 'Politisk åsikt är känsliga personuppgifter. Vi sparar dem bara med ditt uttryckliga samtycke, använder dem enbart för urval och raderar ansökningar automatiskt efter en bestämd tid. Du kan när som helst be oss radera dem.' },
-      { q: 'Kan jag söka flera gånger?', a: 'Absolut. Sök gärna till flera debatter – och anmäl dig till talangbanken så hör vi av oss när något passar dig.' },
+      { q: 'Måste jag vara med i ett parti?', a: 'Nej. Vi frågar om partisympati för att få en blandad grupp.' },
+      { q: 'Hur gammal måste jag vara?', a: 'Minst 18 år.' },
+      { q: 'Blir jag filmad?', a: 'Ja. Debatterna publiceras på YouTube och i sociala medier.' },
+      { q: 'Vad händer med mina uppgifter?', a: 'De används bara till urvalet och raderas efter 12 månader. Svara på bekräftelsemejlet om du vill att vi tar bort dem tidigare.' },
     ],
     partner: {
-      title: 'Nå Sveriges mest engagerade unga publik',
-      text: 'Integrerade samarbeten, sponsrade format, livedebatter på event och skolor eller en egen debattserie – vi tar fram upplägget tillsammans.',
-      offers: [
-        { title: 'Sponsrat avsnitt', text: 'Ert varumärke som presentatör av ett avsnitt eller en hel säsong.' },
-        { title: 'Livedebatt', text: 'Vi tar studion till er scen – festival, Almedalen, skola eller kommun.' },
-        { title: 'Egen debattserie', text: 'Ett skräddarsytt format kring en fråga ni vill lyfta.' },
-        { title: 'Moderering & föreläsning', text: 'Simon och Emil leder er debatt eller berättar hur man bygger en kanal som engagerar.' },
-      ],
+      title: 'Samarbeten',
+      text: 'Vi gör sponsrade avsnitt, livedebatter på event och skolor och egna debattserier. Hör av er så berättar vi mer.',
+      offers: [],
     },
   };
 }
@@ -95,29 +82,26 @@ export const DEBATE_STATUSES = [
 
 /** Mer om varje format – regler och antal deltagare. */
 export const FORMAT_INFO = {
-  '1vs20': { people: '1 + 20', rules: ['En känd profil sätter sig i mitten.', 'Tjugo personer med motsatt åsikt sitter runt hen och turas om att fråga och argumentera.', 'Ingen moderator räddar någon – det är personen i mitten som måste svara.'] },
-  soffan: { people: '6', rules: ['Ett aktuellt ämne och sex gäster från olika läger.', 'Samtalet får ta tid – här möts argumenten på djupet.', 'Ämnen från bistånd och klimat till abort, migration och public service.'] },
-  duellen: { people: '2', rules: ['Två debattörer möts vid samma bord.', 'Ministrar, partisekreterare, ungdomsförbund och opinionsbildare.', 'Öga mot öga – argument mot argument.'] },
-  partiledare: { people: '1 + 20', rules: ['En partiledare möter tjugo väljare.', 'Väljarna ställer sina egna frågor – inga förberedda journalistfrågor.', 'Ulf Kristersson, Simona Mohamsson och Daniel Helldén har suttit i stolen.'] },
-  panelen: { people: '2 + 2', rules: ['Två lag från två partier eller läger.', 'Två mot två – en lagdebatt där argumenten bollas.', 'S mot SD, S mot M, SD mot MP och KD mot C hittills.'] },
-  valvakan: { people: 'Live', rules: ['Kanalens egen valvaka under valet 2026.', 'Fem debatter, samtal med Markus Allard och livesändning hela kvällen.', 'Livesändningen har över 170 000 visningar.'] },
-  banditer: { people: 'Varierar', rules: ['När vi lämnar studion.', 'Utmaningar, en dag i någon annans skor och möten utanför politiken.', 'Till exempel en dag som Alexander Ernstberger och att byta liv med tre kändisar.'] },
+  '1vs20': { people: '1 + 20', rules: ['En känd person sitter i mitten.', 'Tjugo personer som tycker annorlunda ställer frågor och argumenterar.'] },
+  soffan: { people: '6', rules: ['Sex gäster från olika håll.', 'Ett ämne per avsnitt.'] },
+  duellen: { people: '2', rules: ['Två debattörer vid samma bord.', 'Ofta politiker från olika partier eller ungdomsförbund.'] },
+  partiledare: { people: '1 + 20', rules: ['En partiledare i mitten.', 'Tjugo väljare med egna frågor.'] },
+  panelen: { people: '2 + 2', rules: ['Två lag från olika partier eller läger.'] },
+  valvakan: { people: 'Live', rules: ['Sändes live under valnatten 2026.', 'Fem debatter och ett samtal med Markus Allard.'] },
+  banditer: { people: 'Varierar', rules: ['Avsnitt utanför studion.'] },
 };
 
 export const TIMELINE = [
-  ['2023', 'YouTube-kanalen STUDIO 3 skapas av Simon Claesson och Emil Widén – först med humor som tema.'],
-  ['Debatten tar över', 'Formaten 1 mot 20, Duellen och Studio Soffan sätter människor med helt olika åsikter i samma rum.'],
-  ['1 000 000', 'Jan Emanuel mot 20 miljöpartister blir kanalens första avsnitt med en miljon visningar.'],
-  ['Statsministern', 'Ulf Kristersson möter 20 väljare – liksom fler partiledare efter honom.'],
+  ['2023', 'Kanalen startar på YouTube.'],
+  ['1 000 000', 'Jan Emanuel mot 20 miljöpartister blir kanalens mest sedda avsnitt.'],
   ['100 000', 'Kanalen passerar 100 000 prenumeranter.'],
-  ['Valet 2026', 'Egen valvaka live och en livedebatt på Stortorget i Örebro inför runt 300 personer.'],
+  ['Valet 2026', 'Valvaka live och livedebatt på Stortorget i Örebro.'],
 ];
 
 export const PARTNER_PROCESS = [
-  ['Kontakt', 'Ni berättar vad ni vill uppnå. Vi återkommer inom två arbetsdagar.'],
-  ['Upplägg', 'Vi föreslår format, tider, budget och hur samarbetet syns.'],
-  ['Produktion', 'Vi spelar in i studion eller på er plats – med vår redaktion och teknik.'],
-  ['Publicering', 'Avsnittet släpps i våra kanaler och ni får en uppföljning av resultatet.'],
+  ['Kontakt', 'Ni berättar vad ni vill göra.'],
+  ['Förslag', 'Vi föreslår upplägg, datum och pris.'],
+  ['Inspelning', 'I studion eller på plats hos er.'],
 ];
 
-export const PARTNER_EXAMPLE = 'Inför valet 2026 tog vi studion ut på Stortorget i Örebro. Markus Allard (Örebropartiet) mötte John Johansson (S) inför runt 300 personer – modererat av Simon och Emil. Vill ni ha en livedebatt på er festival, skola, kommun eller konferens? Vi tar med format, moderatorer och publikengagemang.';
+export const PARTNER_EXAMPLE = 'Inför valet 2026 höll vi en livedebatt på Stortorget i Örebro mellan Markus Allard (Örebropartiet) och John Johansson (S). Runt 300 personer kom.';
